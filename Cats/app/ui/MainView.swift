@@ -25,7 +25,7 @@ struct MainView: View {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
-            Text("Favorite")
+            FavouriteView()
                 .tabItem {
                     Image(systemName: "heart")
                     Text("Favorite")

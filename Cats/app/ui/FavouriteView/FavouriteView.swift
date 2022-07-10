@@ -11,7 +11,12 @@ struct FavouriteView: View {
     @ObservedObject var vm = FavouriteViewModel()
     
     var body: some View {
-        Text("Favourite View")
+        VStack {
+            Text("My Favourite Cats")
+                .font(.title)
+            
+            
+        }
     }
 }
 
