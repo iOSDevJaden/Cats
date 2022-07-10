@@ -8,14 +8,14 @@
 import Foundation
 
 struct ImageFull: Codable, Identifiable {
-    let id: String
-    let url: String
-    let subId: String
-    let createdAt: String
-    let originalFilename: String
+    let id: String?
+    let url: String?
+    let subId: String?
+    let createdAt: String?
+    let originalFilename: String?
     
-    let categories: [Category]
-    let breeds: [Breed]
+    let categories: [Category]?
+    let breeds: [Breed]?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"

@@ -14,13 +14,24 @@ struct BreedView: View {
         VStack {
             Text("Breeds")
                 .font(.title)
-            List {
-                ForEach(vm.breeds) { breed in
-                    Text(breed.name)
+            getBreedList(vm.breeds)
+        }
+        .onAppear(perform: vm.getAllBreeds)
+    }
+    
+    private func getBreedList(_ breeds: [Breed]) -> some View {
+        VStack {
+            if(breeds.isEmpty) {
+                ProgressView()
+                Spacer()
+            } else {
+                List {
+                    ForEach(vm.breeds) { breed in
+                        Text(breed.name)
+                    }
                 }
             }
         }
-       .onAppear(perform: vm.getAllBreeds)
     }
 }
 
