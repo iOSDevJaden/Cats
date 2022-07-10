@@ -10,8 +10,12 @@ import Foundation
 struct ImagesService {
     private let imagesApi = ImagesApi()
     
-    func getAllImages() -> URLSession.DataTaskPublisher {
-        return URLSession.shared.dataTaskPublisher(for: imagesApi.getAllPublicImages())
+    func getSingleImage() -> URLSession.DataTaskPublisher {
+        return URLSession.shared.dataTaskPublisher(for: imagesApi.getSingleImage())
+    }
+    
+    func getAllImages(limit: Int) -> URLSession.DataTaskPublisher {
+        return URLSession.shared.dataTaskPublisher(for: imagesApi.getAllPublicImages(limit: limit))
     }
     
     func getImage(by id: String) -> URLSession.DataTaskPublisher {
