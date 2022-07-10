@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct SearchView: View, ImageViewProtocol {
     @ObservedObject private var vm = SearchViewModel()
     
     var body: some View {
@@ -23,18 +23,8 @@ struct SearchView: View {
             }
         }
         .onAppear(perform: vm.getAllPublicImages)
+        .navigationTitle("Search Image")
     }
-    
-    private func getImage(imageUrl: String?) -> Image? {
-        guard let imageUrl = imageUrl,
-              let imageUrl = URL(string: imageUrl),
-              let imageData = try? Data(contentsOf: imageUrl),
-              let uiImage = UIImage(data: imageData) else {
-            return nil
-        }
-        return Image(uiImage: uiImage)
-    }
-    
 }
 
 struct SearchView_Previews: PreviewProvider {

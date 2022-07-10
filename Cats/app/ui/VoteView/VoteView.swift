@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VoteView: View {
+struct VoteView: View, ImageViewProtocol {
     @ObservedObject var vm = VoteViewModel()
     
     var body: some View {
