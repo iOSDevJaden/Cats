@@ -20,7 +20,7 @@ struct MainView: View {
                     Image(systemName: "sun.min")
                     Text("Breeds")
                 }
-            Text("Image / Search")
+            SearchView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
