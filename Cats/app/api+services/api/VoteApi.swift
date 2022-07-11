@@ -14,37 +14,39 @@ struct VoteApi {
      * Paginate through them using ‘limit’, ‘page’ and the ‘Pagination-Count’ on the response.
      */
     func getMyVotes() -> URLRequest {
-        var request = URLRequest.getRelativePath("/votes")
-        request.httpMethod = HttpMethod.getValue(method: .get)
-        return request
+        return RequestBuilder()
+            .setPath(path: "/votes")
+            .setMethod(method: .get)
+            .build()
     }
     
     /**
      * Get one specific Vote belonging to your Account
      */
     func getMyVotes(vote id: String) -> URLRequest {
-        var request = URLRequest.getRelativePath("/votes/\(id)")
-        request.httpMethod = HttpMethod.getValue(method: .get)
-        return request
+        return RequestBuilder()
+            .setPath(path: "/votes/\(id)")
+            .setMethod(method: .get)
+            .build()
     }
     
     /**
      * Vote an Image Up or Down
      */
     func createVote(_ req: VoteRequest) -> URLRequest {
-        let httpBody = try? JSONEncoder().encode(req)
-        
-        var request = URLRequest.getRelativePath("/votes")
-        request.httpMethod = HttpMethod.getValue(method: .post)
-        request.httpBody = httpBody
-        return request
+        return RequestBuilder()
+            .setPath(path: "/votes")
+            .setMethod(method: .post)
+            .setParameters(parameters: [:])
+            .build()
     }
     /**
      * Delete a Vote from your Account.
      */
     func deleteMyVote(vote id: String) -> URLRequest {
-        var request = URLRequest.getRelativePath("/votes/\(id)")
-        request.httpMethod = HttpMethod.getValue(method: .delete)
-        return request
+        return RequestBuilder()
+            .setPath(path: "/votes/\(id)")
+            .setMethod(method: .delete)
+            .build()
     }
 }

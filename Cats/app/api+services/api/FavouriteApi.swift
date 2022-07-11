@@ -13,26 +13,29 @@ struct FavouriteApi {
      * option to filter by ‘sub_id’ used when creating them.
      */
     func getMyFavourites() -> URLRequest {
-        var request = URLRequest.getRelativePath("/favourites")
-        request.httpMethod = HttpMethod.getValue(method: .get)
-        return request
+        return RequestBuilder()
+            .setPath(path: "/favourites")
+            .setMethod(method: .get)
+            .build()
     }
-
+    
     /**
      * Get one specific Favourite belonging to your Account
      */
     func getMyFavourites(favourite id: String) -> URLRequest {
-        var request = URLRequest.getRelativePath("/favourites/\(id)")
-        request.httpMethod = HttpMethod.getValue(method: .get)
-        return request
+        return RequestBuilder()
+            .setPath(path: "/favourites/\(id)")
+            .setMethod(method: .get)
+            .build()
     }
     
     /**
      * Get one specific Favourite belonging to your Account
      */
     func deleteFavourite(favourite id: String) -> URLRequest {
-        var request = URLRequest.getRelativePath("/favourites/\(id)")
-        request.httpMethod = HttpMethod.getValue(method: .delete)
-        return request
+        return RequestBuilder()
+            .setPath(path: "/favourites/\(id)")
+            .setMethod(method: .delete)
+            .build()
     }
 }

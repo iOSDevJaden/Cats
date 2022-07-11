@@ -9,23 +9,18 @@ import Foundation
 
 struct BreedApi {
     func getBreedList() -> URLRequest {
-        var request = URLRequest.getRelativePath("/breeds")
-        request.httpMethod = HttpMethod.getValue(method: .get)
-        return request
+        return RequestBuilder()
+            .setPath(path: "/breeds")
+            .setMethod(method: .get)
+            .build()
     }
     
     func getBreedList(id: String) -> URLRequest {
-        var urlComponents = URLComponents(string: URLRequest.getRelativePath("/breeds/search").description)
-        urlComponents?.queryItems = [
-            URLQueryItem(name: "q", value: id),
-        ]
-        
-        guard let url = urlComponents?.url else {
-            fatalError("Wrong URL with query")
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = HttpMethod.getValue(method: .get)
-        return request
+        let parameter = URLQueryItem(name: "q", value: id)
+        return RequestBuilder()
+            .setPath(path: "/breeds/search")
+            .setParameters(urlQuery: [parameter])
+            .setMethod(method: .get)
+            .build()
     }
 }
