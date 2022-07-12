@@ -1,0 +1,13 @@
+//
+//  Basic.xcconfig
+//  Cats
+//
+//  Created by 김태호 on 2022/07/12.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+SERVER_URL = https:/$()/api.thecatapi.com
+API_KEY = 17d94b92-754f-46eb-99a0-65be65b5d18f
+API_VERSION = v1

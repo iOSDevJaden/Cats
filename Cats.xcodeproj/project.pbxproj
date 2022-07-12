@@ -48,6 +48,8 @@
 		A126C9D82879576C00CF3CD7 /* BreedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedApi.swift; sourceTree = "<group>"; };
 		A126C9DA2879578800CF3CD7 /* BreedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedService.swift; sourceTree = "<group>"; };
 		A127054A2879B727001B0A74 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		A134BC8E287DC1640028B251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A134BC8F287DC3220028B251 /* Basic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Basic.xcconfig; sourceTree = "<group>"; };
 		A145259C287DAC5600FEC177 /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		A145259F287DB6B000FEC177 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A17C461A287B2440005B6E07 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		A1B8AEEA2878560A000D16DE /* Cats */ = {
 			isa = PBXGroup;
 			children = (
+				A134BC8E287DC1640028B251 /* Info.plist */,
 				A126C9DE2879584200CF3CD7 /* Utils */,
 				A1F3374928786AE50023961C /* app */,
 				A1B8AEEF2878560B000D16DE /* Assets.xcassets */,
@@ -229,6 +232,7 @@
 				A1B8AEEB2878560A000D16DE /* CatsApp.swift */,
 				A1B8AEF12878560B000D16DE /* Preview Content */,
 				A1F3375228786D3C0023961C /* Resources.swift */,
+				A134BC8F287DC3220028B251 /* Basic.xcconfig */,
 			);
 			path = Cats;
 			sourceTree = "<group>";
@@ -393,6 +397,7 @@
 /* Begin XCBuildConfiguration section */
 		A1B8AF0A2878560B000D16DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A134BC8F287DC3220028B251 /* Basic.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -453,6 +458,7 @@
 		};
 		A1B8AF0B2878560B000D16DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A134BC8F287DC3220028B251 /* Basic.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -516,9 +522,9 @@
 				DEVELOPMENT_TEAM = VWR97UTPCS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -546,9 +552,9 @@
 				DEVELOPMENT_TEAM = VWR97UTPCS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
