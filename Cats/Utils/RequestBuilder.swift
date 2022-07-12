@@ -13,7 +13,7 @@ class RequestBuilder {
     private var method: HttpMethod = .get
     private var headers: [String: String] = [:]
     private var urlQuery: [URLQueryItem]?
-    private var parameters: [String: String]?
+    private var parameters: Data?
     
     func setMethod(method: HttpMethod) -> Self {
         self.method = method
@@ -30,7 +30,7 @@ class RequestBuilder {
         return self
     }
     
-    func setParameters(parameters: [String: String]) -> Self {
+    func setParameters(parameters: Data) -> Self {
         self.parameters = parameters
         return self
     }
@@ -58,9 +58,8 @@ class RequestBuilder {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         
-        if let httpBody = self.parameters,
-           let data = try? JSONSerialization.data(withJSONObject: httpBody, options: []) {
-            request.httpBody = data
+        if let httpBody = self.parameters {
+            request.httpBody = httpBody
         }
         
         request.setValue(
