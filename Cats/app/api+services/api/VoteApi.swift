@@ -34,10 +34,14 @@ struct VoteApi {
      * Vote an Image Up or Down
      */
     func createVote(_ req: VoteRequest) -> URLRequest {
+        guard let data = try? JSONEncoder().encode(req) else {
+            fatalError("Encoding Failed")
+        }
         return RequestBuilder()
             .setPath(path: "/votes")
+            .setHeaders(headers: ["Content-Type": "application/json"])
             .setMethod(method: .post)
-            .setParameters(parameters: [:])
+            .setParameters(parameters: data)
             .build()
     }
     /**
