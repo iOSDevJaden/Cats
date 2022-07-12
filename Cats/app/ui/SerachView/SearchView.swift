@@ -22,7 +22,7 @@ struct SearchView: View, ImageViewProtocol {
                 }
             }
         }
-        .onAppear(perform: vm.getAllPublicImages)
+        .onAppear(perform: vm.getSingleImage)
         .navigationTitle("Search Image")
     }
 }
