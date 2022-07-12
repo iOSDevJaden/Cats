@@ -14,6 +14,7 @@ class VoteViewModel: ObservableObject {
     
     private var cancellable = Set<AnyCancellable>()
     
+    @Published var image: ImageFull?
     @Published var images: [ImageFull] = []
     
     func getSingleImage() {
@@ -22,15 +23,13 @@ class VoteViewModel: ObservableObject {
             .subscribe(on: DispatchQueue.global(qos: .background))
             .tryMap { $0.data }
             .decode(type: [ImageFull].self, decoder: JSONDecoder())
+            .tryMap { $0.first }
             .sink(
                 receiveCompletion: {
                     print("Receive Completion \($0)")
                 },
-                receiveValue: { [weak self] images in
-                    self?.images = images
-                    self?.images.forEach {
-                        print("Image Url \($0.url ?? "Nothing")")
-                    }
+                receiveValue: { [weak self] image in
+                    self?.image = image
                 })
             .store(in: &cancellable)
     }
