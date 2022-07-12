@@ -12,15 +12,70 @@ struct VoteView: View, ImageViewProtocol {
     
     var body: some View {
         VStack {
-            Text("Vote View")
+            getRefreshButton()
+            
+            HStack {
+                getVoteUpButton()
+                getVoteDownButton()
+            }
+            
+            getFavouriteButton()
+            
+            ScrollView {
+                if let imageUrl = vm.image?.url,
+                   let image = getImage(imageUrl: imageUrl) {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    ProgressView()
+                }
+            }
+            Spacer()
         }
+        .onAppear(perform: vm.getSingleImage)
     }
     
-    private func getImage(data: Data) -> Image? {
-        guard let uiImage = UIImage(data: data) else {
-            return nil
-        }
-        return Image(uiImage: uiImage)
+    private func getFavouriteButton() -> some View {
+        Button(
+            action: {},
+            label: { Text("Favorite") })
+    }
+    
+    private func getVoteDownButton() -> some View {
+        Button(
+            action: {
+                if let image = vm.image {
+                    vm.voteImage(image: image, vote: .down)
+                }
+            },
+            label: {
+                Text("Nope it")
+                    .font(.title)
+                    .bold()
+            })
+    }
+    
+    private func getVoteUpButton() -> some View {
+        Button(
+            action: {
+                if let image = vm.image {
+                    vm.voteImage(image: image, vote: .up)
+                }
+            },
+            label: {
+                Text("Love it")
+                    .font(.title)
+                    .bold()
+            })
+    }
+    
+    private func getRefreshButton() -> some View {
+        Button(
+            action: vm.getSingleImage,
+            label: {
+                Text("Get Image")
+            })
     }
 }
 
