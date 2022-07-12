@@ -49,6 +49,7 @@
 		A126C9DA2879578800CF3CD7 /* BreedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedService.swift; sourceTree = "<group>"; };
 		A127054A2879B727001B0A74 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		A145259C287DAC5600FEC177 /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		A145259F287DB6B000FEC177 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A17C461A287B2440005B6E07 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		A1819691287A75F100C6E7B8 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		A1819693287A761700C6E7B8 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		A1B8AEDF2878560A000D16DE = {
 			isa = PBXGroup;
 			children = (
+				A145259F287DB6B000FEC177 /* README.md */,
 				A1B8AEEA2878560A000D16DE /* Cats */,
 				A1B8AEE92878560A000D16DE /* Products */,
 			);
