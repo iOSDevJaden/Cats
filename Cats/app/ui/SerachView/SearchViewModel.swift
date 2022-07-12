@@ -15,8 +15,8 @@ class SearchViewModel: ObservableObject {
     @Published var imageFull: ImageFull? = nil
     @Published var images: [ImageFull] = []
     
-    func getAllPublicImages() {
-        imagesService.getAllImages()
+    func getSingleImage() {
+        imagesService.getSingleImage()
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .tryMap { $0.data }
