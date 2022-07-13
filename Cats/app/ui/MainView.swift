@@ -8,35 +8,40 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var currentTab: TabBarItems = .vote
+    
     var body: some View {
-        TabView {
-            VoteView()
-                .tabItem {
-                    Image(systemName: "archivebox")
-                    Text("vote")
-                }
-            BreedView()
-                .tabItem {
-                    Image(systemName: "sun.min")
-                    Text("Breeds")
-                }
-            SearchView()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
-                }
-            FavouriteView()
-                .tabItem {
-                    Image(systemName: "heart")
-                    Text("Favorite")
-                }
-            Text("Upload")
-                .tabItem {
-                    Image(systemName: "arrow.up.bin")
-                    Text("Upload")
-                }
+        VStack(spacing: 0) {
+            BaseViewFrame(
+                viewTitle: currentTab.text,
+                middle: {
+                    switch currentTab {
+                    case .vote:      VoteView()
+                    case .breed:     BreedView()
+                    case .favourite: FavouriteView()
+                    case .search:    SearchView()
+                    case .upload:    Text("Upload View")
+                    }
+                })
+            getTabItems()
+                .frame(height: 120)
         }
-        .tabViewStyle(.automatic)
+        .ignoresSafeArea()
+    }
+    
+    private func getTabItems() -> some View {
+        ZStack {
+            Color
+                .black
+                .opacity(0.2)
+            HStack(spacing: 30) {
+                ForEach(TabBarItems.allCases) { item in
+                    item.getTabItemButtons(action: { self.currentTab = item })
+                }
+            }
+            .foregroundColor(.purple)
+            .offset(x: 0, y: -10)
+        }
     }
 }
 
