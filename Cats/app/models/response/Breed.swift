@@ -38,7 +38,6 @@ struct Breed: Codable, Identifiable {
     let strangerFriendly: Int?
     let vocalisation: Int?
     
-    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
