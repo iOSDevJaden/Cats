@@ -9,18 +9,22 @@ import SwiftUI
 
 struct SearchView: View, ImageViewProtocol {
     @ObservedObject private var vm = SearchViewModel()
+    @State private var text = ""
     
     var body: some View {
         VStack {
             Text("Image")
                 .font(.title)
-            List {
-                ForEach(vm.images) { image in
-                    if let image = getImage(imageUrl: image.url) {
-                        image.resizable()
-                    }
+            SearchBar($text)
+            ForEach(vm.images) { image in
+                if let image = getImage(imageUrl: image.url) {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.horizontal)
                 }
             }
+            Spacer()
         }
         .onAppear(perform: vm.getSingleImage)
         .navigationTitle("Search Image")
