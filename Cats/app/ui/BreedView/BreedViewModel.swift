@@ -27,7 +27,6 @@ class BreedViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
-    // TODO: - Breed Service can be fixed to be integrated.
     func getBreeds(by id: String) {
         breedService.getBreeds(by: id)
             .receive(on: DispatchQueue.main)

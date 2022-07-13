@@ -11,10 +11,11 @@ struct BreedView: View {
     @ObservedObject private var vm = BreedViewModel()
     
     var body: some View {
-        VStack {
-            Text("Breeds")
-                .font(.title)
-            getBreedList(vm.breeds)
+        NavigationView {
+            VStack {
+                getBreedList(vm.breeds)
+            }
+            .navigationBarHidden(true)
         }
         .onAppear(perform: vm.getAllBreeds)
     }
@@ -22,14 +23,18 @@ struct BreedView: View {
     private func getBreedList(_ breeds: [Breed]) -> some View {
         VStack {
             if(breeds.isEmpty) {
+                Spacer()
                 ProgressView()
                 Spacer()
             } else {
                 List {
                     ForEach(vm.breeds) { breed in
-                        Text(breed.name)
+                        NavigationLink(breed.name) {
+                            BreedDetailView(breed: breed)
+                        }
                     }
                 }
+                .listStyle(.grouped)
             }
         }
     }

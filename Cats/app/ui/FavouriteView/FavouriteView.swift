@@ -11,11 +11,8 @@ struct FavouriteView: View {
     @ObservedObject var vm = FavouriteViewModel()
     
     var body: some View {
-        VStack {
+        ScrollView {
             Text("My Favourite Cats")
-                .font(.title)
-            
-            
         }
     }
 }

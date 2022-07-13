@@ -13,8 +13,6 @@ struct SearchView: View, ImageViewProtocol {
     
     var body: some View {
         VStack {
-            Text("Image")
-                .font(.title)
             SearchBar($text)
             ForEach(vm.images) { image in
                 if let image = getImage(imageUrl: image.url) {
@@ -27,7 +25,6 @@ struct SearchView: View, ImageViewProtocol {
             Spacer()
         }
         .onAppear(perform: vm.getSingleImage)
-        .navigationTitle("Search Image")
     }
 }
 
