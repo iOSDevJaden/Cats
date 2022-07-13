@@ -11,10 +11,7 @@ import SwiftUI
 struct CatsApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                MainView()
-                    .navigationBarHidden(true)
-            }
+            MainView()
         }
     }
 }
