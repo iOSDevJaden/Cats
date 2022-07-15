@@ -18,8 +18,6 @@ struct VoteService {
         return URLSession.shared.dataTaskPublisher(for: voteApi.getMyVotes(vote: id))
     }
     
-    // TODO: - Fix parameter
-    // Body Parameter
     func createVote(vote req: VoteRequest) -> URLSession.DataTaskPublisher {
         return URLSession.shared.dataTaskPublisher(for: voteApi.createVote(req))
     }
