@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BreedView: View {
     @ObservedObject private var vm = BreedViewModel()
+    @State private var dictionaryBreeds: [String: [Breed]] = [:]
     
     var body: some View {
         NavigationView {
@@ -23,18 +24,36 @@ struct BreedView: View {
     private func getBreedList(_ breeds: [Breed]) -> some View {
         VStack {
             if(breeds.isEmpty) {
-                Spacer()
-                ProgressView()
-                Spacer()
+                getProgressView()
             } else {
-                List {
-                    ForEach(vm.breeds) { breed in
-                        NavigationLink(breed.name) {
-                            BreedDetailView(breed: breed)
+                getAlphabeticallyOrderedList()
+            }
+        }
+    }
+    
+    private func getProgressView() -> some View {
+        VStack {
+            Spacer()
+            ProgressView()
+            Spacer()
+        }
+    }
+    
+    private func getAlphabeticallyOrderedList() -> some View {
+        List {
+            ForEach(vm.categorizedBreeds.keys.sorted(), id: \.self) { key in
+                Section(
+                    content: {
+                        ForEach(vm.categorizedBreeds[key]!) { breed in
+                            NavigationLink(breed.name) {
+                                BreedDetailView(breed: breed)
+                                    .navigationBarHidden(true)
+                            }
                         }
-                    }
-                }
-                .listStyle(.grouped)
+                    },
+                    header: {
+                        Text(key)
+                    })
             }
         }
     }

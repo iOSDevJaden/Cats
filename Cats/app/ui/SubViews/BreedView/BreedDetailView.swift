@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BreedDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     let breed: Breed
     
     var body: some View {
@@ -15,7 +17,13 @@ struct BreedDetailView: View {
             Text(breed.id)
             Text(breed.name)
             Text("\(breed.dogFriendly ?? -1)")
+            
+            Button(action: dismiss, label: { Labels(text: "Dismiss") })
         }
+    }
+    
+    func dismiss() {
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
