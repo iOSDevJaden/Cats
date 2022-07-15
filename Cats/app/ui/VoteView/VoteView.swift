@@ -9,73 +9,59 @@ import SwiftUI
 
 struct VoteView: View, ImageViewProtocol {
     @ObservedObject var vm = VoteViewModel()
+    @State private var images: [Image] = []
     
     var body: some View {
         VStack {
-            getRefreshButton()
-            
-            HStack {
-                getVoteUpButton()
-                getVoteDownButton()
-            }
-            
-            getFavouriteButton()
-            
-            ScrollView {
-                if let imageUrl = vm.image?.url,
-                   let image = getImage(imageUrl: imageUrl) {
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } else {
-                    ProgressView()
-                }
-            }
+            // Images
             Spacer()
+            
+            Group {
+                HStack {
+                    VoteButton.like
+                        .getButton(action: {})
+                    VoteButton .favourite
+                        .getButton(action: {})
+                }
+                .padding([.horizontal, .bottom])
+            }
+            
         }
-        .onAppear(perform: vm.getSingleImage)
-    }
-    
-    private func getFavouriteButton() -> some View {
-        Button(
-            action: {},
-            label: { Text("Favorite") })
-    }
-    
-    private func getVoteDownButton() -> some View {
-        Button(
-            action: {
-                if let image = vm.image {
-                    vm.voteImage(image: image, vote: .down)
+        .onAppear(perform: vm.getAllImages)
+        .onReceive(
+            vm.$images,
+            perform: { images in
+                let imageUrls = images.compactMap { $0.url }
+                imageUrls.forEach {
+                    if let image = getImage(imageUrl: $0) {
+                        self.images.append(image)
+                    }
                 }
-            },
-            label: {
-                Text("Nope it")
-                    .font(.title)
-                    .bold()
             })
     }
-    
-    private func getVoteUpButton() -> some View {
-        Button(
-            action: {
-                if let image = vm.image {
-                    vm.voteImage(image: image, vote: .up)
-                }
-            },
-            label: {
-                Text("Love it")
-                    .font(.title)
-                    .bold()
-            })
-    }
-    
-    private func getRefreshButton() -> some View {
-        Button(
-            action: vm.getSingleImage,
-            label: {
-                Text("Get Image")
-            })
+}
+
+extension VoteView {
+    enum VoteButton {
+        case favourite,
+             like,
+             unlike
+        
+        func getLable() -> some View {
+            switch self {
+            case .favourite: return Labels(text: "Favourite")
+            case .like:      return Labels(text: "Like it")
+            case .unlike:    return Labels(text: "Nope it")
+            }
+        }
+        
+        func getButton(action: @escaping () -> ()) -> some View {
+            switch self {
+            case .favourite: return Button(action: action, label: getLable)
+            case .like:      return Button(action: action, label: getLable)
+            case .unlike:    return Button(action: action, label: getLable)
+            }
+        }
     }
 }
 
