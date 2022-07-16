@@ -20,7 +20,7 @@ struct MainView: View {
                     case .breed:     BreedView()
                     case .favourite: FavouriteView()
                     case .search:    SearchView()
-                    case .upload:    Text("Upload View")
+                    case .upload:    UploadView()
                     }
                 })
             getTabItems()
