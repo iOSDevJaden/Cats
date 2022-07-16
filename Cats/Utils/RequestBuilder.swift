@@ -63,8 +63,8 @@ class RequestBuilder {
         }
         
         request.setValue(
-            "x-api-key",
-            forHTTPHeaderField: String.apiKey
+            String.apiKey,
+            forHTTPHeaderField: "x-api-key"
         )
         
         headers.forEach {
