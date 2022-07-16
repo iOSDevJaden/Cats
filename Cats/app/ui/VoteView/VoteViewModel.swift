@@ -37,24 +37,17 @@ class VoteViewModel: ObservableObject {
             return
         }
         
-        // TODO: - Need proper user id for subId member variable of VoteRequest.
         let voteRequest = VoteRequest(
             imageId: imageId,
-            subId: image.subId ?? "user-1234",
+            subId: UserInfoCache.shared.id,
             value: 1
         )
         
         voteService.createVote(vote: voteRequest)
-            .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
-            .eraseToAnyPublisher()
             .map { $0.data }
-            .tryMap {
-                guard let res = try? JSONDecoder().decode(MessageResponse.self, from: $0) else {
-                    return false
-                }
-                return res.message == "SUCCESS"
-            }
+            .decode(type: MessageResponse.self, decoder: JSONDecoder())
+            .map { $0.message == "SUCCESS" }
             .sink(
                 receiveCompletion: {
                     print($0)

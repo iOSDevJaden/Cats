@@ -16,11 +16,12 @@ struct VoteView: View, ImageViewProtocol {
             // Images
             Spacer()
             
+            // Buttons
             Group {
                 HStack {
                     VoteButton.like
                         .getButton(action: {})
-                    VoteButton .favourite
+                    VoteButton.favourite
                         .getButton(action: {})
                 }
                 .padding([.horizontal, .bottom])
