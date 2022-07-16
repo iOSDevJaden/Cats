@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UploadView: View {
     @ObservedObject private var vm = UploadViewModel()
+    
     @State private var showAlbum = false
     @State private var showCamera = false
     
@@ -38,6 +39,28 @@ struct UploadView: View {
         Labels(text: "Upload Cats", .black.opacity(0.3))
             .frame(width: 200)
     }
+}
+
+extension UploadView {
+    enum UploadMenu {
+        case album,
+             camera
+        
+        private func getLabel() -> some View {
+            switch self {
+            case .album:  return Text("")
+            case .camera: return Text("")
+            }
+        }
+        
+        func getButton(action: @escaping () -> ()) -> some View {
+            switch self {
+            case .album:  return Button(action: action, label: getLabel)
+            case .camera: return Button(action: action, label: getLabel)
+            }
+        }
+    }
+    
 }
 
 struct UploadView_Previews: PreviewProvider {
