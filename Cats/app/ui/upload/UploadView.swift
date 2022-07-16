@@ -24,15 +24,35 @@ struct UploadView: View {
                         .foregroundColor(.accentColor)
                 )
                 .padding(.horizontal)
-            
             Menu(
                 content: {
-                    Text("Camera")
-                    Text("Album")
+                    UploadMenu.camera
+                        .getButton(action: toggleCameraFullScreen)
+                    UploadMenu.album
+                        .getButton(action: toggleAlbumSheet)
                 },
-                label: getLabel)
+                label: getLabel
+            )
             .padding(.vertical)
         }
+        .sheet(
+            isPresented: $showCamera,
+            onDismiss: toggleCameraFullScreen,
+            content: {}
+        )
+        .fullScreenCover(
+            isPresented: $showAlbum,
+            onDismiss: toggleAlbumSheet,
+            content: {}
+        )
+    }
+    
+    private func toggleCameraFullScreen() {
+        showCamera.toggle()
+    }
+    
+    private func toggleAlbumSheet() {
+        showCamera.toggle()
     }
     
     private func getLabel() -> some View {
@@ -48,8 +68,8 @@ extension UploadView {
         
         private func getLabel() -> some View {
             switch self {
-            case .album:  return Text("")
-            case .camera: return Text("")
+            case .album:  return Text("Album")
+            case .camera: return Text("Camera")
             }
         }
         
