@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct Labels: View {
+    private let text: String
+    private let foregoundColor: Color
     
-    let text: String
+    init(
+        text: String,
+        _ foregroundColor: Color = .accentColor
+    ) {
+        self.text = text
+        self.foregoundColor = foregroundColor
+    }
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-            .foregroundColor(.accentColor)
+            .foregroundColor(self.foregoundColor)
             .frame(height: 50)
             .overlay(
                 Text(text)
