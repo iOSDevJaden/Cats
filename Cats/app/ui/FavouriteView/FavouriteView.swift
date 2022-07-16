@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct FavouriteView: View {
-    @ObservedObject var vm = FavouriteViewModel()
+    @ObservedObject private var vm = FavouriteViewModel()
     
     var body: some View {
-        ScrollView {
-            Text("My Favourite Cats")
+        List {
+            ForEach(vm.favourites) { favourite in
+                Text("\(favourite.id)")
+                    .onTapGesture(perform: { vm.deleteFavourites(favouriteId: favourite.id) })
+            }
         }
+        .onAppear(perform: vm.getMyFavourites)
+        
     }
 }
 
