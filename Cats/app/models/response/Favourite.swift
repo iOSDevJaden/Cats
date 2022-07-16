@@ -8,15 +8,22 @@
 import Foundation
 
 struct Favourite: Codable, Identifiable {
-    let id: String
+    let id: Int
     let imageId: String?
     let subId: String?
     let createdAt: String?
+    let image: Image?
+
+    struct Image: Codable {
+        let id: String?
+        let url: String?
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case imageId = "image_id"
         case subId = "sub_id"
         case createdAt = "created_at"
+        case image = "image"
     }
 }
