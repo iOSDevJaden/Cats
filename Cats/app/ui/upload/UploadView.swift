@@ -6,57 +6,117 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct UploadView: View {
     @ObservedObject private var vm = UploadViewModel()
+    @State private var selectedImage: UIImage?
     
+    @State private var showActionSheet = false
     @State private var showAlbum = false
     @State private var showCamera = false
     
+    
     var body: some View {
         VStack(spacing: 0) {
-            Image("cat-paw")
-                .resizable()
-                .scaledToFit()
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(.accentColor)
+            if let selectedImage = selectedImage {
+                Image(uiImage: selectedImage)
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.accentColor)
+                    )
+                    .padding(.horizontal)
+            } else {
+                Image("cat-paw")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.accentColor)
+                    )
+                    .padding(.horizontal)
+            }
+            if selectedImage != nil {
+                Button(action: {}, label: {
+                    Labels(text: "Upload", .green.opacity(0.3))
+                        .frame(width: 200)
+                })
+                .padding(.vertical)
+            } else {
+                Button(
+                    action: toggleActionSheet,
+                    label: getLabel)
+                .padding(.vertical)
+            }
+            
+            
+            EmptyView()
+                .sheet(
+                    isPresented: $showAlbum,
+                    content: {
+                        PhotoPicker(selectedImage: $selectedImage)
+                    })
+            
+            EmptyView()
+                .fullScreenCover(
+                    isPresented: $showCamera,
+                    onDismiss: dismissCameraFullScreen,
+                    content: {
+                        Text("Camera")
+                            .onTapGesture(perform: dismissCameraFullScreen)
+                    }
                 )
-                .padding(.horizontal)
-            Menu(
-                content: {
-                    UploadMenu.camera
-                        .getButton(action: toggleCameraFullScreen)
-                    UploadMenu.album
-                        .getButton(action: toggleAlbumSheet)
-                },
-                label: getLabel
-            )
-            .padding(.vertical)
         }
-        .sheet(
-            isPresented: $showCamera,
-            onDismiss: toggleCameraFullScreen,
-            content: {}
-        )
-        .fullScreenCover(
-            isPresented: $showAlbum,
-            onDismiss: toggleAlbumSheet,
-            content: {}
-        )
+        .onAppear(perform: requestPermission)
+        .actionSheet(
+            isPresented: $showActionSheet,
+            content: {
+                ActionSheet(
+                    title: Text("Select"),
+                    buttons: [
+                        .cancel(),
+                        .default(Text("Album"), action: showAlbumSheet),
+                        .default(Text("Camera"), action: showCameraFullScreen),
+                    ]
+                )
+            })
     }
     
-    private func toggleCameraFullScreen() {
-        showCamera.toggle()
+    private func requestPermission() {
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            switch status {
+            case .authorized: print("Authorized")
+            default:          print("Not authorized")
+            }
+        }
     }
     
-    private func toggleAlbumSheet() {
-        showCamera.toggle()
+    private func toggleActionSheet() {
+        showActionSheet.toggle()
+    }
+    
+    private func showCameraFullScreen() {
+        showCamera = true
+    }
+    
+    private func showAlbumSheet() {
+        showAlbum = true
+    }
+    
+    private func dismissCameraFullScreen() {
+        showCamera = false
+    }
+    
+    private func dismissAlbumSheet() {
+        showAlbum = false
     }
     
     private func getLabel() -> some View {
-        Labels(text: "Upload Cats", .black.opacity(0.3))
+        Labels(text: "Select picture", .black.opacity(0.3))
             .frame(width: 200)
     }
 }
