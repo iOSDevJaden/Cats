@@ -27,8 +27,7 @@ struct BaseViewFrame<Content: View>: View {
                 getNavigationTitle(viewTitle)
             }
             Spacer(minLength: 0)
-                
-            middle.frame(height: .infinity)
+            middle
             Spacer(minLength: 0)
         }
         .ignoresSafeArea()
@@ -48,23 +47,6 @@ struct BaseViewFrame<Content: View>: View {
         }
         .frame(height: 120)
         .opacity(0.7)
-    }
-    
-    func getTabBarItems() -> some View {
-        ZStack {
-            Color.purple.opacity(0.5)
-            HStack(alignment: .top, spacing: 20) {
-                ForEach(TabBarItems.allCases, id: \.self) { item in
-                    VStack {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                        Text("\(item.rawValue.capitalized)")
-                            .font(.caption)
-                    }
-                }
-            }
-        }
     }
 }
 
