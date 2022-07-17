@@ -51,6 +51,7 @@
 		A1F3CBE52878FA2400710A35 /* ImageFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3CBE42878FA2400710A35 /* ImageFull.swift */; };
 		A1F3CBE72878FC9800710A35 /* ImageShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3CBE62878FC9800710A35 /* ImageShort.swift */; };
 		A1F3CBE92878FDFA00710A35 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3CBE82878FDFA00710A35 /* Vote.swift */; };
+		A1F57F092883B2D100D01E30 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F57F082883B2D100D01E30 /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
