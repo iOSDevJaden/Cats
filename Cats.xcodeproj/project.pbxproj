@@ -34,6 +34,7 @@
 		A1A086C9287C30B90021C4D3 /* URL+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A086C8287C30B90021C4D3 /* URL+extension.swift */; };
 		A1A086CB287C30D70021C4D3 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A086CA287C30D70021C4D3 /* HttpMethod.swift */; };
 		A1A89C1A2880B11000FE3DBC /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A89C192880B11000FE3DBC /* Labels.swift */; };
+		A1B70F8528834007002B4F26 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B70F8428834007002B4F26 /* ImagePicker.swift */; };
 		A1B8AEEC2878560A000D16DE /* CatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B8AEEB2878560A000D16DE /* CatsApp.swift */; };
 		A1B8AEF02878560B000D16DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B8AEEF2878560B000D16DE /* Assets.xcassets */; };
 		A1B8AEF32878560B000D16DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B8AEF22878560B000D16DE /* Preview Assets.xcassets */; };
@@ -83,6 +84,7 @@
 		A1A086C8287C30B90021C4D3 /* URL+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+extension.swift"; sourceTree = "<group>"; };
 		A1A086CA287C30D70021C4D3 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		A1A89C192880B11000FE3DBC /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		A1B70F8428834007002B4F26 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A1B8AEE82878560A000D16DE /* Cats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B8AEEB2878560A000D16DE /* CatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsApp.swift; sourceTree = "<group>"; };
 		A1B8AEEF2878560B000D16DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		A1F3CBE42878FA2400710A35 /* ImageFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFull.swift; sourceTree = "<group>"; };
 		A1F3CBE62878FC9800710A35 /* ImageShort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShort.swift; sourceTree = "<group>"; };
 		A1F3CBE82878FDFA00710A35 /* Vote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
+		A1F57F082883B2D100D01E30 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +196,7 @@
 				A1584ADE287EF150008AF229 /* SearchBar.swift */,
 				A1584AE7287F131C008AF229 /* TabBarItems.swift */,
 				A1A89C192880B11000FE3DBC /* Labels.swift */,
+				A1B70F8428834007002B4F26 /* ImagePicker.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -252,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				A15D602C2881E32800975F84 /* UserInfoCache.swift */,
+				A1F57F082883B2D100D01E30 /* CacheManager.swift */,
 			);
 			path = cache;
 			sourceTree = "<group>";
@@ -457,7 +462,9 @@
 				A145259D287DAC5600FEC177 /* MessageResponse.swift in Sources */,
 				A1F3375328786D3C0023961C /* Resources.swift in Sources */,
 				A1F3CBDF2878F6B900710A35 /* Fact.swift in Sources */,
+				A1F57F092883B2D100D01E30 /* CacheManager.swift in Sources */,
 				A1F3CBE92878FDFA00710A35 /* Vote.swift in Sources */,
+				A1B70F8528834007002B4F26 /* ImagePicker.swift in Sources */,
 				A126C9DB2879578800CF3CD7 /* BreedService.swift in Sources */,
 				A1B8AEEC2878560A000D16DE /* CatsApp.swift in Sources */,
 				A19789522879FA4700EDB501 /* BreedViewModel.swift in Sources */,
