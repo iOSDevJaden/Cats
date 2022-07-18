@@ -17,19 +17,27 @@ struct BreedView: View {
             VStack {
                 SearchBar($searchText)
                 Spacer(minLength: 0)
-                getBreedList(vm.breeds)
+                if let breeds = vm.breeds {
+                    getBreedList(breeds)
+                } else {
+                    getProgressView()
+                }
             }
             .navigationBarHidden(true)
         }
         .onAppear(perform: vm.getAllBreeds)
     }
     
+    
     private func getBreedList(_ breeds: [Breed]) -> some View {
-        VStack {
-            if(breeds.isEmpty) {
-                getProgressView()
-            } else {
-                getAlphabeticallyOrderedList()
+        let dict = getBreedDictionary(breeds)
+        let keys = dict.keys.sorted()
+        
+        return List {
+            ForEach(keys, id: \.self) { key in
+                if let dict = dict[key] {
+                    getSectionOfNames(with: key, breeds: dict)
+                }
             }
         }
     }
@@ -40,17 +48,6 @@ struct BreedView: View {
             ProgressView()
             Spacer()
         }
-    }
-    
-    private func getAlphabeticallyOrderedList() -> some View {
-        List {
-            ForEach(vm.categorizedBreeds.keys.sorted(), id: \.self) { key in
-                if let breeds = vm.categorizedBreeds[key] {
-                    getSectionOfNames(with: key, breeds: breeds)
-                }
-            }
-        }
-        .listStyle(.grouped)
     }
     
     private func getSectionOfNames(with key: String, breeds: [Breed]) -> some View {
@@ -66,6 +63,24 @@ struct BreedView: View {
             header: {
                 Text(key)
             })
+    }
+    
+    private func getBreedDictionary(_ breeds: [Breed]) -> Dictionary<String, [Breed]> {
+        let names = searchText.isEmpty ?
+        breeds
+            .map { $0.name } :
+        breeds
+            .filter { $0.name.contains(searchText) }
+            .map { $0.name }
+        
+        let keys = Array(Set(names.map { $0.first })) // Remove duplication
+        var dictionaryBreeds: [String: [Breed]] = [:]
+        keys.forEach {
+            if let key = $0 {
+                dictionaryBreeds[String(key)] = breeds.filter { $0.name.contains(String(key)) }
+            }
+        }
+        return dictionaryBreeds
     }
 }
 
