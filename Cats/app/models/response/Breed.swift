@@ -69,4 +69,38 @@ struct Breed: Codable, Identifiable {
         case strangerFriendly = "stranger_friendly"
         case vocalisation = "vocalisation"
     }
+    
+#if DEBUG
+        static let staticBreed = Breed(
+            id: "abys",
+            name: "Abyssinian",
+            temperament: "Active, Energetic, Independent, Intelligent, Gentle",
+            lifeSpan: "14 - 15",
+            altName: nil,
+            wikipediaUrl: "https://en.wikipedia.org/wiki/Abyssinian_(cat)",
+            origin: "Egypt",
+            weightImperial: nil,
+            experimental: 0,
+            hairless: 0,
+            natural: 1,
+            rare: 0,
+            rex: 0,
+            suppressTail: nil,
+            shortsLegs: nil,
+            hypoallergenic: 0,
+            adaptability: 5,
+            affectionLevel: nil,
+            countryCode: "EG",
+            childFriendly: 3,
+            dogFriendly: 4,
+            energyLevel: 5,
+            grooming: 1,
+            healthIssue: nil,
+            intelligence: 5,
+            sheddingLevel: 2,
+            socialNeeds: 5,
+            strangerFriendly: 5,
+            vocalisation: 1
+        )
+#endif
 }
