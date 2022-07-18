@@ -34,6 +34,7 @@
 		A1A086C9287C30B90021C4D3 /* URL+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A086C8287C30B90021C4D3 /* URL+extension.swift */; };
 		A1A086CB287C30D70021C4D3 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A086CA287C30D70021C4D3 /* HttpMethod.swift */; };
 		A1A89C1A2880B11000FE3DBC /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A89C192880B11000FE3DBC /* Labels.swift */; };
+		A1A92BAD2885B3310091EBEA /* CatWikiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A92BAC2885B3310091EBEA /* CatWikiView.swift */; };
 		A1B70F8528834007002B4F26 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B70F8428834007002B4F26 /* ImagePicker.swift */; };
 		A1B8AEEC2878560A000D16DE /* CatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B8AEEB2878560A000D16DE /* CatsApp.swift */; };
 		A1B8AEF02878560B000D16DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B8AEEF2878560B000D16DE /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		A1A086C8287C30B90021C4D3 /* URL+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+extension.swift"; sourceTree = "<group>"; };
 		A1A086CA287C30D70021C4D3 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		A1A89C192880B11000FE3DBC /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		A1A92BAC2885B3310091EBEA /* CatWikiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatWikiView.swift; sourceTree = "<group>"; };
 		A1B70F8428834007002B4F26 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A1B8AEE82878560A000D16DE /* Cats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B8AEEB2878560A000D16DE /* CatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsApp.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				A1584AE3287EF85B008AF229 /* BreedDetailView.swift */,
+				A1A92BAC2885B3310091EBEA /* CatWikiView.swift */,
 			);
 			path = BreedView;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */,
 				A181969F287A92D000C6E7B8 /* VoteRequest.swift in Sources */,
 				A1F3374F28786B130023961C /* VoteViewModel.swift in Sources */,
+				A1A92BAD2885B3310091EBEA /* CatWikiView.swift in Sources */,
 				A1C2CB202882E83F008CFFD2 /* UploadView.swift in Sources */,
 				A1A086C9287C30B90021C4D3 /* URL+extension.swift in Sources */,
 				A197895E2879FF8400EDB501 /* ImagesApi.swift in Sources */,
