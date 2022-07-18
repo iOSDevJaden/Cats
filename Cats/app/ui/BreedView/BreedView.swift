@@ -77,7 +77,7 @@ struct BreedView: View {
         var dictionaryBreeds: [String: [Breed]] = [:]
         keys.forEach {
             if let key = $0 {
-                dictionaryBreeds[String(key)] = breeds.filter { $0.name.contains(String(key)) }
+                dictionaryBreeds[String(key)] = breeds.filter { $0.name.first == key }
             }
         }
         return dictionaryBreeds
