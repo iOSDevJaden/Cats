@@ -16,7 +16,6 @@ struct UploadView: View {
     @State private var showAlbum = false
     @State private var showCamera = false
     
-    
     var body: some View {
         VStack(spacing: 0) {
             if let selectedImage = selectedImage {
@@ -53,7 +52,7 @@ struct UploadView: View {
                 .padding(.vertical)
             }
             
-            
+            // MARK: - sheet, fullScreenCover modifier do not work as expected.
             EmptyView()
                 .sheet(
                     isPresented: $showAlbum,
