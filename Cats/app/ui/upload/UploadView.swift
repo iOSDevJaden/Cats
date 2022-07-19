@@ -52,23 +52,6 @@ struct UploadView: View {
                 .padding(.vertical)
             }
             
-            // MARK: - sheet, fullScreenCover modifier do not work as expected.
-            EmptyView()
-                .sheet(
-                    isPresented: $showAlbum,
-                    content: {
-                        PhotoPicker(selectedImage: $selectedImage)
-                    })
-            
-            EmptyView()
-                .fullScreenCover(
-                    isPresented: $showCamera,
-                    onDismiss: dismissCameraFullScreen,
-                    content: {
-                        Text("Camera")
-                            .onTapGesture(perform: dismissCameraFullScreen)
-                    }
-                )
         }
         .onAppear(perform: requestPermission)
         .actionSheet(
@@ -83,6 +66,22 @@ struct UploadView: View {
                     ]
                 )
             })
+        /* MARK: - sheet, fullScreenCover modifier do not work as expected.
+         * iOS Simulator did not show sheet or full screen cover.
+         * However, it works fine in the real device. */
+        .sheet(
+            isPresented: $showAlbum,
+            content: {
+                PhotoPicker(selectedImage: $selectedImage)
+            })
+        .fullScreenCover(
+            isPresented: $showCamera,
+            onDismiss: dismissCameraFullScreen,
+            content: {
+                Text("Camera")
+                    .onTapGesture(perform: dismissCameraFullScreen)
+            }
+        )
     }
     
     private func requestPermission() {
