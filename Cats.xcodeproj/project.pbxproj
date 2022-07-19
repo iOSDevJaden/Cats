@@ -196,10 +196,11 @@
 		A1584ADD287EF140008AF229 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				A1A92BAC2885B3310091EBEA /* CatWikiView.swift */,
+				A1B70F8428834007002B4F26 /* ImagePicker.swift */,
+				A1A89C192880B11000FE3DBC /* Labels.swift */,
 				A1584ADE287EF150008AF229 /* SearchBar.swift */,
 				A1584AE7287F131C008AF229 /* TabBarItems.swift */,
-				A1A89C192880B11000FE3DBC /* Labels.swift */,
-				A1B70F8428834007002B4F26 /* ImagePicker.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -216,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				A1584AE3287EF85B008AF229 /* BreedDetailView.swift */,
-				A1A92BAC2885B3310091EBEA /* CatWikiView.swift */,
 			);
 			path = BreedView;
 			sourceTree = "<group>";
