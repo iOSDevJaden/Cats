@@ -17,6 +17,8 @@
 		A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE7287F131C008AF229 /* TabBarItems.swift */; };
 		A15D602D2881E32800975F84 /* UserInfoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D602C2881E32800975F84 /* UserInfoCache.swift */; };
 		A17C461B287B2440005B6E07 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C461A287B2440005B6E07 /* RequestBuilder.swift */; };
+		A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */; };
+		A17F4D312886F215009A68BF /* AsyncImgViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */; };
 		A1819692287A75F100C6E7B8 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819691287A75F100C6E7B8 /* FavouriteView.swift */; };
 		A1819694287A761700C6E7B8 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819693287A761700C6E7B8 /* FavouriteViewModel.swift */; };
 		A1819696287A785D00C6E7B8 /* FavouriteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819695287A785D00C6E7B8 /* FavouriteApi.swift */; };
@@ -69,6 +71,8 @@
 		A1584AE7287F131C008AF229 /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
 		A15D602C2881E32800975F84 /* UserInfoCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCache.swift; sourceTree = "<group>"; };
 		A17C461A287B2440005B6E07 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgView.swift; sourceTree = "<group>"; };
+		A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgViewModel.swift; sourceTree = "<group>"; };
 		A1819691287A75F100C6E7B8 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		A1819693287A761700C6E7B8 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		A1819695287A785D00C6E7B8 /* FavouriteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteApi.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 		A1584AE0287EF832008AF229 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A17F4D2F2886F1CD009A68BF /* AsyncImgView */,
 				A1584AE2287EF84B008AF229 /* BreedView */,
 			);
 			path = SubViews;
@@ -219,6 +224,15 @@
 				A1584AE3287EF85B008AF229 /* BreedDetailView.swift */,
 			);
 			path = BreedView;
+			sourceTree = "<group>";
+		};
+		A17F4D2F2886F1CD009A68BF /* AsyncImgView */ = {
+			isa = PBXGroup;
+			children = (
+				A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */,
+				A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */,
+			);
+			path = AsyncImgView;
 			sourceTree = "<group>";
 		};
 		A1819690287A75D900C6E7B8 /* FavouriteView */ = {
@@ -445,6 +459,7 @@
 				A19789502879FA1600EDB501 /* BreedView.swift in Sources */,
 				A1B8AF1628785648000D16DE /* MainView.swift in Sources */,
 				A1584AE6287F058A008AF229 /* BaseViewFrame.swift in Sources */,
+				A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */,
 				A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */,
 				A181969F287A92D000C6E7B8 /* VoteRequest.swift in Sources */,
 				A1F3374F28786B130023961C /* VoteViewModel.swift in Sources */,
@@ -465,6 +480,7 @@
 				A127054B2879B727001B0A74 /* BaseViewModel.swift in Sources */,
 				A1819696287A785D00C6E7B8 /* FavouriteApi.swift in Sources */,
 				A145259D287DAC5600FEC177 /* MessageResponse.swift in Sources */,
+				A17F4D312886F215009A68BF /* AsyncImgViewModel.swift in Sources */,
 				A1F3375328786D3C0023961C /* Resources.swift in Sources */,
 				A1F3CBDF2878F6B900710A35 /* Fact.swift in Sources */,
 				A1F57F092883B2D100D01E30 /* CacheManager.swift in Sources */,
