@@ -51,7 +51,8 @@ struct BaseViewFrame<Content: View>: View {
 }
 
 struct BaseViewFrame_Previews: PreviewProvider {
-    @State static var tab = TabBarItems.vote
+    @State static var tab = TabBarItems.home
+    
     static var previews: some View {
         Group {
             BaseViewFrame(
