@@ -27,6 +27,8 @@ struct AsyncImgView: View {
     var body: some View {
         VStack {
             Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFit()
         }
         .onReceive(vm.$imageData) { data in
             guard let uiImage = UIImage(data: data) else {
@@ -38,16 +40,17 @@ struct AsyncImgView: View {
 }
 
 struct AsyncImgView_Previews: PreviewProvider {
-    static let url1 = "https://24.media.tumblr.com/tumblr_lr8ywvqLEr1qz4dkmo1_250.jpg"
-    static let url2 = "https://25.media.tumblr.com/tumblr_lgruxcE8vY1qgnva2o1_250.jpg"
-    static let url3 = "https://cdn2.thecatapi.com/images/O_GNlmO7K.jpg"
+    // Example Strings
+    static let imgUrlString1 = "https://24.media.tumblr.com/tumblr_lr8ywvqLEr1qz4dkmo1_250.jpg"
+    static let imgUrlString2 = "https://25.media.tumblr.com/tumblr_lgruxcE8vY1qgnva2o1_250.jpg"
+    static let imgUrlString3 = "https://cdn2.thecatapi.com/images/O_GNlmO7K.jpg"
 
     static var previews: some View {
         Group {
             VStack {
-                AsyncImgView(url1)
-                AsyncImgView(url2)
-                AsyncImgView(url3)
+                AsyncImgView(imgUrlString1)
+                AsyncImgView(imgUrlString2)
+                AsyncImgView(imgUrlString3)
             }
         }
     }
