@@ -5,13 +5,36 @@
 //  Created by 김태호 on 2022/07/10.
 //
 
+import Combine
 import Foundation
 
-struct VoteService {
+class VoteService {
+    private var cancellable = Set<AnyCancellable>()
     private let voteApi = VoteApi()
     
-    func getMyVotes() -> URLSession.DataTaskPublisher {
-        return URLSession.shared.dataTaskPublisher(for: voteApi.getMyVotes())
+    func getMyVotes() -> AnyPublisher<[VoteRes], Error> {
+        return Deferred {
+            Future { promise in
+                URLSession.shared.dataTaskPublisher(for: self.voteApi.getMyVotes())
+                    .subscribe(on: DispatchQueue.global(qos: .background))
+                    .map(\.data)
+                    .decode(type: [VoteRes].self, decoder: JSONDecoder())
+                    .sink(
+                        receiveCompletion: {
+                            switch($0) {
+                            case .failure(let error):
+                                promise(.failure(error))
+                            case .finished:
+                                print("Finished")
+                            }
+                        },
+                        receiveValue: {
+                            promise(.success($0))
+                        })
+                    .store(in: &self.cancellable)
+            }
+        }
+        .eraseToAnyPublisher()
     }
     
     func getMyVotes(vote id: String) -> URLSession.DataTaskPublisher {
