@@ -10,80 +10,111 @@ import SwiftUI
 protocol TabItemProtocol: Identifiable, CaseIterable { }
 
 enum TabBarItems: String, TabItemProtocol {
-    case vote,
-         breed,
-         favourite,
+    /**
+     * New Version
+     * 1. Home - show images that user voteup-ed and favourited.
+     * 2. Search - show random images that user can like or favourite it
+     * 3. Upload Images (sheet)
+     * 4. Breeds
+     * 5. Profile - User Settings
+     */
+    case home,
          search,
-         upload
+         upload,
+         breeds,
+         profile
     
     var id: String {
         UUID().uuidString
     }
     
-    var text: String {
+    var labelText: String {
         self.rawValue.capitalized
     }
     
-    private var iconName: String {
-        switch self {
-        case .vote:      return "archivebox"
-        case .breed:     return "sun.min"
-        case .search:    return "magnifyingglass"
-        case .favourite: return "heart"
-        case .upload:    return "arrow.up.bin"
-        }
-    }
-    
-    private func getTabItemLable() -> some View {
+    private func getLabelIcon() -> some View {
         VStack {
-            getTabItemImage()
-            getTabItemText()
+            switch self {
+            case .home:    Image(systemName: "house.circle").setTabItemModifier()
+            case .search:  Image(systemName: "magnifyingglass.circle").setTabItemModifier()
+            case .upload:  Image(systemName: "plus.app").setTabItemModifier()
+            case .breeds:  Image(systemName: "book.circle").setTabItemModifier()
+            case .profile: Image(systemName: "person.crop.circle").setTabItemModifier()
+            }
         }
     }
     
-    private func getTabItemText() -> Text {
+    private func getLabelCaption() -> some View {
         switch self {
-        case .vote:      return Text(text).font(.caption)
-        case .breed:     return Text(text).font(.caption)
-        case .favourite: return Text(text).font(.caption)
-        case .search:    return Text(text).font(.caption)
-        case .upload:    return Text(text).font(.caption)
+        case .home:    return Text(labelText).modifier(IconCaptionModifier())
+        case .search:  return Text(labelText).modifier(IconCaptionModifier())
+        case .upload:  return Text(labelText).modifier(IconCaptionModifier())
+        case .breeds:  return Text(labelText).modifier(IconCaptionModifier())
+        case .profile: return Text(labelText).modifier(IconCaptionModifier())
         }
     }
     
-    private func getTabItemImage() -> some View {
+    func getLabel() -> some View {
+        VStack {
+            switch self {
+            case .home:
+                self.getLabelIcon()
+                self.getLabelCaption()
+            case .search:
+                self.getLabelIcon()
+                self.getLabelCaption()
+            case .upload:
+                self.getLabelIcon()
+                self.getLabelCaption()
+            case .breeds:
+                self.getLabelIcon()
+                self.getLabelCaption()
+            case .profile:
+                self.getLabelIcon()
+                self.getLabelCaption()
+            }
+        }
+    }
+    
+    func getButtons(action: @escaping () -> ()) -> some View {
         switch self {
-        case .vote:      return
-            Image(systemName: self.iconName)
-                .resizable()
-                .frame(width: 25, height: 25)
-        case .breed:     return
-            Image(systemName: self.iconName)
-                .resizable()
-                .frame(width: 25, height: 25)
-        case .favourite: return
-            Image(systemName: self.iconName)
-                .resizable()
-                .frame(width: 25, height: 25)
-        case .search:    return
-            Image(systemName: self.iconName)
-                .resizable()
-                .frame(width: 25, height: 25)
-        case .upload:    return
-            Image(systemName: self.iconName)
-                .resizable()
-                .frame(width: 25, height: 25)
+        case .home:    return Button(action: action, label: getLabel)
+        case .search:  return Button(action: action, label: getLabel)
+        case .upload:  return Button(action: action, label: getLabel)
+        case .breeds:  return Button(action: action, label: getLabel)
+        case .profile: return Button(action: action, label: getLabel)
         }
     }
-    
-    func getTabItemButtons(action: @escaping () -> ()) -> some View {
-        switch self {
-        case .vote:      return Button(action: action, label: getTabItemLable)
-        case .breed:     return Button(action: action, label: getTabItemLable)
-        case .favourite: return Button(action: action, label: getTabItemLable)
-        case .search:    return Button(action: action, label: getTabItemLable)
-        case .upload:    return Button(action: action, label: getTabItemLable)
-        }
+}
+
+fileprivate struct IconCaptionModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content.font(.caption)
     }
+}
+
+extension Image {
+    fileprivate func setTabItemModifier() -> some View {
+        self.resizable()
+            .scaledToFit()
+            .frame(width: 30, height: 30)
+    }
+}
+
+struct TabItems_Preview: PreviewProvider {
+    @State static var tab = TabBarItems.home
     
+    static var previews: some View {
+        Group {
+            HStack(spacing: 30) {
+                ForEach(TabBarItems.allCases) { item in
+                    item.getButtons(action: { self.tab = item })
+                        .foregroundColor(item == tab ? .black : .purple)
+                }
+            }
+            .foregroundColor(.purple)
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
+    }
 }
