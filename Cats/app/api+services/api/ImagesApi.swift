@@ -22,6 +22,7 @@ struct ImagesApi {
         let parameters = [
             URLQueryItem(name: "page", value: "\(page)"),
             URLQueryItem(name: "limit", value: "\(limit)"),
+            URLQueryItem(name: "mime_types", value: "jpg,png"),
             URLQueryItem(name: "size", value: "small"),
         ]
         
