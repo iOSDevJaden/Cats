@@ -16,6 +16,8 @@
 		A1584AE6287F058A008AF229 /* BaseViewFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE5287F058A008AF229 /* BaseViewFrame.swift */; };
 		A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE7287F131C008AF229 /* TabBarItems.swift */; };
 		A15D602D2881E32800975F84 /* UserInfoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D602C2881E32800975F84 /* UserInfoCache.swift */; };
+		A17162F228883D01004CC2AF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17162F128883D01004CC2AF /* HomeView.swift */; };
+		A17162F528883D23004CC2AF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17162F428883D23004CC2AF /* ProfileView.swift */; };
 		A17C461B287B2440005B6E07 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C461A287B2440005B6E07 /* RequestBuilder.swift */; };
 		A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */; };
 		A17F4D312886F215009A68BF /* AsyncImgViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */; };
@@ -69,6 +71,8 @@
 		A1584AE5287F058A008AF229 /* BaseViewFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewFrame.swift; sourceTree = "<group>"; };
 		A1584AE7287F131C008AF229 /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
 		A15D602C2881E32800975F84 /* UserInfoCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCache.swift; sourceTree = "<group>"; };
+		A17162F128883D01004CC2AF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A17162F428883D23004CC2AF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A17C461A287B2440005B6E07 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgView.swift; sourceTree = "<group>"; };
 		A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgViewModel.swift; sourceTree = "<group>"; };
@@ -216,6 +220,22 @@
 			path = BreedView;
 			sourceTree = "<group>";
 		};
+		A17162F028883CEF004CC2AF /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				A17162F128883D01004CC2AF /* HomeView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		A17162F328883D16004CC2AF /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				A17162F428883D23004CC2AF /* ProfileView.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 		A17F4D2F2886F1CD009A68BF /* AsyncImgView */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +359,8 @@
 		A1F3374A28786AE70023961C /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				A17162F328883D16004CC2AF /* ProfileView */,
+				A17162F028883CEF004CC2AF /* HomeView */,
 				A1C2CB1D2882E82A008CFFD2 /* upload */,
 				A1584AE0287EF832008AF229 /* SubViews */,
 				A1584ADD287EF140008AF229 /* custom */,
@@ -444,6 +466,7 @@
 				A19789552879FE7100EDB501 /* SearchView.swift in Sources */,
 				A1F3CBE32878F81900710A35 /* Breed.swift in Sources */,
 				A1819698287A7B3800C6E7B8 /* FavouriteService.swift in Sources */,
+				A17162F528883D23004CC2AF /* ProfileView.swift in Sources */,
 				A19789502879FA1600EDB501 /* BreedView.swift in Sources */,
 				A1B8AF1628785648000D16DE /* MainView.swift in Sources */,
 				A1584AE6287F058A008AF229 /* BaseViewFrame.swift in Sources */,
@@ -461,6 +484,7 @@
 				A1819692287A75F100C6E7B8 /* FavouriteView.swift in Sources */,
 				A19789572879FE7E00EDB501 /* SearchViewModel.swift in Sources */,
 				A1584ADF287EF150008AF229 /* SearchBar.swift in Sources */,
+				A17162F228883D01004CC2AF /* HomeView.swift in Sources */,
 				A181969C287A896200C6E7B8 /* VoteService.swift in Sources */,
 				A15D602D2881E32800975F84 /* UserInfoCache.swift in Sources */,
 				A1584AE4287EF85B008AF229 /* BreedDetailView.swift in Sources */,
