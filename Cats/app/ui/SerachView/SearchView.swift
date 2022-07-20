@@ -7,22 +7,25 @@
 
 import SwiftUI
 
-struct SearchView: View, ImageViewProtocol {
+struct SearchView: View {
     @ObservedObject private var vm = SearchViewModel()
-    @State private var text = ""
+    
+    let colums: [GridItem] = [
+        GridItem(.flexible(minimum:60), spacing: 2),
+        GridItem(.flexible(), spacing: 2),
+        GridItem(.flexible(), spacing: 2),
+    ]
     
     var body: some View {
-        VStack {
-            SearchBar($text)
-            ForEach(vm.images) { image in
-                if let image = getImage(imageUrl: image.url) {
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.horizontal)
+        ScrollView {
+            LazyVGrid(columns: colums, spacing: nil) {
+                ForEach(vm.images) { image in
+                    if let url = image.url {
+                        AsyncImgView(url)
+                            .frame(height: 120, alignment: .top)
+                    }
                 }
             }
-            Spacer()
         }
         .onAppear(perform: vm.getSingleImage)
     }
