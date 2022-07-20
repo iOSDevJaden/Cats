@@ -1,13 +1,13 @@
 //
-//  Fact.swift
+//  FactRes.swift
 //  Cats
 //
-//  Created by 김태호 on 2022/07/09.
+//  Created by 김태호 on 2022/07/21.
 //
 
 import Foundation
 
-struct Fact: Codable, Identifiable {
+struct FactRes: Codable, Identifiable {
     let id: String
     let text: String?
     let languageCode: String?

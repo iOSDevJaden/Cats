@@ -35,21 +35,6 @@ struct HomeView: View {
                     })
             }
             
-            if vm.voteUps.isEmpty {
-                Text("No Vote-up cat pictures")
-            } else {
-                Section(
-                    content: {
-                        ForEach(vm.voteUps) { image in
-                            if let url = image.url {
-                                AsyncImgView(url)
-                            }
-                        }
-                    },
-                    header: {
-                        Text("My Vote-up Views")
-                    })
-            }
         }
         .onAppear(perform: vm.getFavouriteImages)
         .onAppear(perform: vm.getVoteUpImages)

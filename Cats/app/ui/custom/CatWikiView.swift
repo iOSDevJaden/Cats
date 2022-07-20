@@ -37,7 +37,7 @@ struct CatWikiView: UIViewRepresentable {
 struct CatWikiView_Previews: PreviewProvider {
     static var previews: some View {
         CatWikiView(
-            url: Breed.staticBreed.wikipediaUrl ?? ""
+            url: BreedRes.staticBreed.wikipediaUrl ?? ""
         )
     }
 }

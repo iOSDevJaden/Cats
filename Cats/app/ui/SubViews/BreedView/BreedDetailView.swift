@@ -10,7 +10,7 @@ import SwiftUI
 struct BreedDetailView: View {
     @Environment(\.presentationMode) private var presentationMode
     @State private var showWiki = false
-    let breed: Breed
+    let breed: BreedRes
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -118,7 +118,7 @@ struct BreedDetailView: View {
 
 
 struct BreedDetailView_Previews: PreviewProvider {
-    static let breed = Breed.staticBreed
+    static let breed = BreedRes.staticBreed
     
     static var previews: some View {
         BreedDetailView(breed: breed)

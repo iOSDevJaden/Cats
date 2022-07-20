@@ -12,14 +12,14 @@ class SearchViewModel: ObservableObject {
     private let imagesService = ImagesService()
     private var cancellable = Set<AnyCancellable>()
     
-    @Published var images: [ImageFull] = []
+    @Published var images: [ImageRes] = []
     
     func getSingleImage() {
         imagesService.getAllImages(limit: 20)
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .tryMap { $0.data }
-            .decode(type: [ImageFull].self, decoder: JSONDecoder())
+            .decode(type: [ImageRes].self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: {
                     print("Completion \($0)")

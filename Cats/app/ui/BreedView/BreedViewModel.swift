@@ -12,14 +12,14 @@ class BreedViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
     private let breedService = BreedService()
     
-    @Published var breeds: [Breed] = []
+    @Published var breeds: [BreedRes] = []
     
     func getAllBreeds() {
         breedService.getBreeds()
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .map(\.data)
-            .decode(type: [Breed].self, decoder: JSONDecoder())
+            .decode(type: [BreedRes].self, decoder: JSONDecoder())
             .replaceError(with: [])
             .sink { [weak self] breeds in
                 self?.breeds = breeds
@@ -32,7 +32,7 @@ class BreedViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .map(\.data)
-            .decode(type: [Breed].self, decoder: JSONDecoder())
+            .decode(type: [BreedRes].self, decoder: JSONDecoder())
             .replaceError(with: [])
             .sink { [weak self] breeds in
                 self?.breeds = breeds

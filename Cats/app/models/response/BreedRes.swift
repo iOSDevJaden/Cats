@@ -1,13 +1,13 @@
 //
-//  Breed.swift
+//  BreedRes.swift
 //  Cats
 //
-//  Created by 김태호 on 2022/07/09.
+//  Created by 김태호 on 2022/07/21.
 //
 
 import Foundation
 
-struct Breed: Codable, Identifiable {
+struct BreedRes: Codable, Identifiable {
     let id: String
     let name: String
     let temperament: String?
@@ -71,7 +71,7 @@ struct Breed: Codable, Identifiable {
     }
     
 #if DEBUG
-        static let staticBreed = Breed(
+        static let staticBreed = BreedRes(
             id: "abys",
             name: "Abyssinian",
             temperament: "Active, Energetic, Independent, Intelligent, Gentle",

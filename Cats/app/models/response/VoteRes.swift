@@ -1,19 +1,19 @@
 //
-//  Vote.swift
+//  VoteRes.swift
 //  Cats
 //
-//  Created by 김태호 on 2022/07/09.
+//  Created by 김태호 on 2022/07/21.
 //
 
 import Foundation
 
-struct Vote: Codable, Identifiable {
+struct VoteRes: Codable, Identifiable {
     let value: Int
     let imageId: String
-    let subId: String
+    let subId: String?
     let createdAt: String
-    let id: String
-    let countryCode: String
+    let id: Int
+    let countryCode: String?
     
     enum CodingKeys: String, CodingKey {
         case value = "value"

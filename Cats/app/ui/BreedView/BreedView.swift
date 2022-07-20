@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BreedView: View {
     @ObservedObject private var vm = BreedViewModel()
-    @State private var dictionaryBreeds: [String: [Breed]] = [:]
+    @State private var dictionaryBreeds: [String: [BreedRes]] = [:]
     @State private var searchText = ""
     
     var body: some View {
@@ -29,7 +29,7 @@ struct BreedView: View {
     }
     
     
-    private func getBreedList(_ breeds: [Breed]) -> some View {
+    private func getBreedList(_ breeds: [BreedRes]) -> some View {
         let dict = getBreedDictionary(breeds)
         let keys = dict.keys.sorted()
         
@@ -50,7 +50,7 @@ struct BreedView: View {
         }
     }
     
-    private func getSectionOfNames(with key: String, breeds: [Breed]) -> some View {
+    private func getSectionOfNames(with key: String, breeds: [BreedRes]) -> some View {
         Section(
             content: {
                 ForEach(breeds) { breed in
@@ -65,7 +65,7 @@ struct BreedView: View {
             })
     }
     
-    private func getBreedDictionary(_ breeds: [Breed]) -> Dictionary<String, [Breed]> {
+    private func getBreedDictionary(_ breeds: [BreedRes]) -> Dictionary<String, [BreedRes]> {
         let names = searchText.isEmpty ?
         breeds
             .map { $0.name } :
@@ -74,7 +74,7 @@ struct BreedView: View {
             .map { $0.name }
         
         let keys = Array(Set(names.map { $0.first })) // Remove duplication
-        var dictionaryBreeds: [String: [Breed]] = [:]
+        var dictionaryBreeds: [String: [BreedRes]] = [:]
         keys.forEach {
             if let key = $0 {
                 dictionaryBreeds[String(key)] = breeds.filter { $0.name.first == key }

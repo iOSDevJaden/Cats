@@ -13,15 +13,15 @@ class HomeViewModel: ObservableObject {
     private let favouriteService = FavouriteService()
     private let voteService = VoteService()
     
-    @Published var favourites: [Favourite] = []
-    @Published var voteUps: [ImageFull] = []
+    @Published var favourites: [FavouriteRes] = []
+    @Published var voteUps: [VoteRes] = []
     
     func getFavouriteImages() {
         favouriteService.getMyFavourites()
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .map(\.data)
-            .decode(type: [Favourite].self, decoder: JSONDecoder())
+            .decode(type: [FavouriteRes].self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: {
                     print("Receive Completion \($0)")
@@ -36,14 +36,27 @@ class HomeViewModel: ObservableObject {
         voteService.getMyVotes()
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: {
+                    print($0)
+                },
+                receiveValue: { [weak self] vote in
+                    self?.voteUps = vote
+                })
+            .store(in: &cancellable)
+    }
+    
+    func deleteVote(imageId: String) {
+        voteService.deleteVote(vote: imageId)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
             .map(\.data)
-            .decode(type: [ImageFull].self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: {
                     print("Receive Completion \($0)")
                 },
-                receiveValue: { [weak self] voteUps in
-                    self?.voteUps = voteUps
+                receiveValue: {
+                    print("\(String(data: $0, encoding: .utf8) ?? "")")
                 })
             .store(in: &cancellable)
     }

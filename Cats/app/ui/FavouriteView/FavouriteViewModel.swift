@@ -12,14 +12,14 @@ class FavouriteViewModel: ObservableObject {
     private let favouriteServices = FavouriteService()
     private var cancellable = Set<AnyCancellable>()
     
-    @Published var favourites = [Favourite]()
+    @Published var favourites = [FavouriteRes]()
     
     func getMyFavourites() {
         favouriteServices.getMyFavourites()
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .map { $0.data }
-            .decode(type: [Favourite].self, decoder: JSONDecoder())
+            .decode(type: [FavouriteRes].self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: {
                     print("receiveCompletion \($0)")
