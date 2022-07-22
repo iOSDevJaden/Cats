@@ -12,14 +12,20 @@ class BreedViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
     private let breedService = BreedService()
     
-    @Published var breeds: [BreedRes] = []
+    lazy var userDefault = UserDefaults.standard
+    
+    @Published var breeds: [BreedRes] = [] {
+        didSet { saveBreedsInfo() }
+    }
     
     func getAllBreeds() {
+        if !getBreedsInfo().isEmpty {
+            self.breeds = getBreedsInfo()
+            return
+        }
         breedService.getBreeds()
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
-            .map(\.data)
-            .decode(type: [BreedRes].self, decoder: JSONDecoder())
             .replaceError(with: [])
             .sink { [weak self] breeds in
                 self?.breeds = breeds
@@ -31,8 +37,6 @@ class BreedViewModel: ObservableObject {
         breedService.getBreeds(by: id)
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
-            .map(\.data)
-            .decode(type: [BreedRes].self, decoder: JSONDecoder())
             .replaceError(with: [])
             .sink { [weak self] breeds in
                 self?.breeds = breeds
@@ -40,4 +44,25 @@ class BreedViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
+    private func saveBreedsInfo() {
+        guard let breedsInfo = try? JSONEncoder().encode(self.breeds) else {
+            return
+        }
+        userDefault.set(breedsInfo, forKey: Const.breedsKey)
+    }
+    
+    private func getBreedsInfo() -> [BreedRes] {
+        guard let breeds = userDefault.data(forKey: Const.breedsKey),
+              let breedsInfo = try? JSONDecoder().decode([BreedRes].self, from: breeds)
+        else {
+            return []
+        }
+        return breedsInfo
+    }
+}
+
+extension BreedViewModel {
+    enum Const {
+        static let breedsKey = "breedsKey"
+    }
 }
