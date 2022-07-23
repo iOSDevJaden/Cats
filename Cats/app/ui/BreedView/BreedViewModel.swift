@@ -9,20 +9,27 @@ import Combine
 import Foundation
 
 class BreedViewModel: ObservableObject {
-    private var cancellable = Set<AnyCancellable>()
-    private let breedService = BreedService()
+    private lazy var breedService = BreedService()
+    private lazy var cancellable = Set<AnyCancellable>()
     
-    lazy var userDefault = UserDefaults.standard
+    private var diskCache = DiskCache.shared
     
-    @Published var breeds: [BreedRes] = [] {
-        didSet { saveBreedsInfo() }
+    @Published var breeds: [BreedRes] = []
+    
+    func getBreeds() {
+        if checkCacheExists() {
+            self.breeds = readData(from: Const.breedsKey)
+        } else {
+            getAllBreeds()
+        }
     }
     
-    func getAllBreeds() {
-        if !getBreedsInfo().isEmpty {
-            self.breeds = getBreedsInfo()
-            return
-        }
+    private func checkCacheExists() -> Bool {
+        return diskCache.isNotEmptyPath(at: Const.breedsKey) &&
+        diskCache.getDataFromFile(name: Const.breedsKey) != nil
+    }
+    
+    private func getAllBreeds() {
         breedService.getBreeds()
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
@@ -33,31 +40,17 @@ class BreedViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
-    func getBreeds(by id: String) {
-        breedService.getBreeds(by: id)
-            .receive(on: DispatchQueue.main)
-            .subscribe(on: DispatchQueue.global(qos: .background))
-            .replaceError(with: [])
-            .sink { [weak self] breeds in
-                self?.breeds = breeds
-            }
-            .store(in: &cancellable)
-    }
-    
-    private func saveBreedsInfo() {
-        guard let breedsInfo = try? JSONEncoder().encode(self.breeds) else {
-            return
-        }
-        userDefault.set(breedsInfo, forKey: Const.breedsKey)
-    }
-    
-    private func getBreedsInfo() -> [BreedRes] {
-        guard let breeds = userDefault.data(forKey: Const.breedsKey),
-              let breedsInfo = try? JSONDecoder().decode([BreedRes].self, from: breeds)
+    private func readData(from path: String) -> [BreedRes] {
+        guard let data = diskCache.getDataFromFile(name: path),
+              let breedRes = try? JSONDecoder().decode([BreedRes].self, from: data)
         else {
             return []
         }
-        return breedsInfo
+        return breedRes
+    }
+    
+    private func writeData(data: Data) {
+        diskCache.setData(data: data, name: Const.breedsKey)
     }
 }
 
