@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A108AD15288BAC4E00682532 /* ServiceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A108AD14288BAC4E00682532 /* ServiceConst.swift */; };
 		A126C9D92879576C00CF3CD7 /* BreedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126C9D82879576C00CF3CD7 /* BreedApi.swift */; };
 		A126C9DB2879578800CF3CD7 /* BreedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126C9DA2879578800CF3CD7 /* BreedService.swift */; };
 		A127054B2879B727001B0A74 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A127054A2879B727001B0A74 /* BaseViewModel.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A108AD14288BAC4E00682532 /* ServiceConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceConst.swift; sourceTree = "<group>"; };
 		A126C9D82879576C00CF3CD7 /* BreedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedApi.swift; sourceTree = "<group>"; };
 		A126C9DA2879578800CF3CD7 /* BreedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedService.swift; sourceTree = "<group>"; };
 		A127054A2879B727001B0A74 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				A126C9DA2879578800CF3CD7 /* BreedService.swift */,
 				A1819697287A7B3800C6E7B8 /* FavouriteService.swift */,
 				A197895B2879FF7A00EDB501 /* ImagesService.swift */,
+				A108AD14288BAC4E00682532 /* ServiceConst.swift */,
 				A181969B287A896200C6E7B8 /* VoteService.swift */,
 			);
 			path = services;
@@ -631,6 +634,7 @@
 				A1A086CB287C30D70021C4D3 /* HttpMethod.swift in Sources */,
 				A1ACAC5A2889E55400B6A788 /* ImagesReq.swift in Sources */,
 				A1819692287A75F100C6E7B8 /* FavouriteView.swift in Sources */,
+				A108AD15288BAC4E00682532 /* ServiceConst.swift in Sources */,
 				A17162FA28885D28004CC2AF /* BreedRes.swift in Sources */,
 				A19789572879FE7E00EDB501 /* SearchViewModel.swift in Sources */,
 				A1584ADF287EF150008AF229 /* SearchBar.swift in Sources */,
