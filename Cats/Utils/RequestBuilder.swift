@@ -68,8 +68,14 @@ class RequestBuilder {
         )
         
         headers.forEach {
-            request.setValue($0.value, forHTTPHeaderField: $0.key)
+            print("Adding \($0.key) \($0.value)")
+            request.addValue($0.value, forHTTPHeaderField: $0.key)
         }
+        
+        print("Headers")
+        request.allHTTPHeaderFields?.forEach({
+            print("\($0.key): \($0.value)")
+        })
         
         return request
     }
