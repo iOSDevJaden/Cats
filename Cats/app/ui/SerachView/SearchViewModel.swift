@@ -12,13 +12,18 @@ class SearchViewModel: ObservableObject {
     private let imagesService = ImagesService()
     private let voteService = VoteService()
     private var cancellable = Set<AnyCancellable>()
-    private var defaultImageLimit = 20
     
     @Published var images: [ImageRes] = []
-    @Published var page = 0
+    @Published var page: Int = 0 {
+        didSet { saveImagePage() }
+    }
+    
+    init() {
+        setImagePage()
+    }
     
     func getImages() {
-        imagesService.getImages(limit: defaultImageLimit, page: page)
+        imagesService.getImages(limit: Const.defaultImageLimit, page: page)
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .sink(
@@ -34,5 +39,21 @@ class SearchViewModel: ObservableObject {
     func getMoreImages() {
         self.page += 1
         getImages()
+    }
+    
+    private func setImagePage() {
+        guard let lastPage = UserDefaults.standard.value(forKey: Const.lastImagePageKey) as? Int else { return }
+        self.page = lastPage
+    }
+    
+    private func saveImagePage() {
+        UserDefaults.standard.set(page, forKey: Const.lastImagePageKey)
+    }
+}
+
+extension SearchViewModel {
+    enum Const {
+        static let defaultImageLimit = 20
+        static let lastImagePageKey = "LastImagePageKey"
     }
 }
