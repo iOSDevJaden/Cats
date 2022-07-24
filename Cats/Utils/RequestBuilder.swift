@@ -67,9 +67,7 @@ class RequestBuilder {
             forHTTPHeaderField: "x-api-key"
         )
         
-        headers.forEach {
-            request.setValue($0.value, forHTTPHeaderField: $0.key)
-        }
+        print(url.debugDescription)
         
         return request
     }

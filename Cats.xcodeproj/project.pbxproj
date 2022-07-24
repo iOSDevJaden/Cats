@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A108AD15288BAC4E00682532 /* ServiceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A108AD14288BAC4E00682532 /* ServiceConst.swift */; };
 		A126C9D92879576C00CF3CD7 /* BreedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126C9D82879576C00CF3CD7 /* BreedApi.swift */; };
 		A126C9DB2879578800CF3CD7 /* BreedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126C9DA2879578800CF3CD7 /* BreedService.swift */; };
 		A127054B2879B727001B0A74 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A127054A2879B727001B0A74 /* BaseViewModel.swift */; };
@@ -34,6 +35,7 @@
 		A181969A287A892200C6E7B8 /* VoteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819699287A892200C6E7B8 /* VoteApi.swift */; };
 		A181969C287A896200C6E7B8 /* VoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A181969B287A896200C6E7B8 /* VoteService.swift */; };
 		A181969F287A92D000C6E7B8 /* VoteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A181969E287A92D000C6E7B8 /* VoteRequest.swift */; };
+		A1836344288B4D440070B862 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1836343288B4D440070B862 /* DiskCache.swift */; };
 		A19789502879FA1600EDB501 /* BreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197894F2879FA1600EDB501 /* BreedView.swift */; };
 		A19789522879FA4700EDB501 /* BreedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19789512879FA4700EDB501 /* BreedViewModel.swift */; };
 		A19789552879FE7100EDB501 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19789542879FE7100EDB501 /* SearchView.swift */; };
@@ -70,6 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A108AD14288BAC4E00682532 /* ServiceConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceConst.swift; sourceTree = "<group>"; };
 		A126C9D82879576C00CF3CD7 /* BreedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedApi.swift; sourceTree = "<group>"; };
 		A126C9DA2879578800CF3CD7 /* BreedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedService.swift; sourceTree = "<group>"; };
 		A127054A2879B727001B0A74 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 		A1819699287A892200C6E7B8 /* VoteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteApi.swift; sourceTree = "<group>"; };
 		A181969B287A896200C6E7B8 /* VoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteService.swift; sourceTree = "<group>"; };
 		A181969E287A92D000C6E7B8 /* VoteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteRequest.swift; sourceTree = "<group>"; };
+		A1836343288B4D440070B862 /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		A197894F2879FA1600EDB501 /* BreedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedView.swift; sourceTree = "<group>"; };
 		A19789512879FA4700EDB501 /* BreedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedViewModel.swift; sourceTree = "<group>"; };
 		A19789542879FE7100EDB501 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				A126C9DA2879578800CF3CD7 /* BreedService.swift */,
 				A1819697287A7B3800C6E7B8 /* FavouriteService.swift */,
 				A197895B2879FF7A00EDB501 /* ImagesService.swift */,
+				A108AD14288BAC4E00682532 /* ServiceConst.swift */,
 				A181969B287A896200C6E7B8 /* VoteService.swift */,
 			);
 			path = services;
@@ -320,6 +325,7 @@
 			children = (
 				A15D602C2881E32800975F84 /* UserInfoCache.swift */,
 				A1F57F082883B2D100D01E30 /* CacheManager.swift */,
+				A1836343288B4D440070B862 /* DiskCache.swift */,
 			);
 			path = cache;
 			sourceTree = "<group>";
@@ -611,6 +617,7 @@
 				A1584AE6287F058A008AF229 /* BaseViewFrame.swift in Sources */,
 				A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */,
 				A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */,
+				A1836344288B4D440070B862 /* DiskCache.swift in Sources */,
 				A181969F287A92D000C6E7B8 /* VoteRequest.swift in Sources */,
 				A1A92BAD2885B3310091EBEA /* CatWikiView.swift in Sources */,
 				A1C2CB202882E83F008CFFD2 /* UploadView.swift in Sources */,
@@ -627,6 +634,7 @@
 				A1A086CB287C30D70021C4D3 /* HttpMethod.swift in Sources */,
 				A1ACAC5A2889E55400B6A788 /* ImagesReq.swift in Sources */,
 				A1819692287A75F100C6E7B8 /* FavouriteView.swift in Sources */,
+				A108AD15288BAC4E00682532 /* ServiceConst.swift in Sources */,
 				A17162FA28885D28004CC2AF /* BreedRes.swift in Sources */,
 				A19789572879FE7E00EDB501 /* SearchViewModel.swift in Sources */,
 				A1584ADF287EF150008AF229 /* SearchBar.swift in Sources */,

@@ -25,7 +25,7 @@ struct BreedView: View {
             }
             .navigationBarHidden(true)
         }
-        .onAppear(perform: vm.getAllBreeds)
+        .onAppear(perform: vm.getBreeds)
     }
     
     

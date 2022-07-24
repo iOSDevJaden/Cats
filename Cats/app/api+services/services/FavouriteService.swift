@@ -5,20 +5,88 @@
 //  Created by 김태호 on 2022/07/10.
 //
 
+import Combine
 import Foundation
 
-struct FavouriteService {
+class FavouriteService {
+    private var cacellable = Set<AnyCancellable>()
     private let favouriteApi = FavouriteApi()
     
-    func getMyFavourites() -> URLSession.DataTaskPublisher {
-        return URLSession.shared.dataTaskPublisher(for: favouriteApi.getMyFavourites())
+    func getMyFavourites() -> AnyPublisher<[FavouriteRes], Error> {
+        return Deferred {
+            Future { promise in
+                URLSession.shared.dataTaskPublisher(for: self.favouriteApi.getMyFavourites())
+                    .subscribe(on: DispatchQueue.global(qos: .background))
+                    .receive(on: DispatchQueue.main)
+                    .map(\.data)
+                    .decode(type: [FavouriteRes].self, decoder: JSONDecoder())
+                    .sink(
+                        receiveCompletion: {
+                            switch $0 {
+                            case .failure(let error):
+                                promise(.failure(error))
+                            case .finished:
+                                return
+                            }
+                        },
+                        receiveValue: {
+                            promise(.success($0))
+                        })
+                    .store(in: &self.cacellable)
+            }
+        }
+        .eraseToAnyPublisher()
     }
     
-    func getMyFavourties(favourite id: String) -> URLSession.DataTaskPublisher {
-        return URLSession.shared.dataTaskPublisher(for: favouriteApi.getMyFavourites(favourite: id))
+    func getMyFavourtie(favourite id: String) -> AnyPublisher<FavouriteRes, Error> {
+        return Deferred {
+            Future { promise in
+                URLSession.shared.dataTaskPublisher(for: self.favouriteApi.getMyFavourites())
+                    .subscribe(on: DispatchQueue.global(qos: .background))
+                    .receive(on: DispatchQueue.main)
+                    .map(\.data)
+                    .decode(type: FavouriteRes.self, decoder: JSONDecoder())
+                    .sink(
+                        receiveCompletion: {
+                            switch $0 {
+                            case .failure(let error):
+                                promise(.failure(error))
+                            case .finished:
+                                return
+                            }
+                        },
+                        receiveValue: {
+                            promise(.success($0))
+                        })
+                    .store(in: &self.cacellable)
+            }
+        }
+        .eraseToAnyPublisher()
     }
     
-    func deleteMyFavourite(favourite id: String) -> URLSession.DataTaskPublisher {
-        return URLSession.shared.dataTaskPublisher(for: favouriteApi.deleteFavourite(favourite: id))
+    func deleteMyFavourite(favourite id: String) -> AnyPublisher<Bool, Error> {
+        return Deferred {
+            Future { promise in
+                URLSession.shared.dataTaskPublisher(for: self.favouriteApi.deleteFavourite(favourite: id))
+                    .subscribe(on: DispatchQueue.global(qos: .background))
+                    .receive(on: DispatchQueue.main)
+                    .map(\.data)
+                    .decode(type: DeleteVoteRes.self, decoder: JSONDecoder())
+                    .sink(
+                        receiveCompletion: {
+                            switch $0 {
+                            case .failure(let error):
+                                promise(.failure(error))
+                            case .finished:
+                                return
+                            }
+                        },
+                        receiveValue: {
+                            promise(.success($0.message == ServiceConst.success))
+                        })
+                    .store(in: &self.cacellable)
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }

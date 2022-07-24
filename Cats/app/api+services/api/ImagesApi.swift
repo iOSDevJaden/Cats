@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ImagesApi {
     /**
@@ -19,17 +20,22 @@ struct ImagesApi {
     }
     
     func getAllPublicImages(limit: Int, page: Int = 0) -> URLRequest {
-        let parameters = [
-            URLQueryItem(name: "page", value: "\(page)"),
-            URLQueryItem(name: "limit", value: "\(limit)"),
-            URLQueryItem(name: "mime_types", value: "jpg,png"),
-            URLQueryItem(name: "size", value: "small"),
-        ]
+        let req = ImagesReq(
+            size: .small,
+            mimeTypes: [.jpg, .png],
+            order: .asc,
+            limit: limit,
+            page: page,
+            categoryIds: nil,
+            format: .json,
+            breedId: nil,
+            breedsIncluded: false
+        )
         
         return RequestBuilder()
             .setPath(path: "/images/search")
             .setMethod(method: .get)
-            .setParameters(urlQuery: parameters)
+            .setParameters(urlQuery: req.getUrlQueries())
             .build()
     }
     
@@ -42,6 +48,23 @@ struct ImagesApi {
         return RequestBuilder()
             .setPath(path: "/images/\(id))")
             .setMethod(method: .get)
+            .build()
+    }
+    
+    /** TODO: - Usaing of `multipart/form-data`
+     * Create a new Iamge in the system
+     * by uploading a valid .jpg or .png file containing a Cat
+     */
+    func getImageUpload(image: Data) -> URLRequest {
+        let boundary = "----\(UUID().uuidString)\r\n"
+        var headers: [String: String] = [:]
+        headers["Content-Type"] = "multipart/form-data; boundary\(boundary)"
+        
+        return RequestBuilder()
+            .setParameters(parameters: Data())
+            .setPath(path: "/images/upload")
+            .setMethod(method: .post)
+            .setHeaders(headers: headers)
             .build()
     }
 }

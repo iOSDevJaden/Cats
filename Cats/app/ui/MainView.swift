@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var currentTab: TabBarItems = .home
+    @State private var showUploadView = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -16,14 +17,18 @@ struct MainView: View {
                 viewTitle: currentTab.labelText,
                 middle: {
                     switch currentTab {
-                    case .home: HomeView()
-                    case .search: SearchView()
-                    case .upload: UploadView()
-                    case .breeds: BreedView()
+                    case .home:    HomeView()
+                    case .search:  SearchView()
+                    case .breeds:  BreedView()
                     case .profile: ProfileView()
+                        
+                    default: EmptyView()
                     }
                 })
             getTabItems().padding()
+                .sheet(isPresented: $showUploadView) {
+                    UploadView()
+                }
             Spacer().frame(height: 20)
         }
         .ignoresSafeArea()
@@ -33,12 +38,21 @@ struct MainView: View {
         ZStack {
             HStack(spacing: 30) {
                 ForEach(TabBarItems.allCases) { item in
-                    item.getButtons(action: { self.currentTab = item })
-                        .foregroundColor(
-                            self.currentTab == item ? .black : .purple
-                        )
+                    item.getButtons(action: {
+                        setCurrentTab(to: item)
+                    })
+                    .foregroundColor(
+                        self.currentTab == item ? Color("TabSelectedColor") : .purple
+                    )
                 }
             }
+        }
+    }
+    
+    private func setCurrentTab(to item: TabBarItems) {
+        switch item {
+        case .upload: self.showUploadView.toggle()
+        default:      self.currentTab = item
         }
     }
 }

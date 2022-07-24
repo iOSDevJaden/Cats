@@ -9,17 +9,30 @@ import Combine
 import Foundation
 
 class BreedViewModel: ObservableObject {
-    private var cancellable = Set<AnyCancellable>()
-    private let breedService = BreedService()
+    private lazy var breedService = BreedService()
+    private lazy var cancellable = Set<AnyCancellable>()
+    
+    private var diskCache = DiskCache.shared
     
     @Published var breeds: [BreedRes] = []
     
-    func getAllBreeds() {
+    func getBreeds() {
+        if checkCacheExists() {
+            self.breeds = readData(from: Const.breedsKey)
+        } else {
+            getAllBreeds()
+        }
+    }
+    
+    private func checkCacheExists() -> Bool {
+        return diskCache.isNotEmptyPath(at: Const.breedsKey) &&
+        diskCache.getDataFromFile(name: Const.breedsKey) != nil
+    }
+    
+    private func getAllBreeds() {
         breedService.getBreeds()
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
-            .map(\.data)
-            .decode(type: [BreedRes].self, decoder: JSONDecoder())
             .replaceError(with: [])
             .sink { [weak self] breeds in
                 self?.breeds = breeds
@@ -27,17 +40,22 @@ class BreedViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
-    func getBreeds(by id: String) {
-        breedService.getBreeds(by: id)
-            .receive(on: DispatchQueue.main)
-            .subscribe(on: DispatchQueue.global(qos: .background))
-            .map(\.data)
-            .decode(type: [BreedRes].self, decoder: JSONDecoder())
-            .replaceError(with: [])
-            .sink { [weak self] breeds in
-                self?.breeds = breeds
-            }
-            .store(in: &cancellable)
+    private func readData(from path: String) -> [BreedRes] {
+        guard let data = diskCache.getDataFromFile(name: path),
+              let breedRes = try? JSONDecoder().decode([BreedRes].self, from: data)
+        else {
+            return []
+        }
+        return breedRes
     }
     
+    private func writeData(data: Data) {
+        diskCache.setData(data: data, name: Const.breedsKey)
+    }
+}
+
+extension BreedViewModel {
+    enum Const {
+        static let breedsKey = "breedsKey"
+    }
 }
