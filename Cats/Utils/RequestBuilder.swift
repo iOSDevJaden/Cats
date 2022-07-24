@@ -67,15 +67,7 @@ class RequestBuilder {
             forHTTPHeaderField: "x-api-key"
         )
         
-        headers.forEach {
-            print("Adding \($0.key) \($0.value)")
-            request.addValue($0.value, forHTTPHeaderField: $0.key)
-        }
-        
-        print("Headers")
-        request.allHTTPHeaderFields?.forEach({
-            print("\($0.key): \($0.value)")
-        })
+        print(url.debugDescription)
         
         return request
     }

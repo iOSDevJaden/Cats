@@ -7,15 +7,15 @@
 
 import Combine
 import Foundation
- 
+
 class ImagesService {
     private var cancellable = Set<AnyCancellable>()
     private let imagesApi = ImagesApi()
     
-    func getImages() -> AnyPublisher<[ImageRes], Error> {
+    func getImages(limit: Int, page: Int) -> AnyPublisher<[ImageRes], Error> {
         return Deferred {
             Future { promise in
-                URLSession.shared.dataTaskPublisher(for: self.imagesApi.getSingleImage())
+                URLSession.shared.dataTaskPublisher(for: self.imagesApi.getAllPublicImages(limit: limit, page: page))
                     .receive(on: DispatchQueue.global(qos: .background))
                     .subscribe(on: DispatchQueue.main)
                     .map(\.data)
@@ -38,10 +38,37 @@ class ImagesService {
         .eraseToAnyPublisher()
     }
     
-    func getImages(id imageId: String) -> AnyPublisher<ImageRes, Error> {
+    func getSingleImage() -> AnyPublisher<ImageRes, Error> {
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(for: self.imagesApi.getSingleImage())
+                    .receive(on: DispatchQueue.global(qos: .background))
+                    .subscribe(on: DispatchQueue.main)
+                    .map(\.data)
+                    .decode(type: ImageRes.self, decoder: JSONDecoder())
+                    .sink(
+                        receiveCompletion: {
+                            switch($0) {
+                            case .failure(let error):
+                                promise(.failure(error))
+                            case .finished:
+                                return
+                            }
+                        },
+                        receiveValue: {
+                            promise(.success($0))
+                        })
+                    .store(in: &self.cancellable)
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    
+    func getImage(id imageId: String) -> AnyPublisher<ImageRes, Error> {
+        return Deferred {
+            Future { promise in
+                URLSession.shared.dataTaskPublisher(for: self.imagesApi.getImage(by: imageId))
                     .receive(on: DispatchQueue.global(qos: .background))
                     .subscribe(on: DispatchQueue.main)
                     .map(\.data)
