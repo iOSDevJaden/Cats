@@ -18,8 +18,6 @@ class FavouriteViewModel: ObservableObject {
         favouriteServices.getMyFavourites()
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
-            .map { $0.data }
-            .decode(type: [FavouriteRes].self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: {
                     print("receiveCompletion \($0)")
@@ -35,16 +33,12 @@ class FavouriteViewModel: ObservableObject {
         favouriteServices.deleteMyFavourite(favourite: "\(favouriteId)")
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
-            .map { $0.data }
             .sink(
                 receiveCompletion: {
                     print("receiveCompletion \($0)")
                 },
                 receiveValue: {
-                    if let str = String(data: $0, encoding: .utf8) {
-                        print(str)
-                    }
-                    
+                    print("\($0)")
                 })
             .store(in: &cancellable)
     }

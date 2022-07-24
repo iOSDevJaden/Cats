@@ -15,11 +15,9 @@ class SearchViewModel: ObservableObject {
     @Published var images: [ImageRes] = []
     
     func getSingleImage() {
-        imagesService.getAllImages(limit: 20)
+        imagesService.getImages()
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
-            .tryMap { $0.data }
-            .decode(type: [ImageRes].self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: {
                     print("Completion \($0)")

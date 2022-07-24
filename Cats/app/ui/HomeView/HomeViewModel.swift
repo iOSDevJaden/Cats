@@ -20,8 +20,6 @@ class HomeViewModel: ObservableObject {
         favouriteService.getMyFavourites()
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
-            .map(\.data)
-            .decode(type: [FavouriteRes].self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: {
                     print("Receive Completion \($0)")
@@ -38,7 +36,7 @@ class HomeViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: {
-                    print($0)
+                    print("Receive Completion \($0)")
                 },
                 receiveValue: { [weak self] vote in
                     self?.voteUps = vote
@@ -50,13 +48,12 @@ class HomeViewModel: ObservableObject {
         voteService.deleteVote(vote: imageId)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
-            .map(\.data)
             .sink(
                 receiveCompletion: {
                     print("Receive Completion \($0)")
                 },
                 receiveValue: {
-                    print("\(String(data: $0, encoding: .utf8) ?? "")")
+                    print("Receive Value = \($0)")
                 })
             .store(in: &cancellable)
     }
