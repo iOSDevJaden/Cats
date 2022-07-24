@@ -56,7 +56,7 @@ struct ImagesApi {
         headers["Content-Type"] = "multipart/form-data; boundary\(boundary)"
         
         return RequestBuilder()
-            .setParameters(parameters: body)
+            .setParameters(parameters: Data())
             .setPath(path: "/images/upload")
             .setMethod(method: .post)
             .setHeaders(headers: headers)
