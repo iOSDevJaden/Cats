@@ -20,17 +20,22 @@ struct ImagesApi {
     }
     
     func getAllPublicImages(limit: Int, page: Int = 0) -> URLRequest {
-        let parameters = [
-            URLQueryItem(name: "page", value: "\(page)"),
-            URLQueryItem(name: "limit", value: "\(limit)"),
-            URLQueryItem(name: "mime_types", value: "jpg,png"),
-            URLQueryItem(name: "size", value: "small"),
-        ]
+        let req = ImagesReq(
+            size: .small,
+            mimeTypes: [.jpg, .png],
+            order: .asc,
+            limit: limit,
+            page: page,
+            categoryIds: nil,
+            format: .json,
+            breedId: nil,
+            breedsIncluded: false
+        )
         
         return RequestBuilder()
             .setPath(path: "/images/search")
             .setMethod(method: .get)
-            .setParameters(urlQuery: parameters)
+            .setParameters(urlQuery: req.getUrlQueries())
             .build()
     }
     
