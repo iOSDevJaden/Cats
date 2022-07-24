@@ -63,4 +63,12 @@ class ImagesService {
         }
         .eraseToAnyPublisher()
     }
+    
+    /** MARK: - The Following API keeps occuring fowllowing error.
+     *  `parser error, xxx of 207 bytes parsed`
+     * Not sure if this is about URLSession Configuration related or
+     * Server side data size limitation.
+     * Waiting for the answer from 2022.07.23 15:00 ~
+     */
+    func getImageUploaded(image: Data) { }
 }

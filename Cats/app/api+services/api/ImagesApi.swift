@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ImagesApi {
     /**
@@ -42,6 +43,23 @@ struct ImagesApi {
         return RequestBuilder()
             .setPath(path: "/images/\(id))")
             .setMethod(method: .get)
+            .build()
+    }
+    
+    /** TODO: - Usaing of `multipart/form-data`
+     * Create a new Iamge in the system
+     * by uploading a valid .jpg or .png file containing a Cat
+     */
+    func getImageUpload(image: Data) -> URLRequest {
+        let boundary = "----\(UUID().uuidString)\r\n"
+        var headers: [String: String] = [:]
+        headers["Content-Type"] = "multipart/form-data; boundary\(boundary)"
+        
+        return RequestBuilder()
+            .setParameters(parameters: body)
+            .setPath(path: "/images/upload")
+            .setMethod(method: .post)
+            .setHeaders(headers: headers)
             .build()
     }
 }
