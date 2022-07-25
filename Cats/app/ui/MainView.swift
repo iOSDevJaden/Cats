@@ -17,10 +17,10 @@ struct MainView: View {
                 viewTitle: currentTab.labelText,
                 middle: {
                     switch currentTab {
-                    case .home:    HomeView()
-                    case .search:  SearchView()
-                    case .breeds:  BreedView()
-                    case .profile: ProfileView()
+                    case .home:     HomeView()
+                    case .search:   SearchView()
+                    case .breeds:   BreedView()
+                    case .settings: SettingsView()
                         
                     default: EmptyView()
                     }

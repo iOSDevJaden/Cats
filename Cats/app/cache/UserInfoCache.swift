@@ -19,4 +19,6 @@ class UserInfoCache: Identifiable {
         }
         return deviceId
     }()
+    
+    // Settings for page
 }

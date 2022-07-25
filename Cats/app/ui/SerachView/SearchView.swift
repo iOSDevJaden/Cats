@@ -33,7 +33,7 @@ struct SearchView: View {
                                     })
                                 Spacer()
                                 Button(
-                                    action: { },
+                                    action: { /* Favourite Button */ },
                                     label: {
                                         Image(systemName: "heart")
                                             .foregroundColor(.accentColor)
