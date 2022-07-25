@@ -26,10 +26,7 @@ struct SearchView: View {
                                 .frame(height: 120, alignment: .top)
                             HStack {
                                 Button(
-                                    action: {
-                                        guard let imageId = image.id else { return }
-                                        vm.voteUpImage(image: imageId)
-                                    },
+                                    action: { },
                                     label: {
                                         Image(systemName: "hand.thumbsup")
                                             .foregroundColor(.accentColor)
