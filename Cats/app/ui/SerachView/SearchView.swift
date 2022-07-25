@@ -26,17 +26,14 @@ struct SearchView: View {
                                 .frame(height: 120, alignment: .top)
                             HStack {
                                 Button(
-                                    action: {
-                                        guard let imageId = image.id else { return }
-                                        vm.voteUpImage(image: imageId)
-                                    },
+                                    action: { },
                                     label: {
                                         Image(systemName: "hand.thumbsup")
                                             .foregroundColor(.accentColor)
                                     })
                                 Spacer()
                                 Button(
-                                    action: { },
+                                    action: { /* Favourite Button */ },
                                     label: {
                                         Image(systemName: "heart")
                                             .foregroundColor(.accentColor)

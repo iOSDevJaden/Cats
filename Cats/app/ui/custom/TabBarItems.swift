@@ -22,7 +22,8 @@ enum TabBarItems: String, TabItemProtocol {
          search,
          upload,
          breeds,
-         profile
+         // profile
+         settings
     
     var id: String {
         UUID().uuidString
@@ -35,22 +36,22 @@ enum TabBarItems: String, TabItemProtocol {
     private func getLabelIcon() -> some View {
         VStack {
             switch self {
-            case .home:    Image(systemName: "house.circle").setTabItemModifier()
-            case .search:  Image(systemName: "magnifyingglass.circle").setTabItemModifier()
-            case .upload:  Image(systemName: "plus.app").setTabItemModifier()
-            case .breeds:  Image(systemName: "book.circle").setTabItemModifier()
-            case .profile: Image(systemName: "person.crop.circle").setTabItemModifier()
+            case .home:     Image(systemName: "house.circle").setTabItemModifier()
+            case .search:   Image(systemName: "magnifyingglass.circle").setTabItemModifier()
+            case .upload:   Image(systemName: "plus.app").setTabItemModifier()
+            case .breeds:   Image(systemName: "book.circle").setTabItemModifier()
+            case .settings: Image(systemName: "person.crop.circle").setTabItemModifier()
             }
         }
     }
     
     private func getLabelCaption() -> some View {
         switch self {
-        case .home:    return Text(labelText).modifier(IconCaptionModifier())
-        case .search:  return Text(labelText).modifier(IconCaptionModifier())
-        case .upload:  return Text(labelText).modifier(IconCaptionModifier())
-        case .breeds:  return Text(labelText).modifier(IconCaptionModifier())
-        case .profile: return Text(labelText).modifier(IconCaptionModifier())
+        case .home:     return Text(labelText).modifier(IconCaptionModifier())
+        case .search:   return Text(labelText).modifier(IconCaptionModifier())
+        case .upload:   return Text(labelText).modifier(IconCaptionModifier())
+        case .breeds:   return Text(labelText).modifier(IconCaptionModifier())
+        case .settings: return Text(labelText).modifier(IconCaptionModifier())
         }
     }
     
@@ -69,7 +70,7 @@ enum TabBarItems: String, TabItemProtocol {
             case .breeds:
                 self.getLabelIcon()
                 self.getLabelCaption()
-            case .profile:
+            case .settings:
                 self.getLabelIcon()
                 self.getLabelCaption()
             }
@@ -78,11 +79,11 @@ enum TabBarItems: String, TabItemProtocol {
     
     func getButtons(action: @escaping () -> ()) -> some View {
         switch self {
-        case .home:    return Button(action: action, label: getLabel)
-        case .search:  return Button(action: action, label: getLabel)
-        case .upload:  return Button(action: action, label: getLabel)
-        case .breeds:  return Button(action: action, label: getLabel)
-        case .profile: return Button(action: action, label: getLabel)
+        case .home:     return Button(action: action, label: getLabel)
+        case .search:   return Button(action: action, label: getLabel)
+        case .upload:   return Button(action: action, label: getLabel)
+        case .breeds:   return Button(action: action, label: getLabel)
+        case .settings: return Button(action: action, label: getLabel)
         }
     }
 }
