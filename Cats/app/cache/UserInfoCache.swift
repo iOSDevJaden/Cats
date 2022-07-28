@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+/**
+ * User Info and User Preference Properties.
+ * `MARK: - UIKit imported to get vendor id which is unique and never change.`
+ * `However when you remove and re-install this app, it could change.`*/
+
 class UserInfoCache: Identifiable {
     static var shared = UserInfoCache()
     lazy var userDefault = UserDefaults.standard
@@ -57,7 +62,9 @@ class UserInfoCache: Identifiable {
     func setNumberOfImage(_ number: Int) {
         userDefault.set(number, forKey: Const.numberOfImage)
     }
-    
+}
+
+extension UserInfoCache {
     enum Const {
         static let defualtNumberOfImage = 15
         static let defualtMaximumPage = 0
