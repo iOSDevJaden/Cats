@@ -10,15 +10,21 @@ import Foundation
 
 class BreedService {
     private var cancellable = Set<AnyCancellable>()
-    private var breedApi = BreedApi()
     
-    func getBreeds() -> AnyPublisher<[BreedRes], Error> {
+    func getBreeds() -> AnyPublisher<[BreedModel], Error> {
         return Deferred {
             Future { promise in
-                URLSession.shared.dataTaskPublisher(for: self.breedApi.getBreedList())
+                URLSession.shared.dataTaskPublisher(for: BreedApi().getBreedList())
                     .subscribe(on: DispatchQueue.global(qos: .background))
                     .map(\.data)
                     .decode(type: [BreedRes].self, decoder: JSONDecoder())
+                    .map { breedRes in
+                        var breedModels: [BreedModel] = []
+                        breedRes.forEach {
+                            breedModels.append($0.mapToBreedModel())
+                        }
+                        return breedModels
+                    }
                     .sink(
                         receiveCompletion: {
                             switch($0) {
@@ -37,13 +43,20 @@ class BreedService {
     }
     
     
-    func getBreeds(by id: String) -> AnyPublisher<[BreedRes], Error> {
+    func getBreeds(by id: String) -> AnyPublisher<[BreedModel], Error> {
         return Deferred {
             Future { promise in
-                URLSession.shared.dataTaskPublisher(for: self.breedApi.getBreedList(id: id))
+                URLSession.shared.dataTaskPublisher(for: BreedApi().getBreedList(id: id))
                     .subscribe(on: DispatchQueue.global(qos: .background))
                     .map(\.data)
                     .decode(type: [BreedRes].self, decoder: JSONDecoder())
+                    .map { breedRes in
+                        var breedModels: [BreedModel] = []
+                        breedRes.forEach {
+                            breedModels.append($0.mapToBreedModel())
+                        }
+                        return breedModels
+                    }
                     .sink(
                         receiveCompletion: {
                             switch($0) {
