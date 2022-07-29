@@ -10,7 +10,7 @@ import SwiftUI
 struct BreedDetailView: View {
     @Environment(\.presentationMode) private var presentationMode
     @State private var showWiki = false
-    let breed: BreedRes
+    let breed: BreedModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -18,7 +18,7 @@ struct BreedDetailView: View {
                 Section(
                     content: {
                         HStack {
-                            Text(breed.name)
+                            Text(breed.breedName)
                             Spacer()
                             Button(action: { showWiki = true }, label: {
                                 Image(systemName: "questionmark.circle")
@@ -33,7 +33,7 @@ struct BreedDetailView: View {
                     })
                 Section(
                     content: {
-                        let temperatments = breed.temperament?.split(separator: ",") ?? []
+                        let temperatments = breed.breedTemperament.split(separator: ",")
                         ForEach(temperatments, id: \.self) { temperatment in
                             Text(temperatment)
                         }
@@ -43,42 +43,42 @@ struct BreedDetailView: View {
                     })
                 Section(
                     content: {
-                        Text(breed.origin ?? "No Data")
+                        Text(breed.breedOrigin)
                     },
                     header: {
                         Text("Origin")
                     })
                 Section(
                     content: {
-                        showRates(rate: breed.childFriendly ?? 0)
+                        showRates(rate: breed.childFriendly)
                     },
                     header: {
                         Text("Child Friendly")
                     })
                 Section(
                     content: {
-                        showRates(rate: breed.dogFriendly ?? 0)
+                        showRates(rate: breed.dogFriendly)
                     },
                     header: {
                         Text("Dog Friendly")
                     })
                 Section(
                     content: {
-                        showRates(rate: breed.energyLevel ?? 0)
+                        showRates(rate: breed.energyLevel)
                     },
                     header: {
                         Text("Energy Level")
                     })
                 Section(
                     content: {
-                        showRates(rate: breed.strangerFriendly ?? 0)
+                        showRates(rate: breed.strangerFriendly)
                     },
                     header: {
                         Text("Stranger Friendly")
                     })
                 Section(
                     content: {
-                        showRates(rate: breed.socialNeeds ?? 0)
+                        showRates(rate: breed.socialNeeds)
                     },
                     header: {
                         Text("Social Needs")
@@ -118,7 +118,7 @@ struct BreedDetailView: View {
 
 
 struct BreedDetailView_Previews: PreviewProvider {
-    static let breed = BreedRes.staticBreed
+    static let breed = BreedRes.staticBreed.mapToBreedModel()
     
     static var previews: some View {
         BreedDetailView(breed: breed)
