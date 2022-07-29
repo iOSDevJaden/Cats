@@ -14,8 +14,6 @@ struct BreedView: View {
     var body: some View {
         NavigationView {
             VStack {
-                SearchBar($searchText)
-                Spacer(minLength: 0)
                 Form {
                     ForEach(getAlphabets(), id:\.self) { alphabet in
                         Section(
@@ -27,6 +25,8 @@ struct BreedView: View {
                             })
                     }
                 }
+                Spacer(minLength: 0)
+                SearchBar($searchText)
             }
             .navigationBarHidden(true)
         }
@@ -40,6 +40,7 @@ struct BreedView: View {
             NavigationLink(
                 destination: {
                     BreedDetailView(breed: breed)
+                        .navigationBarHidden(true)
                 },
                 label: {
                     Text(breed.breedName)
