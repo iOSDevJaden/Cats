@@ -7,6 +7,16 @@
 
 import Foundation
 
-struct BreedModel {
+struct BreedModel: Codable, Identifiable {
+    let id: String
     let breedName: String
+    let wikipediaUrl: String
+    let breedTemperament: String
+    let breedOrigin: String
+    
+    let childFriendly: Int
+    let dogFriendly: Int
+    let energyLevel: Int
+    let strangerFriendly: Int
+    let socialNeeds: Int
 }
