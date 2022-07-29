@@ -70,6 +70,19 @@ struct BreedRes: Codable, Identifiable {
         case vocalisation = "vocalisation"
     }
     
+    func mapToBreedModel() -> BreedModel {
+        return BreedModel(
+            id: self.id,
+            breedName: self.name,
+            wikipediaUrl: self.wikipediaUrl ?? "No URL",
+            breedTemperament: self.temperament ?? "",
+            breedOrigin: self.origin ?? "No Origin",
+            childFriendly: self.childFriendly ?? 0,
+            dogFriendly: self.dogFriendly ?? 0,
+            energyLevel: self.energyLevel ?? 0,
+            strangerFriendly: self.strangerFriendly ?? 0,
+            socialNeeds: self.socialNeeds ?? 0)
+    }
 #if DEBUG
         static let staticBreed = BreedRes(
             id: "abys",
