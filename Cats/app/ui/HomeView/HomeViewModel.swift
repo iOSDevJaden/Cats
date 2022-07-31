@@ -36,9 +36,23 @@ class HomeViewModel: ObservableObject {
                 receiveCompletion: {
                     print("Receive Completion \($0)")
                 },
-                receiveValue: {
-                    print("Favourite Image deleted \($0 ? "success" : "failed")")
+                receiveValue: { [weak self] in
+                    if $0 == true {
+                        self?.deleteImage(favouriteId: id)
+                        print("Image Delete from favourite Success")
+                    } else {
+                        print("Image Delete from favourite failed")
+                    }
                 })
             .store(in: &cancellable)
+    }
+    
+    func deleteImage(favouriteId: String) {
+        guard let imageIndex = self.favouriteImages
+            .firstIndex(where: { $0.favouriteId == favouriteId }) else {
+            return
+        }
+        
+        self.favouriteImages.remove(at: imageIndex)
     }
 }
