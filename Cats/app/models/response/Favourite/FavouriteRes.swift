@@ -21,6 +21,14 @@ struct FavouriteRes: Codable, Identifiable {
         case createdAt = "created_at"
         case image = "image"
     }
+    
+    func mapToFavouriteModel() -> FavouriteModel {
+        return FavouriteModel(
+            favouriteId: "\(self.id)",
+            imageModel: ImageModel(
+                imageUrl: image?.imageUrl,
+                imageId: image?.imageId))
+    }
 #if DEBUG
     static let staticFavouriteRes = FavouriteRes(
         id: 100052852,
