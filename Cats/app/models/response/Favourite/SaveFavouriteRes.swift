@@ -8,13 +8,18 @@
 import Foundation
 
 struct SaveFavouriteRes: Codable {
-    let id: Int
+    let id: MultipleTypes
     let message: String
     
-    #if DEBUG
+#if DEBUG
     static let staticSaveFavouriteRes =
     SaveFavouriteRes(
-        id: 100052981,
+        id: .intValue(100052981),
         message: "SUCCESS")
-    #endif
+#endif
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case message = "message"
+    }
 }
