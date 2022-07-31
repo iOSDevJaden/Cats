@@ -31,8 +31,6 @@
 		A17DA5342894834D00F6F524 /* UserForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17DA5332894834D00F6F524 /* UserForm.swift */; };
 		A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */; };
 		A17F4D312886F215009A68BF /* AsyncImgViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */; };
-		A1819692287A75F100C6E7B8 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819691287A75F100C6E7B8 /* FavouriteView.swift */; };
-		A1819694287A761700C6E7B8 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819693287A761700C6E7B8 /* FavouriteViewModel.swift */; };
 		A1819696287A785D00C6E7B8 /* FavouriteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819695287A785D00C6E7B8 /* FavouriteApi.swift */; };
 		A1819698287A7B3800C6E7B8 /* FavouriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819697287A7B3800C6E7B8 /* FavouriteService.swift */; };
 		A181969A287A892200C6E7B8 /* VoteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819699287A892200C6E7B8 /* VoteApi.swift */; };
@@ -107,8 +105,6 @@
 		A17DA5332894834D00F6F524 /* UserForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserForm.swift; sourceTree = "<group>"; };
 		A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgView.swift; sourceTree = "<group>"; };
 		A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgViewModel.swift; sourceTree = "<group>"; };
-		A1819691287A75F100C6E7B8 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
-		A1819693287A761700C6E7B8 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		A1819695287A785D00C6E7B8 /* FavouriteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteApi.swift; sourceTree = "<group>"; };
 		A1819697287A7B3800C6E7B8 /* FavouriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteService.swift; sourceTree = "<group>"; };
 		A1819699287A892200C6E7B8 /* VoteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteApi.swift; sourceTree = "<group>"; };
@@ -317,15 +313,6 @@
 				A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */,
 			);
 			path = AsyncImgView;
-			sourceTree = "<group>";
-		};
-		A1819690287A75D900C6E7B8 /* FavouriteView */ = {
-			isa = PBXGroup;
-			children = (
-				A1819691287A75F100C6E7B8 /* FavouriteView.swift */,
-				A1819693287A761700C6E7B8 /* FavouriteViewModel.swift */,
-			);
-			path = FavouriteView;
 			sourceTree = "<group>";
 		};
 		A181969D287A92BD00C6E7B8 /* request */ = {
@@ -556,7 +543,6 @@
 				A11E0CEC288EB80200635594 /* Settings */,
 				A17162F028883CEF004CC2AF /* HomeView */,
 				A1C2CB1D2882E82A008CFFD2 /* upload */,
-				A1819690287A75D900C6E7B8 /* FavouriteView */,
 				A19789532879FE4D00EDB501 /* SerachView */,
 				A197894E2879FA0600EDB501 /* BreedView */,
 				A1B8AF1528785648000D16DE /* MainView.swift */,
@@ -684,7 +670,6 @@
 				A1A89C1A2880B11000FE3DBC /* Labels.swift in Sources */,
 				A1A086CB287C30D70021C4D3 /* HttpMethod.swift in Sources */,
 				A1ACAC5A2889E55400B6A788 /* ImagesReq.swift in Sources */,
-				A1819692287A75F100C6E7B8 /* FavouriteView.swift in Sources */,
 				A108AD15288BAC4E00682532 /* ServiceConst.swift in Sources */,
 				A1F80FC42895C686009C21C8 /* SaveFavouriteRes.swift in Sources */,
 				A17162FA28885D28004CC2AF /* BreedRes.swift in Sources */,
@@ -716,7 +701,6 @@
 				A1BF170E28967B8F0077AB1E /* MultipleTypes.swift in Sources */,
 				A171630228885EC0004CC2AF /* FavouriteRes.swift in Sources */,
 				A1ACAC732889EB3600B6A788 /* BreedReq.swift in Sources */,
-				A1819694287A761700C6E7B8 /* FavouriteViewModel.swift in Sources */,
 				A1ACAC542889D78500B6A788 /* CreateVoteRes.swift in Sources */,
 				A17162FE28885E29004CC2AF /* ImageRes.swift in Sources */,
 				A17C461B287B2440005B6E07 /* RequestBuilder.swift in Sources */,
