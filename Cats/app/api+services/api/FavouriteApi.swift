@@ -38,4 +38,22 @@ struct FavouriteApi {
             .setMethod(method: .delete)
             .build()
     }
+    
+    /**
+     * Save an Image as a Favourite to your Account by sending the ‘image_id’ in the body.
+     * An optional ‘sub_id’ can be passed to help filter Favourites when performing GET /favourites
+     */
+    func saveFavouriteImage(imageId id: String) -> URLRequest {
+        let header = [
+            "Content-Type": "application/json",
+        ]
+        let req = SaveFavouriteImageRequest(imageId: id)
+        
+        return RequestBuilder()
+            .setPath(path: "/favourites")
+            .setHeaders(headers: header)
+            .setParameters(parameters: req.getJson())
+            .setMethod(method: .post)
+            .build()
+    }
 }

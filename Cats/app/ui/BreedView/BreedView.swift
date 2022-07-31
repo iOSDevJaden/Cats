@@ -9,78 +9,75 @@ import SwiftUI
 
 struct BreedView: View {
     @ObservedObject private var vm = BreedViewModel()
-    @State private var dictionaryBreeds: [String: [BreedRes]] = [:]
     @State private var searchText = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                SearchBar($searchText)
-                Spacer(minLength: 0)
-                if let breeds = vm.breeds {
-                    getBreedList(breeds)
-                } else {
-                    getProgressView()
+                Form {
+                    ForEach(getAlphabets(), id:\.self) { alphabet in
+                        Section(
+                            content: {
+                                getNavigationLinkList(alphabet)
+                            },
+                            header: {
+                                Text(alphabet)
+                            })
+                    }
                 }
+                Spacer(minLength: 0)
+                SearchBar($searchText)
             }
             .navigationBarHidden(true)
         }
         .onAppear(perform: vm.getBreeds)
     }
     
-    
-    private func getBreedList(_ breeds: [BreedRes]) -> some View {
-        let dict = getBreedDictionary(breeds)
-        let keys = dict.keys.sorted()
-        
-        return List {
-            ForEach(keys, id: \.self) { key in
-                if let dict = dict[key] {
-                    getSectionOfNames(with: key, breeds: dict)
-                }
-            }
+    private func getNavigationLinkList(_ alphabet: String) -> some View {
+        let filteredBreed = getFilteredBreed()
+            .filter { getFirstCharacter($0.breedName) == alphabet }
+        return ForEach(filteredBreed) { breed in
+            NavigationLink(
+                destination: {
+                    BreedDetailView(breed: breed)
+                        .navigationBarHidden(true)
+                },
+                label: {
+                    Text(breed.breedName)
+                })
         }
     }
     
-    private func getProgressView() -> some View {
-        VStack {
-            Spacer()
-            ProgressView()
-            Spacer()
+    private func getNavigationLinkList() -> some View {
+        ForEach(getFilteredBreed()) { breed in
+            NavigationLink(
+                destination: {
+                    BreedDetailView(breed: breed)
+                },
+                label: {
+                    Text(breed.breedName)
+                })
         }
     }
     
-    private func getSectionOfNames(with key: String, breeds: [BreedRes]) -> some View {
-        Section(
-            content: {
-                ForEach(breeds) { breed in
-                    NavigationLink(breed.name) {
-                        BreedDetailView(breed: breed)
-                            .navigationBarHidden(true)
-                    }
-                }
-            },
-            header: {
-                Text(key)
-            })
+    private func getFilteredBreed() -> [BreedModel] {
+        return searchText.isEmpty ?
+        vm.breeds :
+        vm.breeds.filter { $0.breedName.contains(searchText) }
     }
     
-    private func getBreedDictionary(_ breeds: [BreedRes]) -> Dictionary<String, [BreedRes]> {
-        let names = searchText.isEmpty ?
-        breeds
-            .map { $0.name } :
-        breeds
-            .filter { $0.name.contains(searchText) }
-            .map { $0.name }
-        
-        let keys = Array(Set(names.map { $0.first })) // Remove duplication
-        var dictionaryBreeds: [String: [BreedRes]] = [:]
-        keys.forEach {
-            if let key = $0 {
-                dictionaryBreeds[String(key)] = breeds.filter { $0.name.first == key }
-            }
+    private func getAlphabets() -> [String] {
+        let alphabets = getFilteredBreed()
+            .map(\.breedName)
+            .map { getFirstCharacter($0) }
+        return Set(alphabets).sorted()
+    }
+    
+    private func getFirstCharacter(_ string: String) -> String {
+        guard let firstCharacter = string.first else {
+            return ""
         }
-        return dictionaryBreeds
+        return String(firstCharacter)
     }
 }
 

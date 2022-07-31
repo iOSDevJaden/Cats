@@ -14,7 +14,7 @@ class BreedViewModel: ObservableObject {
     
     private var diskCache = DiskCache.shared
     
-    @Published var breeds: [BreedRes] = []
+    @Published var breeds: [BreedModel] = []
     
     func getBreeds() {
         if checkCacheExists() {
@@ -40,9 +40,9 @@ class BreedViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
-    private func readData(from path: String) -> [BreedRes] {
+    private func readData(from path: String) -> [BreedModel] {
         guard let data = diskCache.getDataFromFile(name: path),
-              let breedRes = try? JSONDecoder().decode([BreedRes].self, from: data)
+              let breedRes = try? JSONDecoder().decode([BreedModel].self, from: data)
         else {
             return []
         }
@@ -56,6 +56,6 @@ class BreedViewModel: ObservableObject {
 
 extension BreedViewModel {
     enum Const {
-        static let breedsKey = "breedsKey"
+        static let breedsKey = "BreedsModels"
     }
 }

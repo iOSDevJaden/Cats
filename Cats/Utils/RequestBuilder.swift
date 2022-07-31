@@ -9,11 +9,11 @@ import Foundation
 
 class RequestBuilder {
     private let baseUrl = URL.baseUrl
-    private var path: String = ""
-    private var method: HttpMethod = .get
-    private var headers: [String: String] = [:]
-    private var urlQuery: [URLQueryItem]?
-    private var parameters: Data?
+    private lazy var path: String = ""
+    private lazy var method: HttpMethod = .get
+    private lazy var headers: [String: String] = [:]
+    private lazy var urlQuery: [URLQueryItem]? = nil
+    private lazy var parameters: Data? = nil
     
     func setMethod(method: HttpMethod) -> Self {
         self.method = method
@@ -62,13 +62,29 @@ class RequestBuilder {
             request.httpBody = httpBody
         }
         
-        request.setValue(
+        // Adding Request headers
+        headers.forEach {
+            request.addValue(
+                $0.value,
+                forHTTPHeaderField: $0.key
+            )
+        }
+        
+        // All the cat api needs the following header.
+        // x-api-key: my-key
+        request.addValue(
             String.apiKey,
-            forHTTPHeaderField: "x-api-key"
+            forHTTPHeaderField: Const.xApiKey
         )
         
         print(url.debugDescription)
         
         return request
+    }
+}
+
+extension RequestBuilder {
+    enum Const {
+        static let xApiKey = "x-api-key"
     }
 }

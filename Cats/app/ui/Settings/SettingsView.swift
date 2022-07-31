@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State var picker: SettingsType = .user
+    @State private var picker: SettingsType = .user
+    @ObservedObject private var vm = SettingsViewModel()
+    
     var body: some View {
         VStack {
             Picker("", selection: $picker) {
@@ -16,9 +18,11 @@ struct SettingsView: View {
                 Text("Image").tag(SettingsType.image)
             }
             .pickerStyle(.segmented)
+            .padding(.horizontal)
+            .padding(.vertical, 10)
             VStack {
                 switch picker {
-                case .user: UserForm()
+                case .user: UserForm().environmentObject(vm)
                 case .image: Spacer()
                 }
             }
@@ -30,47 +34,6 @@ struct SettingsView: View {
         
         var id: String {
             self.rawValue
-        }
-    }
-}
-
-struct UserForm: View {
-    @State var edit = false
-    @State var page: Float = 0
-    @State var numberOfPic: Float = 0
-    
-    var body: some View {
-        Form {
-            Section(
-                content: {
-                    ProfileView()
-                },
-                header: {
-                    Text("User Profile")
-                })
-            Section(
-                content: {
-                    Text("edit text")
-                },
-                header: {
-                    Toggle(isOn: $edit, label: { Text("edit") })
-                })
-            Section(
-                content: {
-                    Text("Page at \(String(format: "%d", Int(page)))")
-                    Slider(value: $page, in: 0...10)
-                },
-                header: {
-                    Text("Page")
-                })
-            Section(
-                content: {
-                    Text("Show Pictures in a page (\(String(format: "%d", Int(numberOfPic))))")
-                    Slider(value: $numberOfPic, in: 15...30)
-                },
-                header: {
-                    Text("Number of pictures")
-                })
         }
     }
 }
