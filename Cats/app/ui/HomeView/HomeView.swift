@@ -21,11 +21,37 @@ struct HomeView: View {
         Form {
             ForEach(vm.favouriteImages, id: \.favouriteId) { images in
                 if let imageUrl = images.imageModel.imageUrl {
-                    AsyncImgView(imageUrl)
+                    VStack(alignment: .leading) {
+                        AsyncImgView(imageUrl)
+                            .cornerRadius(20)
+                        Button(
+                            action: {
+                                vm.deleteFavouriteImage(image: images.favouriteId)
+                            },
+                            label: {
+                                getButtonLabel(favouriteId: images.favouriteId)
+                            })
+                        .background(
+                            Color.black.opacity(0.3)
+                                .cornerRadius(5)
+                        )
+                    }
                 }
             }
         }
         .onAppear(perform: vm.getFavouriteImages)
+    }
+    
+    private func getButtonLabel(favouriteId: String) -> some View {
+        HStack {
+            Image(systemName: "trash")
+                .resizable()
+                .frame(width: 30, height: 40)
+                .padding(5)
+            Text(favouriteId)
+                .font(.title3)
+                .bold()
+        }
     }
 }
 
