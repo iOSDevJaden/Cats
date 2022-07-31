@@ -10,4 +10,8 @@ import Foundation
 struct CategoryRes: Codable, Identifiable {
     let id: Int
     let name: String?
+    
+#if DEBUG
+    static let staticCategoryRes = CategoryRes(id: 6, name: "caturday")
+#endif
 }

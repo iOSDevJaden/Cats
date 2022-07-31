@@ -21,4 +21,12 @@ struct FavouriteRes: Codable, Identifiable {
         case createdAt = "created_at"
         case image = "image"
     }
+#if DEBUG
+    static let staticFavouriteRes = FavouriteRes(
+        id: 100052852,
+        imageId: "2gh",
+        subId: UserInfoCache.shared.id,
+        createdAt: "2022-07-30T21:54:58.000Z",
+        image: .staticImageModel)
+#endif
 }

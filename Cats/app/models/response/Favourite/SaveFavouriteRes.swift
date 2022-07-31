@@ -10,4 +10,11 @@ import Foundation
 struct SaveFavouriteRes: Codable {
     let id: Int
     let message: String
+    
+    #if DEBUG
+    static let staticSaveFavouriteRes =
+    SaveFavouriteRes(
+        id: 100052981,
+        message: "SUCCESS")
+    #endif
 }
