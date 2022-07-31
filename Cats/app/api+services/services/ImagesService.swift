@@ -10,16 +10,23 @@ import Foundation
 
 class ImagesService {
     private var cancellable = Set<AnyCancellable>()
-    private let imagesApi = ImagesApi()
     
-    func getImages(limit: Int, page: Int) -> AnyPublisher<[ImageRes], Error> {
+    func getImages(limit: Int, page: Int) -> AnyPublisher<[ImageModel], Error> {
         return Deferred {
             Future { promise in
-                URLSession.shared.dataTaskPublisher(for: self.imagesApi.getAllPublicImages(limit: limit, page: page))
+                URLSession.shared.dataTaskPublisher(for: ImagesApi().getAllPublicImages(limit: limit, page: page))
                     .receive(on: DispatchQueue.global(qos: .background))
                     .subscribe(on: DispatchQueue.main)
                     .map(\.data)
                     .decode(type: [ImageRes].self, decoder: JSONDecoder())
+                    .map { imageRes in
+                        var imageModels: [ImageModel] = []
+                        imageRes.forEach {
+                            print("Image Res got \($0.id)")
+                            imageModels.append($0.mapToImageModel())
+                        }
+                        return imageModels
+                    }
                     .sink(
                         receiveCompletion: {
                             switch($0) {
@@ -38,14 +45,15 @@ class ImagesService {
         .eraseToAnyPublisher()
     }
     
-    func getSingleImage() -> AnyPublisher<ImageRes, Error> {
+    func getSingleImage() -> AnyPublisher<ImageModel, Error> {
         return Deferred {
             Future { promise in
-                URLSession.shared.dataTaskPublisher(for: self.imagesApi.getSingleImage())
+                URLSession.shared.dataTaskPublisher(for: ImagesApi().getSingleImage())
                     .receive(on: DispatchQueue.global(qos: .background))
                     .subscribe(on: DispatchQueue.main)
                     .map(\.data)
                     .decode(type: ImageRes.self, decoder: JSONDecoder())
+                    .map { $0.mapToImageModel() }
                     .sink(
                         receiveCompletion: {
                             switch($0) {
@@ -64,15 +72,15 @@ class ImagesService {
         .eraseToAnyPublisher()
     }
     
-    
-    func getImage(id imageId: String) -> AnyPublisher<ImageRes, Error> {
+    func getImage(id imageId: String) -> AnyPublisher<ImageModel, Error> {
         return Deferred {
             Future { promise in
-                URLSession.shared.dataTaskPublisher(for: self.imagesApi.getImage(by: imageId))
+                URLSession.shared.dataTaskPublisher(for: ImagesApi().getImage(by: imageId))
                     .receive(on: DispatchQueue.global(qos: .background))
                     .subscribe(on: DispatchQueue.main)
                     .map(\.data)
                     .decode(type: ImageRes.self, decoder: JSONDecoder())
+                    .map { $0.mapToImageModel() }
                     .sink(
                         receiveCompletion: {
                             switch($0) {
