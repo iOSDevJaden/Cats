@@ -12,13 +12,8 @@ struct FavouriteRes: Codable, Identifiable {
     let imageId: String?
     let subId: String?
     let createdAt: String?
-    let image: Image?
+    let image: ImageModel?
 
-    struct Image: Codable {
-        let id: String?
-        let url: String?
-    }
-    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case imageId = "image_id"
