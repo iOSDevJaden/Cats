@@ -98,7 +98,6 @@ class FavouriteService {
     }
     
     func saveFavouriteImage(id imageId: String) -> AnyPublisher<Bool, Error> {
-        print("Image ID \(imageId)")
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(
