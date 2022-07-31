@@ -19,25 +19,13 @@ struct HomeView: View {
     
     var body: some View {
         Form {
-            if vm.favourites.isEmpty {
-                Text("No favourite cat pictures")
-            } else {
-                Section(
-                    content: {
-                        ForEach(vm.favourites) { image in
-                            if let url = image.image?.url {
-                                AsyncImgView(url)
-                            }
-                        }
-                    },
-                    header: {
-                        Text("My Favourite Views")
-                    })
+            ForEach(vm.favouriteImages, id: \.favouriteId) { images in
+                if let imageUrl = images.imageModel.imageUrl {
+                    AsyncImgView(imageUrl)
+                }
             }
-            
         }
         .onAppear(perform: vm.getFavouriteImages)
-        .onAppear(perform: vm.getVoteUpImages)
     }
 }
 

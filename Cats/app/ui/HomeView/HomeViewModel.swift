@@ -11,10 +11,8 @@ import Foundation
 class HomeViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
     private let favouriteService = FavouriteService()
-    private let voteService = VoteService()
     
-    @Published var favourites: [FavouriteRes] = []
-    @Published var voteUps: [VoteRes] = []
+    @Published var favouriteImages = [FavouriteModel]()
     
     func getFavouriteImages() {
         favouriteService.getMyFavourites()
@@ -24,28 +22,14 @@ class HomeViewModel: ObservableObject {
                 receiveCompletion: {
                     print("Receive Completion \($0)")
                 },
-                receiveValue: { [weak self] favourites in
-                    self?.favourites = favourites
+                receiveValue: { [weak self] favouriteImages in
+                    self?.favouriteImages = favouriteImages
                 })
             .store(in: &cancellable)
     }
     
-    func getVoteUpImages() {
-        voteService.getMyVotes()
-            .subscribe(on: DispatchQueue.global(qos: .background))
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: {
-                    print("Receive Completion \($0)")
-                },
-                receiveValue: { [weak self] vote in
-                    self?.voteUps = vote
-                })
-            .store(in: &cancellable)
-    }
-    
-    func deleteVote(imageId: String) {
-        voteService.deleteVote(vote: imageId)
+    func deleteFavouriteImage(image id: String) {
+        favouriteService.deleteMyFavourite(favourite: id)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .sink(
@@ -53,7 +37,7 @@ class HomeViewModel: ObservableObject {
                     print("Receive Completion \($0)")
                 },
                 receiveValue: {
-                    print("Receive Value = \($0)")
+                    print("Favourite Image deleted \($0 ? "success" : "failed")")
                 })
             .store(in: &cancellable)
     }
