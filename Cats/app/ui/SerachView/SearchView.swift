@@ -39,17 +39,20 @@ struct SearchView: View {
                         if let imageUrl = image.imageUrl {
                             AsyncImgView(imageUrl)
                                 .frame(height: 120, alignment: .top)
-                                .onTapGesture(perform: {
+                                .background(Color.black)
+                                .border(Color.white, width: 1)
+                                .onTapGesture {
                                     self.image = AsyncImgView(imageUrl)
                                     self.imageId = image.imageId
                                     toggleWithAnimation()
-                                })
-                                .background(Color.black)
-                                .border(Color.white, width: 1)
+                                }
                         }
                     }
                 }
             }
+            Button(
+                action: vm.getMoreImages,
+                label: getMoreImagesBtnLabel)
         }
     }
     
@@ -62,22 +65,43 @@ struct SearchView: View {
                 if let imageId = imageId {
                     Button(
                         action: { vm.favouriteImage(imageId: imageId) },
-                        label: {
-                            Image(systemName: "heart.fill")
-                        })
+                        label: getFavouriteBtnLabel)
                 }
             }
         }
         .ignoresSafeArea()
-        .onTapGesture {
-            self.image = nil
-            self.imageId = nil
-            toggleWithAnimation()
-        }
+        .onTapGesture(perform: dismissFullScreen)
+    }
+    
+    private func dismissFullScreen() {
+        self.image = nil
+        self.imageId = nil
+        toggleWithAnimation()
     }
     
     private func toggleWithAnimation() {
         withAnimation { showFullImage.toggle() }
+    }
+    
+    private func getMoreImagesBtnLabel() -> some View {
+        Text("Get More Images")
+            .font(.title3.bold())
+            .padding()
+            .background(
+                Color.black.opacity(0.3)
+                    .cornerRadius(10)
+            )
+    }
+    
+    private func getFavouriteBtnLabel() -> some View {
+        Image(systemName: "heart.fill")
+            .resizable()
+            .frame(width: 30, height: 30)
+            .padding()
+            .background(
+                Color.black.opacity(0.3)
+                    .cornerRadius(10)
+            )
     }
 }
 
