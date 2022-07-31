@@ -22,7 +22,6 @@ class ImagesService {
                     .map { imageRes in
                         var imageModels: [ImageModel] = []
                         imageRes.forEach {
-                            print("Image Res got \($0.id)")
                             imageModels.append($0.mapToImageModel())
                         }
                         return imageModels

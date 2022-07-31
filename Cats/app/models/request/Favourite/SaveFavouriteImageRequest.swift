@@ -29,9 +29,6 @@ struct SaveFavouriteImageRequest: Codable {
             return Data()
         }
         
-        let string = String(data: data, encoding: .utf8)
-        print(string ?? "")
-        
         return data
     }
 }
