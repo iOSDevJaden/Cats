@@ -9,11 +9,11 @@ import Combine
 import Foundation
 
 class SearchViewModel: ObservableObject {
-    private let imagesService = ImagesService()
-    private let voteService = VoteService()
+    private lazy var imagesService = ImagesService()
+    private lazy var favouriteService = FavouriteService()
     private var cancellable = Set<AnyCancellable>()
     
-    @Published var images: [ImageRes] = []
+    @Published var images: [ImageModel] = []
     @Published var page: Int = 0 {
         didSet { saveImagePage() }
     }
@@ -32,6 +32,20 @@ class SearchViewModel: ObservableObject {
                 },
                 receiveValue: { [weak self] images in
                     self?.images.append(contentsOf: images)
+                })
+            .store(in: &cancellable)
+    }
+    
+    func favouriteImage(imageId id: String) {
+        favouriteService.saveFavouriteImage(id: id)
+            .receive(on: DispatchQueue.main)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .sink(
+                receiveCompletion: {
+                    print("Completion \($0)")
+                },
+                receiveValue: {
+                    print("Save image as an favourite \($0 ? "success" : "failed.")")
                 })
             .store(in: &cancellable)
     }
