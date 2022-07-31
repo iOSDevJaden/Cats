@@ -15,4 +15,8 @@ struct ImageModel: Codable {
         case imageUrl = "image_url"
         case imageId = "image_id"
     }
+    
+#if DEBUG
+    static let staticImageModel = ImageRes.staticImageRes.mapToImageModel()
+#endif
 }

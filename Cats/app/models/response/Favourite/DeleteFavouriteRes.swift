@@ -9,4 +9,9 @@ import Foundation
 
 struct DeleteFavouriteRes: Codable {
     let message: String
+    
+#if DEBUG
+    static let staticDeleteFavouriteRes = DeleteFavouriteRes(
+        message: "SUCCESS")
+#endif
 }

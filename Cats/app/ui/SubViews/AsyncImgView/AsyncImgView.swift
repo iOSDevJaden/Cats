@@ -17,7 +17,7 @@ import SwiftUI
 struct AsyncImgView: View {
     let urlString: String
     @ObservedObject private var vm: AsyncImgViewModel
-    @State var uiImage = UIImage()
+    @State private var uiImage = UIImage()
     
     init(_ urlString: String) {
         self.urlString = urlString

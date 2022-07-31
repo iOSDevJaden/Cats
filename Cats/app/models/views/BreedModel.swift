@@ -19,4 +19,9 @@ struct BreedModel: Codable, Identifiable {
     let energyLevel: Int
     let strangerFriendly: Int
     let socialNeeds: Int
+    
+#if DEBUG
+    static let staticBreedModel = BreedRes.staticBreed
+        .mapToBreedModel()
+#endif
 }

@@ -15,7 +15,7 @@ import UIKit
 
 class UserInfoCache: Identifiable {
     static var shared = UserInfoCache()
-    lazy var userDefault = UserDefaults.standard
+    private lazy var userDefault = UserDefaults.standard
     
     private init() { }
     
