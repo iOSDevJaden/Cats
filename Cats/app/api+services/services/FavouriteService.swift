@@ -11,7 +11,7 @@ import Foundation
 class FavouriteService {
     private var cacellable = Set<AnyCancellable>()
     
-    func getMyFavourites() -> AnyPublisher<[FavouriteRes], Error> {
+    func getMyFavourites() -> AnyPublisher<[FavouriteModel], Error> {
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(for: FavouriteApi().getMyFavourites())
@@ -19,6 +19,13 @@ class FavouriteService {
                     .receive(on: DispatchQueue.main)
                     .map(\.data)
                     .decode(type: [FavouriteRes].self, decoder: JSONDecoder())
+                    .map { favouriteRes in
+                        var favouriteModels: [FavouriteModel] = []
+                        favouriteRes.forEach {
+                            favouriteModels.append($0.mapToFavouriteModel())
+                        }
+                        return favouriteModels
+                    }
                     .sink(
                         receiveCompletion: {
                             switch $0 {
@@ -37,7 +44,7 @@ class FavouriteService {
         .eraseToAnyPublisher()
     }
     
-    func getMyFavourtie(favourite id: String) -> AnyPublisher<FavouriteRes, Error> {
+    func getMyFavourtie(favourite id: String) -> AnyPublisher<FavouriteModel, Error> {
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(for: FavouriteApi().getMyFavourites())
@@ -45,6 +52,7 @@ class FavouriteService {
                     .receive(on: DispatchQueue.main)
                     .map(\.data)
                     .decode(type: FavouriteRes.self, decoder: JSONDecoder())
+                    .map { $0.mapToFavouriteModel()}
                     .sink(
                         receiveCompletion: {
                             switch $0 {

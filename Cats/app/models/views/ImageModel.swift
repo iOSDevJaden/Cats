@@ -12,8 +12,8 @@ struct ImageModel: Codable {
     let imageId: String?
     
     enum CodingKeys: String, CodingKey {
-        case imageUrl = "image_url"
-        case imageId = "image_id"
+        case imageUrl = "url"
+        case imageId = "id"
     }
     
 #if DEBUG
