@@ -10,8 +10,8 @@ import SwiftUI
 struct SearchView: View {
     @ObservedObject private var vm = SearchViewModel()
     @State private var showFullImage = false
-    @State var image: AsyncImgView? = nil
-    @State var imageId: String? = nil
+    @State private var image: AsyncImgView? = nil
+    @State private var imageId: String? = nil
     
     let colums: [GridItem] = [
         GridItem(.flexible(), spacing: 2),
