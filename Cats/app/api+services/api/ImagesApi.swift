@@ -51,17 +51,17 @@ struct ImagesApi {
             .build()
     }
     
-    /** TODO: - Usaing of `multipart/form-data`
-     * Create a new Iamge in the system
-     * by uploading a valid .jpg or .png file containing a Cat
-     */
     func getImageUpload(image: Data) -> URLRequest {
-        let boundary = "----\(UUID().uuidString)\r\n"
-        var headers: [String: String] = [:]
-        headers["Content-Type"] = "multipart/form-data; boundary\(boundary)"
+        let boundary = "--\(UUID().uuidString)"
+        
+        let headers = [
+            "Content-Type": "multipart/form-data; boundary=\(boundary)",
+        ]
+        
+        let req = UploadImageReq(imageData: image)
         
         return RequestBuilder()
-            .setParameters(parameters: Data())
+            .setParameters(parameters: req.getHttpBodyData(boundary: boundary))
             .setPath(path: "/images/upload")
             .setMethod(method: .post)
             .setHeaders(headers: headers)

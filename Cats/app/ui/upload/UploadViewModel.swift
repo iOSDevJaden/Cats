@@ -11,7 +11,21 @@ import Foundation
 class UploadViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
     
-    func uploadImage(image data: Data) {
-        print("Preparing")
+    func uploadImage(imageData: Data?) {
+        guard let imageData = imageData else {
+            return
+        }
+        
+        ImagesService().uploadImage(image: imageData)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: {
+                    print($0)
+                },
+                receiveValue: {
+                    print("\($0 ? "Success" : "Failed")")
+                })
+            .store(in: &cancellable)
     }
 }

@@ -98,11 +98,29 @@ class ImagesService {
         .eraseToAnyPublisher()
     }
     
-    /** MARK: - The Following API keeps occuring fowllowing error.
-     *  `parser error, xxx of 207 bytes parsed`
-     * Not sure if this is about URLSession Configuration related or
-     * Server side data size limitation.
-     * Waiting for the answer from 2022.07.23 15:00 ~
-     */
-    func getImageUploaded(image: Data) { }
+    func uploadImage(image: Data) -> AnyPublisher<Bool, Error> {
+        return Deferred {
+            Future { promise in
+                URLSession.shared.dataTaskPublisher(for: ImagesApi().getImageUpload(image: image))
+                    .receive(on: DispatchQueue.global(qos: .background))
+                    .subscribe(on: DispatchQueue.main)
+                    .map(\.data)
+                    .sink(
+                        receiveCompletion: {
+                            switch($0) {
+                            case .failure(let error):
+                                promise(.failure(error))
+                            case .finished:
+                                return
+                            }
+                        },
+                        receiveValue: {
+                            print("S \(String(data: $0, encoding: .utf8) ?? "")")
+                            promise(.success(true))
+                        })
+                    .store(in: &self.cancellable)
+            }
+        }
+        .eraseToAnyPublisher()
+    }
 }
