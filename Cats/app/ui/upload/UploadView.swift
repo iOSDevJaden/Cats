@@ -40,10 +40,14 @@ struct UploadView: View {
                     .padding(.horizontal)
             }
             if selectedImage != nil {
-                Button(action: {}, label: {
-                    Labels(text: "Upload", .green.opacity(0.3))
-                        .frame(width: 200)
-                })
+                Button(
+                    action: {
+                        vm.uploadImage(imageData: selectedImage?.jpegData(compressionQuality: 0.2))
+                    },
+                    label: {
+                        Labels(text: "Upload", .green.opacity(0.3))
+                            .frame(width: 200)
+                    })
                 .padding(.vertical)
             } else {
                 Button(
