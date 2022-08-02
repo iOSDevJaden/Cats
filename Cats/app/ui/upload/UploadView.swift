@@ -123,26 +123,15 @@ struct UploadView: View {
     }
 }
 
-extension UploadView {
-    enum UploadMenu {
-        case album,
-             camera
-        
-        private func getLabel() -> some View {
-            switch self {
-            case .album:  return Text("Album")
-            case .camera: return Text("Camera")
-            }
-        }
-        
-        func getButton(action: @escaping () -> ()) -> some View {
-            switch self {
-            case .album:  return Button(action: action, label: getLabel)
-            case .camera: return Button(action: action, label: getLabel)
-            }
-        }
+fileprivate struct ImageModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundColor(.accentColor)
+            )
     }
-    
 }
 
 struct UploadView_Previews: PreviewProvider {
