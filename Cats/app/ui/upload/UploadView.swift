@@ -38,32 +38,6 @@ struct UploadView: View {
             label: getSelectPictureBtnLabel)
     }
     
-    private func getUploadPictureBtn(selected image: UIImage) -> some View {
-        Button(
-            action: {
-                vm.uploadImage(
-                    imageData: image.jpegData(compressionQuality: 0.2)
-                )
-            },
-            label: getUploadPictureBtnLabel)
-    }
-    
-    private func getActionSheet() -> ActionSheet {
-        ActionSheet(
-            title: Text("Select"),
-            buttons: actionSheetBtns)
-    }
-    
-    
-    private func getUploadPictureBtnLabel() -> some View {
-        Labels(text: "Upload", .green.opacity(0.3))
-            .frame(width: 200)
-    }
-    
-    private func getSelectPictureBtnLabel() -> some View {
-        Labels(text: "Select picture", .black.opacity(0.3))
-            .frame(width: 200)
-    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -131,6 +105,31 @@ struct UploadView: View {
         showAlbum.toggle()
     }
     
+    private func getUploadPictureBtn(selected image: UIImage) -> some View {
+        Button(
+            action: {
+                vm.uploadImage(
+                    imageData: image.jpegData(compressionQuality: 0.2)
+                )
+            },
+            label: getUploadPictureBtnLabel)
+    }
+    
+    private func getActionSheet() -> ActionSheet {
+        ActionSheet(
+            title: Text("Select"),
+            buttons: actionSheetBtns)
+    }
+    
+    private func getUploadPictureBtnLabel() -> some View {
+        Labels(text: "Upload", .green.opacity(0.3))
+            .frame(width: 200)
+    }
+    
+    private func getSelectPictureBtnLabel() -> some View {
+        Labels(text: "Select picture", .black.opacity(0.3))
+            .frame(width: 200)
+    }
 }
 
 fileprivate struct ImageModifier: ViewModifier {
