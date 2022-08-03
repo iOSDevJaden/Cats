@@ -1,9 +1,7 @@
 //
 //  UploadView.swift
 //  Cats
-//
-//  Created by 김태호 on 2022/07/16.
-//
+// //  Created by 김태호 on 2022/07/16. //
 
 import SwiftUI
 import PhotosUI
@@ -25,7 +23,8 @@ struct UploadView: View {
             .default(Text("Camera"),
                      action: showCameraFullScreenToggle)
         return [
-            cancelBtn, albumBtn,
+            cancelBtn,
+            albumBtn,
             cameraBtn
         ]
     }
@@ -71,8 +70,7 @@ struct UploadView: View {
         .fullScreenCover(
             isPresented: $showCamera,
             content: {
-                Text("Camera")
-                    .onTapGesture(perform: showCameraFullScreenToggle)
+                CameraView()
             }
         )
     }
