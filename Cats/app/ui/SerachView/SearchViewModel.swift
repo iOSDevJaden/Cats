@@ -8,18 +8,13 @@
 import Combine
 import Foundation
 
-class SearchViewModel: ObservableObject {
+class SearchViewModel: BaseViewModel, ObservableObject {
     private lazy var imagesService = ImagesService()
     private lazy var favouriteService = FavouriteService()
-    private var cancellable = Set<AnyCancellable>()
     
     @Published var images: [ImageModel] = []
     @Published var page: Int = 0 {
         didSet { saveImagePage() }
-    }
-    
-    init() {
-        setImagePage()
     }
     
     func getImages() {

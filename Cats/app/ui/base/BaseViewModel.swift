@@ -8,7 +8,6 @@
 import Combine
 import Foundation
 
-class BaseViewModel: ObservableObject {
-    var cancellable = Set<AnyCancellable>()
-    
+class BaseViewModel {
+   lazy var cancellable = Set<AnyCancellable>()
 }

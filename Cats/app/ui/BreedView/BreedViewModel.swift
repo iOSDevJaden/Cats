@@ -8,9 +8,8 @@
 import Combine
 import Foundation
 
-class BreedViewModel: ObservableObject {
+class BreedViewModel: BaseViewModel, ObservableObject {
     private lazy var breedService = BreedService()
-    private lazy var cancellable = Set<AnyCancellable>()
     
     private var diskCache = DiskCache.shared
     
