@@ -51,8 +51,8 @@ struct SettingsView: View {
             
             Section(
                 content: {
-                    Stepper("Number of Picture \(vm.currentPage)",
-                            value: $vm.currentPage,
+                    Stepper("Number of Picture \(vm.numberOfPicture)",
+                            value: $vm.numberOfPicture,
                             in: 15 ... 30)
                 },
                 header: {
