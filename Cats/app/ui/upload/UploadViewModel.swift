@@ -8,9 +8,7 @@
 import Combine
 import Foundation
 
-class UploadViewModel: ObservableObject {
-    private var cancellable = Set<AnyCancellable>()
-    
+class UploadViewModel: BaseViewModel, ObservableObject {
     func uploadImage(imageData: Data?) {
         guard let imageData = imageData else {
             return

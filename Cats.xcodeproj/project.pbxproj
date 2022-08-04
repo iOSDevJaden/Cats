@@ -14,6 +14,7 @@
 		A126C9D92879576C00CF3CD7 /* BreedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126C9D82879576C00CF3CD7 /* BreedApi.swift */; };
 		A126C9DB2879578800CF3CD7 /* BreedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126C9DA2879578800CF3CD7 /* BreedService.swift */; };
 		A127054B2879B727001B0A74 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A127054A2879B727001B0A74 /* BaseViewModel.swift */; };
+		A12951662899AE1C00E6AD97 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12951652899AE1C00E6AD97 /* CameraView.swift */; };
 		A1584ADF287EF150008AF229 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584ADE287EF150008AF229 /* SearchBar.swift */; };
 		A1584AE4287EF85B008AF229 /* BreedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE3287EF85B008AF229 /* BreedDetailView.swift */; };
 		A1584AE6287F058A008AF229 /* BaseViewFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE5287F058A008AF229 /* BaseViewFrame.swift */; };
@@ -28,7 +29,6 @@
 		A171630228885EC0004CC2AF /* FavouriteRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A171630128885EC0004CC2AF /* FavouriteRes.swift */; };
 		A171630428886004004CC2AF /* BreedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A171630328886004004CC2AF /* BreedModel.swift */; };
 		A17C461B287B2440005B6E07 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C461A287B2440005B6E07 /* RequestBuilder.swift */; };
-		A17DA5342894834D00F6F524 /* UserForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17DA5332894834D00F6F524 /* UserForm.swift */; };
 		A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */; };
 		A17F4D312886F215009A68BF /* AsyncImgViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */; };
 		A1819696287A785D00C6E7B8 /* FavouriteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819695287A785D00C6E7B8 /* FavouriteApi.swift */; };
@@ -86,6 +86,7 @@
 		A126C9D82879576C00CF3CD7 /* BreedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedApi.swift; sourceTree = "<group>"; };
 		A126C9DA2879578800CF3CD7 /* BreedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedService.swift; sourceTree = "<group>"; };
 		A127054A2879B727001B0A74 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		A12951652899AE1C00E6AD97 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		A134BC8E287DC1640028B251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A134BC8F287DC3220028B251 /* Basic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Basic.xcconfig; sourceTree = "<group>"; };
 		A145259F287DB6B000FEC177 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		A171630128885EC0004CC2AF /* FavouriteRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRes.swift; sourceTree = "<group>"; };
 		A171630328886004004CC2AF /* BreedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedModel.swift; sourceTree = "<group>"; };
 		A17C461A287B2440005B6E07 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
-		A17DA5332894834D00F6F524 /* UserForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserForm.swift; sourceTree = "<group>"; };
 		A17F4D2D2886EFC6009A68BF /* AsyncImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgView.swift; sourceTree = "<group>"; };
 		A17F4D302886F215009A68BF /* AsyncImgViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImgViewModel.swift; sourceTree = "<group>"; };
 		A1819695287A785D00C6E7B8 /* FavouriteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteApi.swift; sourceTree = "<group>"; };
@@ -258,6 +258,7 @@
 				A1A89C192880B11000FE3DBC /* Labels.swift */,
 				A1584ADE287EF150008AF229 /* SearchBar.swift */,
 				A1584AE7287F131C008AF229 /* TabBarItems.swift */,
+				A12951652899AE1C00E6AD97 /* CameraView.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -265,7 +266,6 @@
 		A1584AE0287EF832008AF229 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				A17DA5322894833A00F6F524 /* Userform */,
 				A11E0CF1288EC16300635594 /* ProfileView */,
 				A17F4D2F2886F1CD009A68BF /* AsyncImgView */,
 				A1584AE2287EF84B008AF229 /* BreedView */,
@@ -298,14 +298,6 @@
 				A1BF170F28968E4B0077AB1E /* FavouriteModel.swift */,
 			);
 			path = views;
-			sourceTree = "<group>";
-		};
-		A17DA5322894833A00F6F524 /* Userform */ = {
-			isa = PBXGroup;
-			children = (
-				A17DA5332894834D00F6F524 /* UserForm.swift */,
-			);
-			path = Userform;
 			sourceTree = "<group>";
 		};
 		A17F4D2F2886F1CD009A68BF /* AsyncImgView */ = {
@@ -655,7 +647,6 @@
 				A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */,
 				A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */,
 				A1836344288B4D440070B862 /* DiskCache.swift in Sources */,
-				A17DA5342894834D00F6F524 /* UserForm.swift in Sources */,
 				A181969F287A92D000C6E7B8 /* VoteRequest.swift in Sources */,
 				A1A92BAD2885B3310091EBEA /* CatWikiView.swift in Sources */,
 				A1C2CB202882E83F008CFFD2 /* UploadView.swift in Sources */,
@@ -705,6 +696,7 @@
 				A1BF170E28967B8F0077AB1E /* MultipleTypes.swift in Sources */,
 				A171630228885EC0004CC2AF /* FavouriteRes.swift in Sources */,
 				A1ACAC732889EB3600B6A788 /* BreedReq.swift in Sources */,
+				A12951662899AE1C00E6AD97 /* CameraView.swift in Sources */,
 				A1ACAC542889D78500B6A788 /* CreateVoteRes.swift in Sources */,
 				A17162FE28885E29004CC2AF /* ImageRes.swift in Sources */,
 				A17C461B287B2440005B6E07 /* RequestBuilder.swift in Sources */,

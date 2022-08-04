@@ -9,9 +9,8 @@ import Foundation
 
 class SettingsViewModel: ObservableObject {
     private let userInfoCahce = UserInfoCache.shared
-
-    @Published var currentPage: Float = 0
-    @Published var maximumPage: Int = 0
+    
+    @Published var numberOfPicture = 15
     
     func getUserId() -> String {
         return userInfoCahce.id
@@ -27,6 +26,7 @@ class SettingsViewModel: ObservableObject {
     }
     
     // Maximum Page
+    // Will be deprecated.
     func getMaximumPage() -> Float {
         return Float(userInfoCahce.getMaximumPage())
     }

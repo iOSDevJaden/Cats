@@ -8,16 +8,16 @@
 import Combine
 import Foundation
 
-class AsyncImgViewModel: ObservableObject {
-    
-    private let urlString: String
-    private var cancellable = Set<AnyCancellable>()
-    
+class AsyncImgViewModel: BaseViewModel, ObservableObject {
     @Published var imageData = Data()
     
+    private lazy var urlString: String = ""
+    
     init(_ urlString: String) {
+        super.init()
+        
         self.urlString = urlString
-        self.getDataFrom(url: urlString)
+        getDataFrom(url: urlString)
     }
     
     func getDataFrom(url: String) {

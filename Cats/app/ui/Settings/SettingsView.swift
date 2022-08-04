@@ -8,32 +8,56 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var picker: SettingsType = .user
     @ObservedObject private var vm = SettingsViewModel()
     
-    var body: some View {
-        VStack {
-            Picker("", selection: $picker) {
-                Text("User").tag(SettingsType.user)
-                Text("Image").tag(SettingsType.image)
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal)
-            .padding(.vertical, 10)
-            VStack {
-                switch picker {
-                case .user: UserForm().environmentObject(vm)
-                case .image: Spacer()
-                }
-            }
-        }
-    }
     
-    enum SettingsType: String, Identifiable {
-        case user, image
-        
-        var id: String {
-            self.rawValue
+    var body: some View {
+        Form {
+            Section(
+                content: {
+                    HStack(alignment: .top) {
+                        VStack(spacing: 5) {
+                            Image("cat-paw")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                                .padding()
+                                .background(
+                                    Color.black
+                                        .cornerRadius(10)
+                                )
+                            Text("User-name")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .background(
+                                    Color.accentColor
+                                        .cornerRadius(5)
+                                        .opacity(0.8)
+                                )
+                        }
+                        VStack(alignment: .leading) {
+                            Text("User ID")
+                                .font(.headline)
+                                .foregroundColor(.accentColor)
+                                .padding(.vertical, 5)
+                            Text(vm.getUserId()).font(.callout)
+                            
+                        }.padding(.leading)
+                    }
+                },
+                header: {
+                    Text("User Information")
+                })
+            
+            Section(
+                content: {
+                    Stepper("Number of Picture \(vm.numberOfPicture)",
+                            value: $vm.numberOfPicture,
+                            in: 15 ... 30)
+                },
+                header: {
+                    Text("Number of Cat Pictures per Page")
+                })
         }
     }
 }

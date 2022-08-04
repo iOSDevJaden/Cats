@@ -1,9 +1,7 @@
 //
 //  UploadView.swift
 //  Cats
-//
-//  Created by 김태호 on 2022/07/16.
-//
+// //  Created by 김태호 on 2022/07/16. //
 
 import SwiftUI
 import PhotosUI
@@ -16,60 +14,51 @@ struct UploadView: View {
     @State private var showAlbum = false
     @State private var showCamera = false
     
+    private var actionSheetBtns: [ActionSheet.Button] {
+        let cancelBtn = ActionSheet.Button.cancel()
+        let albumBtn = ActionSheet.Button
+            .default(Text("Album"),
+                     action: showAlbumSheetToggle)
+        let cameraBtn = ActionSheet.Button
+            .default(Text("Camera"),
+                     action: showCameraFullScreenToggle)
+        return [
+            cancelBtn,
+            albumBtn,
+            cameraBtn
+        ]
+    }
+    
+    private let placeHolderImage = Image("cat-paw")
+    
+    private func getSelectPictureBtn() -> some View {
+        Button(
+            action: toggleActionSheet,
+            label: getSelectPictureBtnLabel)
+    }
+    
+    
     var body: some View {
         VStack(spacing: 0) {
+            getSelectedImage(selected: selectedImage)
+                .resizable()
+                .scaledToFit()
+                .modifier(ImageModifier())
+                .padding()
+            
             if let selectedImage = selectedImage {
-                Image(uiImage: selectedImage)
-                    .resizable()
-                    .scaledToFit()
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.accentColor)
-                    )
-                    .padding(.horizontal)
+                getUploadPictureBtn(selected: selectedImage)
+                    .padding(.vertical)
             } else {
-                Image("cat-paw")
-                    .resizable()
-                    .scaledToFit()
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.accentColor)
-                    )
-                    .padding(.horizontal)
-            }
-            if selectedImage != nil {
-                Button(
-                    action: {
-                        vm.uploadImage(imageData: selectedImage?.jpegData(compressionQuality: 0.2))
-                    },
-                    label: {
-                        Labels(text: "Upload", .green.opacity(0.3))
-                            .frame(width: 200)
-                    })
-                .padding(.vertical)
-            } else {
-                Button(
-                    action: toggleActionSheet,
-                    label: getLabel)
-                .padding(.vertical)
+                getSelectPictureBtn()
+                    .padding(.vertical)
             }
             
         }
         .onAppear(perform: requestPermission)
         .actionSheet(
             isPresented: $showActionSheet,
-            content: {
-                ActionSheet(
-                    title: Text("Select"),
-                    buttons: [
-                        .cancel(),
-                        .default(Text("Album"), action: showAlbumSheet),
-                        .default(Text("Camera"), action: showCameraFullScreen),
-                    ]
-                )
-            })
+            content: getActionSheet)
         /* MARK: - sheet, fullScreenCover modifier do not work as expected.
          * iOS Simulator did not show sheet or full screen cover.
          * However, it works fine in the real device. */
@@ -80,12 +69,17 @@ struct UploadView: View {
             })
         .fullScreenCover(
             isPresented: $showCamera,
-            onDismiss: dismissCameraFullScreen,
             content: {
-                Text("Camera")
-                    .onTapGesture(perform: dismissCameraFullScreen)
+                CameraView()
             }
         )
+    }
+    
+    private func getSelectedImage(selected image: UIImage?) -> Image {
+        guard let uiImage = image else {
+            return placeHolderImage
+        }
+        return Image(uiImage: uiImage)
     }
     
     private func requestPermission() {
@@ -101,48 +95,50 @@ struct UploadView: View {
         showActionSheet.toggle()
     }
     
-    private func showCameraFullScreen() {
-        showCamera = true
+    private func showCameraFullScreenToggle() {
+        showCamera.toggle()
     }
     
-    private func showAlbumSheet() {
-        showAlbum = true
+    private func showAlbumSheetToggle() {
+        showAlbum.toggle()
     }
     
-    private func dismissCameraFullScreen() {
-        showCamera = false
+    private func getUploadPictureBtn(selected image: UIImage) -> some View {
+        Button(
+            action: {
+                vm.uploadImage(
+                    imageData: image.jpegData(compressionQuality: 0.2)
+                )
+            },
+            label: getUploadPictureBtnLabel)
     }
     
-    private func dismissAlbumSheet() {
-        showAlbum = false
+    private func getActionSheet() -> ActionSheet {
+        ActionSheet(
+            title: Text("Select"),
+            buttons: actionSheetBtns)
     }
     
-    private func getLabel() -> some View {
+    private func getUploadPictureBtnLabel() -> some View {
+        Labels(text: "Upload", .green.opacity(0.3))
+            .frame(width: 200)
+    }
+    
+    private func getSelectPictureBtnLabel() -> some View {
         Labels(text: "Select picture", .black.opacity(0.3))
             .frame(width: 200)
     }
 }
 
-extension UploadView {
-    enum UploadMenu {
-        case album,
-             camera
-        
-        private func getLabel() -> some View {
-            switch self {
-            case .album:  return Text("Album")
-            case .camera: return Text("Camera")
-            }
-        }
-        
-        func getButton(action: @escaping () -> ()) -> some View {
-            switch self {
-            case .album:  return Button(action: action, label: getLabel)
-            case .camera: return Button(action: action, label: getLabel)
-            }
-        }
+fileprivate struct ImageModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundColor(.accentColor)
+            )
     }
-    
 }
 
 struct UploadView_Previews: PreviewProvider {

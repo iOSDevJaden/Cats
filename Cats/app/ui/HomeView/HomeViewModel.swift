@@ -8,8 +8,7 @@
 import Combine
 import Foundation
 
-class HomeViewModel: ObservableObject {
-    private var cancellable = Set<AnyCancellable>()
+class HomeViewModel: BaseViewModel, ObservableObject {
     private let favouriteService = FavouriteService()
     
     @Published var favouriteImages = [FavouriteModel]()
