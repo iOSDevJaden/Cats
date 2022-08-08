@@ -310,8 +310,8 @@
 		A1973FCA28A15C2700B90093 /* base */ = {
 			isa = PBXGroup;
 			children = (
-				A108AD14288BAC4E00682532 /* ServiceConst.swift */,
 				A1973FCB28A15C3500B90093 /* BaseService.swift */,
+				A108AD14288BAC4E00682532 /* ServiceConst.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";

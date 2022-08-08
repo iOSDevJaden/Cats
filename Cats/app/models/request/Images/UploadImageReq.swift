@@ -34,7 +34,6 @@ struct UploadImageReq: Codable {
         }
         
         data.append(imageData)
-        print("Image Data = \(imageData.isEmpty ? "No data": "Image Data")")
 
         if let boundaryData = "\r\n--\(boundary)--".data(using: .utf8) {
             data.append(boundaryData)
