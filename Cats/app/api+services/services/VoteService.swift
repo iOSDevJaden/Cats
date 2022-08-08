@@ -62,7 +62,7 @@ class VoteService: BaseService {
         .eraseToAnyPublisher()
     }
     
-    func createVote(vote req: VoteRequest) -> AnyPublisher<Bool, Error> {
+    /*func createVote(vote req: VoteRequest) -> AnyPublisher<Bool, Error> {
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(for: self.voteApi.createVote(req))
@@ -83,7 +83,7 @@ class VoteService: BaseService {
             }
         }
         .eraseToAnyPublisher()
-    }
+    }*/
     
     func deleteVote(vote id: String) -> AnyPublisher<Bool, Error> {
         return Deferred {
