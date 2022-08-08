@@ -30,7 +30,7 @@ class RequestBuilder {
         return self
     }
     
-    func setParameters(parameters: Data) -> Self {
+    func setParameters(parameters: Data?) -> Self {
         self.parameters = parameters
         return self
     }
@@ -44,6 +44,7 @@ class RequestBuilder {
         guard var component = URLComponents(
             url: baseUrl.appendingPathComponent(path),
             resolvingAgainstBaseURL: true) else {
+            // TODO: - Find Another way to remove fatal Error
             fatalError("")
         }
         
@@ -52,6 +53,7 @@ class RequestBuilder {
         }
         
         guard let url =  component.url else {
+            // TODO: - Find Another way to remove fatal Error
             fatalError("")
         }
         
