@@ -20,7 +20,7 @@ struct ImagesApi {
     }
     
     func getAllPublicImages(limit: Int, page: Int = 0) -> URLRequest {
-        let req = ImagesReq(
+        let parameter = ImagesReq(
             size: .small,
             mimeTypes: [.jpg, .png],
             order: .asc,
@@ -35,7 +35,7 @@ struct ImagesApi {
         return RequestBuilder()
             .setPath(path: "/images/search")
             .setMethod(method: .get)
-            .setParameters(urlQuery: req.getUrlQueries())
+            .setParameters(urlQuery: parameter.getUrlQueries())
             .build()
     }
     
