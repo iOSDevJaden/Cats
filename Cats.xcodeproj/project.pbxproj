@@ -34,7 +34,6 @@
 		A1819698287A7B3800C6E7B8 /* FavouriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819697287A7B3800C6E7B8 /* FavouriteService.swift */; };
 		A181969A287A892200C6E7B8 /* VoteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819699287A892200C6E7B8 /* VoteApi.swift */; };
 		A181969C287A896200C6E7B8 /* VoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A181969B287A896200C6E7B8 /* VoteService.swift */; };
-		A181969F287A92D000C6E7B8 /* VoteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A181969E287A92D000C6E7B8 /* VoteRequest.swift */; };
 		A1836344288B4D440070B862 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1836343288B4D440070B862 /* DiskCache.swift */; };
 		A18C175D2897FC6D00BC3909 /* UploadImageRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C175C2897FC6D00BC3909 /* UploadImageRes.swift */; };
 		A1973FCC28A15C3500B90093 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1973FCB28A15C3500B90093 /* BaseService.swift */; };
@@ -60,7 +59,6 @@
 		A1ACAC732889EB3600B6A788 /* BreedReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ACAC722889EB3600B6A788 /* BreedReq.swift */; };
 		A1ACAC752889EBD600B6A788 /* BreedsReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ACAC742889EBD600B6A788 /* BreedsReq.swift */; };
 		A1ACAC782889EC5300B6A788 /* CategoryListReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ACAC772889EC5300B6A788 /* CategoryListReq.swift */; };
-		A1ACAC7B2889ED0A00B6A788 /* GetMyVotesReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ACAC7A2889ED0A00B6A788 /* GetMyVotesReq.swift */; };
 		A1B70F8528834007002B4F26 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B70F8428834007002B4F26 /* ImagePicker.swift */; };
 		A1B8AEEC2878560A000D16DE /* CatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B8AEEB2878560A000D16DE /* CatsApp.swift */; };
 		A1B8AEF02878560B000D16DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B8AEEF2878560B000D16DE /* Assets.xcassets */; };
@@ -109,7 +107,6 @@
 		A1819697287A7B3800C6E7B8 /* FavouriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteService.swift; sourceTree = "<group>"; };
 		A1819699287A892200C6E7B8 /* VoteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteApi.swift; sourceTree = "<group>"; };
 		A181969B287A896200C6E7B8 /* VoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteService.swift; sourceTree = "<group>"; };
-		A181969E287A92D000C6E7B8 /* VoteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteRequest.swift; sourceTree = "<group>"; };
 		A1836343288B4D440070B862 /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		A18C175C2897FC6D00BC3909 /* UploadImageRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageRes.swift; sourceTree = "<group>"; };
 		A1973FCB28A15C3500B90093 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
@@ -135,7 +132,6 @@
 		A1ACAC722889EB3600B6A788 /* BreedReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedReq.swift; sourceTree = "<group>"; };
 		A1ACAC742889EBD600B6A788 /* BreedsReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsReq.swift; sourceTree = "<group>"; };
 		A1ACAC772889EC5300B6A788 /* CategoryListReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListReq.swift; sourceTree = "<group>"; };
-		A1ACAC7A2889ED0A00B6A788 /* GetMyVotesReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyVotesReq.swift; sourceTree = "<group>"; };
 		A1B70F8428834007002B4F26 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A1B8AEE82878560A000D16DE /* Cats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B8AEEB2878560A000D16DE /* CatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsApp.swift; sourceTree = "<group>"; };
@@ -303,10 +299,9 @@
 		A181969D287A92BD00C6E7B8 /* request */ = {
 			isa = PBXGroup;
 			children = (
-				A1F80FC52895C833009C21C8 /* Favourite */,
-				A1ACAC792889EC7000B6A788 /* Vote */,
-				A1ACAC762889EC4200B6A788 /* Categories */,
 				A1ACAC712889EB2000B6A788 /* Breeds */,
+				A1ACAC762889EC4200B6A788 /* Categories */,
+				A1F80FC52895C833009C21C8 /* Favourite */,
 				A1ACAC5D2889E67500B6A788 /* Images */,
 			);
 			path = request;
@@ -458,15 +453,6 @@
 				A1ACAC772889EC5300B6A788 /* CategoryListReq.swift */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		A1ACAC792889EC7000B6A788 /* Vote */ = {
-			isa = PBXGroup;
-			children = (
-				A181969E287A92D000C6E7B8 /* VoteRequest.swift */,
-				A1ACAC7A2889ED0A00B6A788 /* GetMyVotesReq.swift */,
-			);
-			path = Vote;
 			sourceTree = "<group>";
 		};
 		A1B8AEDF2878560A000D16DE = {
@@ -638,7 +624,6 @@
 				A1ACAC5C2889E62200B6A788 /* UploadImageReq.swift in Sources */,
 				A1819698287A7B3800C6E7B8 /* FavouriteService.swift in Sources */,
 				A17162F728884718004CC2AF /* HomeViewModel.swift in Sources */,
-				A1ACAC7B2889ED0A00B6A788 /* GetMyVotesReq.swift in Sources */,
 				A19789502879FA1600EDB501 /* BreedView.swift in Sources */,
 				A1B8AF1628785648000D16DE /* MainView.swift in Sources */,
 				A1ACAC6E2889E95B00B6A788 /* SponsorRes.swift in Sources */,
@@ -647,7 +632,6 @@
 				A17F4D2E2886EFC6009A68BF /* AsyncImgView.swift in Sources */,
 				A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */,
 				A1836344288B4D440070B862 /* DiskCache.swift in Sources */,
-				A181969F287A92D000C6E7B8 /* VoteRequest.swift in Sources */,
 				A1A92BAD2885B3310091EBEA /* CatWikiView.swift in Sources */,
 				A1C2CB202882E83F008CFFD2 /* UploadView.swift in Sources */,
 				A1A086C9287C30B90021C4D3 /* URL+extension.swift in Sources */,
