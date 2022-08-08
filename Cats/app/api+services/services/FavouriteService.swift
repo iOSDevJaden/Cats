@@ -8,8 +8,7 @@
 import Combine
 import Foundation
 
-class FavouriteService {
-    private var cacellable = Set<AnyCancellable>()
+class FavouriteService: BaseService {
     
     func getMyFavourites() -> AnyPublisher<[FavouriteModel], Error> {
         return Deferred {
@@ -38,7 +37,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()
@@ -65,7 +64,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()
@@ -91,7 +90,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0.message == ServiceConst.success))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()
@@ -118,7 +117,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0.message == ServiceConst.success))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()

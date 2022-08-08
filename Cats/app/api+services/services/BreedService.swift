@@ -8,8 +8,7 @@
 import Combine
 import Foundation
 
-class BreedService {
-    private var cancellable = Set<AnyCancellable>()
+class BreedService: BaseService {
     
     func getBreeds() -> AnyPublisher<[BreedModel], Error> {
         return Deferred {

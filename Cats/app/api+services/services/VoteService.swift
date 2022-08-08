@@ -8,8 +8,7 @@
 import Combine
 import Foundation
 
-class VoteService {
-    private var cancellable = Set<AnyCancellable>()
+class VoteService: BaseService {
     private let voteApi = VoteApi()
     
     func getMyVotes() -> AnyPublisher<[VoteRes], Error> {

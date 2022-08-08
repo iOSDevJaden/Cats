@@ -8,8 +8,7 @@
 import Combine
 import Foundation
 
-class ImagesService {
-    private var cancellable = Set<AnyCancellable>()
+class ImagesService: BaseService {
     
     func getImages(limit: Int, page: Int) -> AnyPublisher<[ImageModel], Error> {
         return Deferred {
