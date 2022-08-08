@@ -202,7 +202,6 @@
 				A126C9DA2879578800CF3CD7 /* BreedService.swift */,
 				A1819697287A7B3800C6E7B8 /* FavouriteService.swift */,
 				A197895B2879FF7A00EDB501 /* ImagesService.swift */,
-				A108AD14288BAC4E00682532 /* ServiceConst.swift */,
 				A181969B287A896200C6E7B8 /* VoteService.swift */,
 			);
 			path = services;
@@ -316,6 +315,7 @@
 		A1973FCA28A15C2700B90093 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				A108AD14288BAC4E00682532 /* ServiceConst.swift */,
 				A1973FCB28A15C3500B90093 /* BaseService.swift */,
 			);
 			path = base;
