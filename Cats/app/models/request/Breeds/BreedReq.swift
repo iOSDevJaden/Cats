@@ -9,4 +9,10 @@ import Foundation
 
 struct BreedReq {
     let q: String
+    
+    func getUrlQuery() -> [URLQueryItem] {
+        return [
+            URLQueryItem(name: "q", value: self.q),
+        ]
+    }
 }

@@ -16,10 +16,11 @@ struct BreedApi {
     }
     
     func getBreedList(id: String) -> URLRequest {
-        let parameter = URLQueryItem(name: "q", value: id)
+        let parameter = BreedReq(q: id)
+        
         return RequestBuilder()
             .setPath(path: "/breeds/search")
-            .setParameters(urlQuery: [parameter])
+            .setParameters(urlQuery: parameter.getUrlQuery())
             .setMethod(method: .get)
             .build()
     }

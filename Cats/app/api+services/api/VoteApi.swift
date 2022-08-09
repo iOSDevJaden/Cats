@@ -32,7 +32,6 @@ struct VoteApi {
     
     /**
      * Vote an Image Up or Down
-     */
     func createVote(_ req: VoteRequest) -> URLRequest {
         guard let data = try? JSONEncoder().encode(req) else {
             fatalError("Encoding Failed")
@@ -43,7 +42,8 @@ struct VoteApi {
             .setMethod(method: .post)
             .setParameters(parameters: data)
             .build()
-    }
+    } */
+    
     /**
      * Delete a Vote from your Account.
      */

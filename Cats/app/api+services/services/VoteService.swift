@@ -8,8 +8,14 @@
 import Combine
 import Foundation
 
-class VoteService {
-    private var cancellable = Set<AnyCancellable>()
+// Vote Service is not currently used.
+protocol VoteServiceProtocol {
+    func getMyVotes() -> AnyPublisher<[VoteRes], Error>
+    func getMyVotes(vote id: String) -> AnyPublisher<[VoteRes], Error>
+    func deleteVote(vote id: String) -> AnyPublisher<Bool, Error>
+}
+
+class VoteService: BaseService {
     private let voteApi = VoteApi()
     
     func getMyVotes() -> AnyPublisher<[VoteRes], Error> {
@@ -37,9 +43,7 @@ class VoteService {
         .eraseToAnyPublisher()
     }
     
-    func getMyVotes(
-        vote id: String
-    ) -> AnyPublisher<[VoteRes], Error> {
+    func getMyVotes(vote id: String) -> AnyPublisher<[VoteRes], Error> {
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(for: self.voteApi.getMyVotes(vote: id))
@@ -63,7 +67,7 @@ class VoteService {
         .eraseToAnyPublisher()
     }
     
-    func createVote(vote req: VoteRequest) -> AnyPublisher<Bool, Error> {
+    /*func createVote(vote req: VoteRequest) -> AnyPublisher<Bool, Error> {
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(for: self.voteApi.createVote(req))
@@ -84,7 +88,7 @@ class VoteService {
             }
         }
         .eraseToAnyPublisher()
-    }
+    }*/
     
     func deleteVote(vote id: String) -> AnyPublisher<Bool, Error> {
         return Deferred {

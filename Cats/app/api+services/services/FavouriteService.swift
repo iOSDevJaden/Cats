@@ -8,8 +8,14 @@
 import Combine
 import Foundation
 
-class FavouriteService {
-    private var cacellable = Set<AnyCancellable>()
+protocol FavouriteServiceProtocol {
+    func getMyFavourites() -> AnyPublisher<[FavouriteModel], Error>
+    func getMyFavourtie(favourite id: String) -> AnyPublisher<FavouriteModel, Error>
+    func deleteMyFavourite(favourite id: String) -> AnyPublisher<Bool, Error>
+    func saveFavouriteImage(id imageId: String) -> AnyPublisher<Bool, Error>
+}
+
+class FavouriteService: BaseService, FavouriteServiceProtocol {
     
     func getMyFavourites() -> AnyPublisher<[FavouriteModel], Error> {
         return Deferred {
@@ -38,7 +44,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()
@@ -65,7 +71,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()
@@ -91,7 +97,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0.message == ServiceConst.success))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()
@@ -118,7 +124,7 @@ class FavouriteService {
                         receiveValue: {
                             promise(.success($0.message == ServiceConst.success))
                         })
-                    .store(in: &self.cacellable)
+                    .store(in: &self.cancellable)
             }
         }
         .eraseToAnyPublisher()
