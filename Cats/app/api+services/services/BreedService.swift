@@ -8,7 +8,12 @@
 import Combine
 import Foundation
 
-class BreedService: BaseService {
+protocol BreedServiceProtocol {
+    func getBreeds() -> AnyPublisher<[BreedModel], Error>
+    func getBreeds(by id: String) -> AnyPublisher<[BreedModel], Error>
+}
+
+class BreedService: BaseService, BreedServiceProtocol {
     
     func getBreeds() -> AnyPublisher<[BreedModel], Error> {
         return Deferred {

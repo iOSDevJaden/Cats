@@ -8,6 +8,13 @@
 import Combine
 import Foundation
 
+// Vote Service is not currently used.
+protocol VoteServiceProtocol {
+    func getMyVotes() -> AnyPublisher<[VoteRes], Error>
+    func getMyVotes(vote id: String) -> AnyPublisher<[VoteRes], Error>
+    func deleteVote(vote id: String) -> AnyPublisher<Bool, Error>
+}
+
 class VoteService: BaseService {
     private let voteApi = VoteApi()
     
@@ -36,9 +43,7 @@ class VoteService: BaseService {
         .eraseToAnyPublisher()
     }
     
-    func getMyVotes(
-        vote id: String
-    ) -> AnyPublisher<[VoteRes], Error> {
+    func getMyVotes(vote id: String) -> AnyPublisher<[VoteRes], Error> {
         return Deferred {
             Future { promise in
                 URLSession.shared.dataTaskPublisher(for: self.voteApi.getMyVotes(vote: id))

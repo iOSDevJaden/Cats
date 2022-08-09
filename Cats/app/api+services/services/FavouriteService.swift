@@ -8,7 +8,14 @@
 import Combine
 import Foundation
 
-class FavouriteService: BaseService {
+protocol FavouriteServiceProtocol {
+    func getMyFavourites() -> AnyPublisher<[FavouriteModel], Error>
+    func getMyFavourtie(favourite id: String) -> AnyPublisher<FavouriteModel, Error>
+    func deleteMyFavourite(favourite id: String) -> AnyPublisher<Bool, Error>
+    func saveFavouriteImage(id imageId: String) -> AnyPublisher<Bool, Error>
+}
+
+class FavouriteService: BaseService, FavouriteServiceProtocol {
     
     func getMyFavourites() -> AnyPublisher<[FavouriteModel], Error> {
         return Deferred {
