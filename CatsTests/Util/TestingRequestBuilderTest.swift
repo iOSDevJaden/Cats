@@ -63,21 +63,14 @@ struct UrlRequestBuilder {
 }
 
 class TestingRequestBuilderTest: XCTestCase {
-    private let testOnlyUrl = URL(string: "https://example.com")
+    private let testUrl = URL(string: "https://example.com")
     private let testPath = "/testPath"
     private let testUrlQueryItems = [URLQueryItem(name: "name", value: "value1")]
+    private let testHttpBody = Data()
     
-    func test_urlRequestBuilderMemberUrlIsNil() {
-        let requestBuilder = UrlRequestBuilder()
-        XCTAssertNil(requestBuilder.url)
-    }
+    override func setUp() { }
     
-    func test_urlRequestBuilderMemberUrlIsNotNil() {
-        let requestBuilder = UrlRequestBuilder(testOnlyUrl)
-        XCTAssertNotNil(requestBuilder.url)
-    }
-    
-    func test_urlRequestBuilderSetUrlIsNil() {
+    func test_urlRequestBuilderSetUrlIsNilReturnsTrue() {
         let requestBuilder = UrlRequestBuilder()
             .setUrl(url: nil)
         
@@ -86,24 +79,19 @@ class TestingRequestBuilderTest: XCTestCase {
     
     func test_urlRequestBuilderSetUrlIsNotNil() {
         let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: testOnlyUrl)
+            .setUrl(url: testUrl)
         
         XCTAssertNotNil(requestBuilder.url)
     }
     
     func test_urlRequestBuilderMemberPathIsNil() {
         let requestBuilder = UrlRequestBuilder()
+            .setUrl(url: testUrl)
         
         XCTAssertNil(requestBuilder.path)
     }
     
-    func test_urlRequestBuilderMemberPathIsNotNil() {
-        let requestBuilder = UrlRequestBuilder(nil, testPath)
-        
-        XCTAssertNotNil(requestBuilder.path)
-    }
-    
-    func test_urlRequestBuilderSetPathIsNil() {
+    func test_urlRequestBuilderSetPathIsNilReturnsTrue() {
         let requestBuilder = UrlRequestBuilder()
             .setPath(path: testPath)
         
@@ -112,7 +100,7 @@ class TestingRequestBuilderTest: XCTestCase {
     
     func test_urlRequestBuilderSetUrlSetPathNotNil() {
         let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: testOnlyUrl)
+            .setUrl(url: testUrl)
             .setPath(path: testPath)
         
         XCTAssertNotNil(requestBuilder.url)
@@ -158,4 +146,16 @@ class TestingRequestBuilderTest: XCTestCase {
         XCTAssertFalse(requestBuilder.urlQueryItems.isEmpty)
     }
     
+    func test_urlRequestBuilderHttpBodyIsNil() {
+        let requestBuilder = UrlRequestBuilder()
+        
+        XCTAssertNil(requestBuilder.httpBody)
+    }
+    
+    func test_urlRequestBuilderHttpBodyIsNotNil() {
+        let requestBuilder = UrlRequestBuilder()
+            .setHttpBody(httpBody: testHttpBody)
+        
+        XCTAssertNotNil(requestBuilder.httpBody)
+    }
 }
