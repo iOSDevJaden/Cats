@@ -8,40 +8,50 @@
 import XCTest
 
 struct UrlRequestBuilder {
-    var url: URL?
-    var path: String?
-    var httpMethod: HttpMethod
-    var urlQueryItems: [URLQueryItem]
-    
-    init(_ url: URL? = nil,
-         _ path: String? = nil,
-         _ httpMethod: HttpMethod = .get,
-         _ urlQueryItems: [URLQueryItem] = []) {
-        self.url = url
-        self.path = path
-        self.httpMethod = httpMethod
-        self.urlQueryItems = urlQueryItems
-    }
+    var url: URL? = nil
+    var path: String? = nil
+    var httpMethod: HttpMethod = .get
+    var urlQueryItems: [URLQueryItem] = []
+    var httpBody: Data? = nil
     
     func setUrl(url: URL?) -> Self {
-        UrlRequestBuilder(url, self.path, self.httpMethod)
+        UrlRequestBuilder(url: url,
+                          path: self.path,
+                          httpMethod: .get,
+                          urlQueryItems: self.urlQueryItems,
+                          httpBody: self.httpBody)
     }
     
     func setPath(path: String?) -> Self {
-        UrlRequestBuilder(self.url, path, self.httpMethod)
+        UrlRequestBuilder(url: self.url,
+                          path: path,
+                          httpMethod: .get,
+                          urlQueryItems: self.urlQueryItems,
+                          httpBody: self.httpBody)
     }
     
     func setHttpMethod(method: HttpMethod = .get) -> Self {
-        UrlRequestBuilder(self.url,
-                          self.path,
-                          method)
+        UrlRequestBuilder(url: self.url,
+                          path: path,
+                          httpMethod: method,
+                          urlQueryItems: self.urlQueryItems,
+                          httpBody: self.httpBody)
     }
     
     func setUrlQueryItems(urlQueryItems: [URLQueryItem]) -> Self {
-        UrlRequestBuilder(self.url,
-                          self.path,
-                          self.httpMethod,
-                          urlQueryItems)
+        UrlRequestBuilder(url: self.url,
+                          path: self.path,
+                          httpMethod: self.httpMethod,
+                          urlQueryItems: urlQueryItems,
+                          httpBody: self.httpBody)
+    }
+    
+    func setHttpBody(httpBody: Data?) -> Self {
+        UrlRequestBuilder(url: self.url,
+                          path: self.path,
+                          httpMethod: self.httpMethod,
+                          urlQueryItems: self.urlQueryItems,
+                          httpBody: httpBody)
     }
     
     enum HttpMethod {
