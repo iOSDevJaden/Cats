@@ -10,19 +10,35 @@ import XCTest
 struct UrlRequestBuilder {
     var url: URL?
     var path: String?
+    var httpMethod: HttpMethod
     
     init(_ url: URL? = nil,
-         _ path: String? = nil) {
+         _ path: String? = nil,
+         _ httpMethod: HttpMethod = .get) {
         self.url = url
         self.path = path
+        self.httpMethod = httpMethod
     }
     
     func setUrl(url: URL?) -> Self {
-        UrlRequestBuilder(url, self.path)
+        UrlRequestBuilder(url, self.path, self.httpMethod)
     }
     
     func setPath(path: String?) -> Self {
-        UrlRequestBuilder(self.url, path)
+        UrlRequestBuilder(self.url, path, self.httpMethod)
+    }
+    
+    func setHttpMethod(method: HttpMethod = .get) -> Self {
+        UrlRequestBuilder(self.url,
+                          self.path,
+                          method)
+    }
+    
+    enum HttpMethod {
+        case get
+        case post
+        case delete
+        case put
     }
 }
 
@@ -80,5 +96,29 @@ class TestingRequestBuilderTest: XCTestCase {
         
         XCTAssertNotNil(requestBuilder.url)
         XCTAssertNotNil(requestBuilder.path)
+    }
+    
+    func test_urlRequestBuilderHttpMethodIsGet() {
+        let requestBuilder = UrlRequestBuilder()
+        
+        XCTAssertEqual(UrlRequestBuilder.HttpMethod.get, requestBuilder.httpMethod)
+    }
+    
+    func test_urlRequestBuilderSetHttpMethodIsNotGet() {
+        let requestBuilder = UrlRequestBuilder()
+            .setHttpMethod(method: .post)
+        
+        XCTAssertNotEqual(
+            UrlRequestBuilder.HttpMethod.get,
+            requestBuilder.httpMethod)
+    }
+    
+    func test_urlRequestBuilderSetHttpMethodIsPost() {
+        let requestBuilder = UrlRequestBuilder()
+            .setHttpMethod(method: .post)
+        
+        XCTAssertEqual(
+            UrlRequestBuilder.HttpMethod.post,
+            requestBuilder.httpMethod)
     }
 }
