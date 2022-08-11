@@ -10,6 +10,7 @@ import XCTest
 struct UrlRequestBuilder {
     var url: URL? = nil
     var path: String? = nil
+    var httpHeader: [String: String] = [:]
     var httpMethod: HttpMethod = .get
     var urlQueryItems: [URLQueryItem] = []
     var httpBody: Data? = nil
@@ -17,7 +18,8 @@ struct UrlRequestBuilder {
     func setUrl(url: URL?) -> Self {
         UrlRequestBuilder(url: url,
                           path: self.path,
-                          httpMethod: .get,
+                          httpHeader: self.httpHeader,
+                          httpMethod: self.httpMethod,
                           urlQueryItems: self.urlQueryItems,
                           httpBody: self.httpBody)
     }
@@ -25,7 +27,17 @@ struct UrlRequestBuilder {
     func setPath(path: String?) -> Self {
         UrlRequestBuilder(url: self.url,
                           path: path,
-                          httpMethod: .get,
+                          httpHeader: self.httpHeader,
+                          httpMethod: self.httpMethod,
+                          urlQueryItems: self.urlQueryItems,
+                          httpBody: self.httpBody)
+    }
+    
+    func setHttpHeader(header: [String: String]) -> Self {
+        UrlRequestBuilder(url: self.url,
+                          path: self.path,
+                          httpHeader: header,
+                          httpMethod: self.httpMethod,
                           urlQueryItems: self.urlQueryItems,
                           httpBody: self.httpBody)
     }
@@ -33,6 +45,7 @@ struct UrlRequestBuilder {
     func setHttpMethod(method: HttpMethod = .get) -> Self {
         UrlRequestBuilder(url: self.url,
                           path: path,
+                          httpHeader: self.httpHeader,
                           httpMethod: method,
                           urlQueryItems: self.urlQueryItems,
                           httpBody: self.httpBody)
@@ -41,6 +54,7 @@ struct UrlRequestBuilder {
     func setUrlQueryItems(urlQueryItems: [URLQueryItem]) -> Self {
         UrlRequestBuilder(url: self.url,
                           path: self.path,
+                          httpHeader: self.httpHeader,
                           httpMethod: self.httpMethod,
                           urlQueryItems: urlQueryItems,
                           httpBody: self.httpBody)
@@ -49,6 +63,7 @@ struct UrlRequestBuilder {
     func setHttpBody(httpBody: Data?) -> Self {
         UrlRequestBuilder(url: self.url,
                           path: self.path,
+                          httpHeader: self.httpHeader,
                           httpMethod: self.httpMethod,
                           urlQueryItems: self.urlQueryItems,
                           httpBody: httpBody)
