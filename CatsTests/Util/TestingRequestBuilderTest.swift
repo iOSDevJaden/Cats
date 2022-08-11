@@ -69,7 +69,48 @@ struct UrlRequestBuilder {
                           httpBody: httpBody)
     }
     
-    enum HttpMethod {
+    func getEncodedUrl() throws -> URL {
+        guard let url = url else {
+            throw BuilderError.invalidUrl
+        }
+
+        var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        urlComponent?.queryItems = self.urlQueryItems
+        
+        if let urlComponent = urlComponent?.url {
+            if httpMethod == .get {
+                return urlComponent
+            } else {
+                throw BuilderError.invalidHttpMethod
+            }
+        }
+        
+        return url
+    }
+    
+    func build() -> URLRequest? {
+        guard let url = try? getEncodedUrl() else {
+            return nil
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        
+        self.httpHeader.forEach {
+            urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
+        }
+        
+        urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
+        urlRequest.httpBody = self.httpBody
+        
+        return urlRequest
+    }
+    
+    enum BuilderError: Error {
+        case invalidUrl
+        case invalidHttpMethod
+    }
+    
+    enum HttpMethod: String {
         case get
         case post
         case delete
@@ -80,6 +121,7 @@ struct UrlRequestBuilder {
 class TestingRequestBuilderTest: XCTestCase {
     private let testUrl = URL(string: "https://example.com")
     private let testPath = "/testPath"
+    private let testHeader = ["Content-type": "application/json"]
     private let testUrlQueryItems = [URLQueryItem(name: "name", value: "value1")]
     private let testHttpBody = Data()
     
@@ -135,6 +177,46 @@ class TestingRequestBuilderTest: XCTestCase {
         XCTAssertNotEqual(
             UrlRequestBuilder.HttpMethod.get,
             requestBuilder.httpMethod)
+    }
+    
+    func test_urlRequestBuilderGetEncodedUrlThrowsError() {
+        let requestBuilder = UrlRequestBuilder()
+            .setUrl(url: testUrl)
+            .setHttpMethod(method: .delete)
+            .setUrlQueryItems(urlQueryItems: testUrlQueryItems)
+        
+       XCTAssertThrowsError(try requestBuilder.getEncodedUrl())
+    }
+    
+    func test_urlRequestBuilderSetUrlIsNilAndGetEncodedUrlThrowsError() {
+        let requestBuilder = UrlRequestBuilder()
+            .setUrl(url: nil)
+            .setHttpMethod(method: .get)
+            .setUrlQueryItems(urlQueryItems: testUrlQueryItems)
+        
+       XCTAssertThrowsError(try requestBuilder.getEncodedUrl())
+    }
+    
+    func test_urlRequestBuilderGetEncodedUrlNotThrowsError() {
+        let requestBuilder = UrlRequestBuilder()
+            .setUrl(url: nil)
+            .setHttpMethod(method: .delete)
+            .setUrlQueryItems(urlQueryItems: testUrlQueryItems)
+        
+        XCTAssertThrowsError(try requestBuilder.getEncodedUrl())
+    }
+
+    func test_urlRequestBuilderSetHttpHeaderIsEmptyReturnsTrue() {
+        let requestBuilder = UrlRequestBuilder()
+        
+        XCTAssertTrue(requestBuilder.httpHeader.isEmpty)
+    }
+    
+    func test_urlRequestBuilderSetHttpHeaderIsEmptyReturnsFalse() {
+        let requestBuilder = UrlRequestBuilder()
+            .setHttpHeader(header: testHeader)
+        
+        XCTAssertFalse(requestBuilder.httpHeader.isEmpty)
     }
     
     func test_urlRequestBuilderSetHttpMethodIsPost() {
