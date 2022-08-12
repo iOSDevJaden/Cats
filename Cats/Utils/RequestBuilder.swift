@@ -23,7 +23,7 @@ class RequestBuilder {
     }
     
     // Path
-    public  func setPath(path: String) -> Self {
+    public func setPath(path: String) -> Self {
         self.path = path
         return self
     }
@@ -33,19 +33,19 @@ class RequestBuilder {
         return self
     }
     
-    public  func setPath(path: String, _ urlQueryItems: [URLQueryItem]) -> Self {
+    public func setPath(path: String, _ urlQueryItems: [URLQueryItem]) -> Self {
         self.path = path
         self.urlQueryItems = urlQueryItems
         // setQueryItems(urlQueryItems: queryItems)
         return self
     }
     
-    public   func addPath(_ path: String) -> Self {
+    public func addPath(_ path: String) -> Self {
         self.path.append(path)
         return self
     }
     
-    public  func addPath(_ path: String, _ pathVariable: String) -> Self {
+    public func addPath(_ path: String, _ pathVariable: String) -> Self {
         self.path.append(path + "/" + pathVariable)
         return self
     }
