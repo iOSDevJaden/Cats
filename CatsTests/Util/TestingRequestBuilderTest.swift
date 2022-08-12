@@ -22,6 +22,7 @@ class UrlRequestBuilder {
         self.baseUrl = baseUrl
     }
     
+    // Path
     func setPath(path: String) -> Self {
         self.path = path
         return self
@@ -42,12 +43,19 @@ class UrlRequestBuilder {
         return self
     }
     
+    // Http Headers
+    func setHeaders(headers: [String: String]) -> Self {
+        self.httpHeader = headers
+        return self
+    }
+    
     func build() -> URLRequest {
         let url = self.path.isEmpty ?
         self.baseUrl :
         self.baseUrl.appendingPathComponent(path)
         
         var urlRequest = URLRequest(url: url)
+        urlRequest.allHTTPHeaderFields = self.httpHeader
         
         return urlRequest
     }
@@ -67,6 +75,7 @@ class UrlRequestBuilder {
 
 class TestingRequestBuilderTest: XCTestCase {
     private let url = URL(string: "https://example.com")!
+    private let header: [String: String] = ["Content-Type": "applicaiton/json"]
     
     func test_urlRequestBuilder_initialize_with_proper_url() {
         let request = UrlRequestBuilder(baseUrl: url)
@@ -132,5 +141,36 @@ class TestingRequestBuilderTest: XCTestCase {
             .build()
         
         XCTAssertEqual(request.url?.path, path + somePath + "/" + variable)
+    }
+    
+    func test_urlRequestBuilder_has_empty_httpHeader_without_setHttpHeader() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .build()
+        
+        XCTAssertEqual(request.allHTTPHeaderFields?.isEmpty, true)
+    }
+    
+    func test_urlRequestBuilder_has_empty_httpHeader_with_setHttpHeaeder() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setHeaders(headers: [:])
+            .build()
+        
+        XCTAssertEqual(request.allHTTPHeaderFields?.isEmpty, true)
+    }
+    
+    func test_urlRequestBuilder_has_not_empty_httpHeader_with_setHttpHeaeder() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setHeaders(headers: header)
+            .build()
+        
+        XCTAssertEqual(request.allHTTPHeaderFields?.isEmpty, false)
+    }
+    
+    func test_urlRequestBuilder_has_same_http_header_with_setHttpHeader() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setHeaders(headers: header)
+            .build()
+        
+        XCTAssertEqual(request.allHTTPHeaderFields, header)
     }
 }
