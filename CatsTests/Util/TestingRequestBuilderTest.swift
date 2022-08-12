@@ -68,6 +68,12 @@ class UrlRequestBuilder {
         return self
     }
     
+    // Http Body
+    func setHttpBody(httpBody: Data?) -> Self {
+        self.httpBody = httpBody
+        return self
+    }
+    
     func getURLRequestWithQueryItems(url: URL) -> URLRequest {
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = self.urlQueryItems
@@ -84,6 +90,7 @@ class UrlRequestBuilder {
             var urlRequest = URLRequest(url: url)
             urlRequest.allHTTPHeaderFields = self.httpHeader
             urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
+            urlRequest.httpBody = self.httpBody
             return urlRequest
         }
         return getURLRequestWithQueryItems(url: url)
@@ -108,6 +115,7 @@ class TestingRequestBuilderTest: XCTestCase {
     private let header: [String: String] = ["Content-Type": "applicaiton/json"]
     private let path = "/path"
     private let pathVariable = "1234"
+    private let httpBody = "{\"key\":\"value\"}".data(using: .utf8)
     
     private let queryItem = URLQueryItem(name: "q", value: "query")
     
@@ -250,5 +258,28 @@ class TestingRequestBuilderTest: XCTestCase {
         XCTAssertEqual(request.httpMethod, "POST")
         XCTAssertNotEqual(request.httpMethod, "DELETE")
         XCTAssertNotEqual(request.httpMethod, "PUT")
+    }
+    
+    func test_urlRequestBuilder_has_nil_data_without_setHttpBody() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .build()
+        
+        XCTAssertNil(request.httpBody)
+    }
+    
+    func test_urlRequestBuilder_has_empty_data_with_setHttpBody() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setHttpBody(httpBody: Data())
+            .build()
+        
+        XCTAssertNotNil(request.httpBody)
+    }
+    
+    func test_urlRequestBuilder_has_data_with_setHttpBody() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setHttpBody(httpBody: httpBody)
+            .build()
+        
+        XCTAssertNotNil(request.httpBody)
     }
 }
