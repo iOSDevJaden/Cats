@@ -8,80 +8,80 @@
 import XCTest
 
 class UrlRequestBuilder {
-    var baseUrl: URL
-    var path: String = ""
+    private var baseUrl: URL
+    private var path: String = ""
     
-    var httpHeader: [String: String] = [:]
-    var httpMethod: HttpMethod = .get
-    var httpBody: Data? = nil
+    private var httpHeader: [String: String] = [:]
+    private var httpMethod: HttpMethod = .get
+    private var httpBody: Data? = nil
     
-    var urlQueryItems: [URLQueryItem] = []
+    private var urlQueryItems: [URLQueryItem] = []
     
     // To make it safer Compile time error occured without `baseUrl`
-    init(baseUrl: URL) {
+    public init(baseUrl: URL) {
         self.baseUrl = baseUrl
     }
     
     // Path
-    func setPath(path: String) -> Self {
+    public  func setPath(path: String) -> Self {
         self.path = path
         return self
     }
     
-    func setPath(path: String, _ pathVariable: String) -> Self {
+    public func setPath(path: String, _ pathVariable: String) -> Self {
         self.path = path + "/" + pathVariable
         return self
     }
     
-    func setPath(path: String, _ urlQueryItems: [URLQueryItem]) -> Self {
+    public  func setPath(path: String, _ urlQueryItems: [URLQueryItem]) -> Self {
         self.path = path
         self.urlQueryItems = urlQueryItems
         // setQueryItems(urlQueryItems: queryItems)
         return self
     }
     
-    func addPath(_ path: String) -> Self {
+    public   func addPath(_ path: String) -> Self {
         self.path.append(path)
         return self
     }
     
-    func addPath(_ path: String, _ pathVariable: String) -> Self {
+    public  func addPath(_ path: String, _ pathVariable: String) -> Self {
         self.path.append(path + "/" + pathVariable)
         return self
     }
     
     // Query Items
-    func setQueryItems(urlQueryItems: [URLQueryItem]) -> Self {
+    public func setQueryItems(urlQueryItems: [URLQueryItem]) -> Self {
         self.urlQueryItems = urlQueryItems
         return self
     }
     
     // Http Method
-    func setHttpMethod(_ httpMehtod: HttpMethod) -> Self {
+    public func setHttpMethod(_ httpMehtod: HttpMethod) -> Self {
         self.httpMethod = httpMehtod
         return self
     }
     
     // Http Headers
-    func setHeaders(headers: [String: String]) -> Self {
+    public func setHeaders(headers: [String: String]) -> Self {
         self.httpHeader = headers
         return self
     }
     
     // Http Body
-    func setHttpBody(httpBody: Data?) -> Self {
+    public func setHttpBody(httpBody: Data?) -> Self {
         self.httpBody = httpBody
         return self
     }
     
-    func getURLRequestWithQueryItems(url: URL) -> URLRequest {
+    private func getURLRequestWithQueryItems(url: URL) -> URLRequest {
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = self.urlQueryItems
         
         return URLRequest(url: urlComponents?.url ?? url)
     }
     
-    func build() -> URLRequest {
+    public func build() -> URLRequest {
         let url = self.path.isEmpty ?
         self.baseUrl :
         self.baseUrl.appendingPathComponent(path)
@@ -94,7 +94,7 @@ class UrlRequestBuilder {
             return urlRequest
         }
         return getURLRequestWithQueryItems(url: url)
-            
+        
     }
     
     enum HttpMethod: String {
@@ -102,11 +102,6 @@ class UrlRequestBuilder {
         case post
         case delete
         case put
-    }
-    
-    enum BuilderError: Error {
-        case invalidUrl
-        case invalidHttpMethod
     }
 }
 
@@ -225,7 +220,7 @@ class TestingRequestBuilderTest: XCTestCase {
             .build()
         
         let expectedUrl = "https://example.com/path?q=query"
-            
+        
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
     
@@ -235,7 +230,7 @@ class TestingRequestBuilderTest: XCTestCase {
             .build()
         
         let expectedUrl = "https://example.com/path?q=query"
-            
+        
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
     
