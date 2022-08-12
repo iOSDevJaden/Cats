@@ -29,7 +29,7 @@ final class RequestBuilder {
     }
     
     public func setPath(path: String) -> Self {
-        self.path = path
+        self.path += path
         return self
     }
     
