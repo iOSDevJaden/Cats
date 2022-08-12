@@ -56,6 +56,12 @@ class UrlRequestBuilder {
         return self
     }
     
+    // Http Method
+    func setHttpMethod(_ httpMehtod: HttpMethod) -> Self {
+        self.httpMethod = httpMehtod
+        return self
+    }
+    
     // Http Headers
     func setHeaders(headers: [String: String]) -> Self {
         self.httpHeader = headers
@@ -77,7 +83,7 @@ class UrlRequestBuilder {
         if self.urlQueryItems.isEmpty {
             var urlRequest = URLRequest(url: url)
             urlRequest.allHTTPHeaderFields = self.httpHeader
-            
+            urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
             return urlRequest
         }
         return getURLRequestWithQueryItems(url: url)
@@ -223,5 +229,26 @@ class TestingRequestBuilderTest: XCTestCase {
         let expectedUrl = "https://example.com/path?q=query"
             
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+    }
+    
+    func test_urlRequestBuilder_returns_URLRequest_has_same_httpMethod() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .build()
+        
+        XCTAssertEqual(request.httpMethod, "GET")
+        XCTAssertNotEqual(request.httpMethod, "POST")
+        XCTAssertNotEqual(request.httpMethod, "DELETE")
+        XCTAssertNotEqual(request.httpMethod, "PUT")
+    }
+    
+    func test_urlRequestBuilder_setHttpMethod_returns_URLRequest_with_httpMethod() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setHttpMethod(.post)
+            .build()
+        
+        XCTAssertNotEqual(request.httpMethod, "GET")
+        XCTAssertEqual(request.httpMethod, "POST")
+        XCTAssertNotEqual(request.httpMethod, "DELETE")
+        XCTAssertNotEqual(request.httpMethod, "PUT")
     }
 }
