@@ -33,6 +33,13 @@ class UrlRequestBuilder {
         return self
     }
     
+    func setPath(path: String, _ urlQueryItems: [URLQueryItem]) -> Self {
+        self.path = path
+        self.urlQueryItems = urlQueryItems
+        // setQueryItems(urlQueryItems: queryItems)
+        return self
+    }
+    
     func addPath(_ path: String) -> Self {
         self.path.append(path)
         return self
@@ -43,10 +50,23 @@ class UrlRequestBuilder {
         return self
     }
     
+    // Query Items
+    func setQueryItems(urlQueryItems: [URLQueryItem]) -> Self {
+        self.urlQueryItems = urlQueryItems
+        return self
+    }
+    
     // Http Headers
     func setHeaders(headers: [String: String]) -> Self {
         self.httpHeader = headers
         return self
+    }
+    
+    func getURLRequestWithQueryItems(url: URL) -> URLRequest {
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        urlComponents?.queryItems = self.urlQueryItems
+        
+        return URLRequest(url: urlComponents?.url ?? url)
     }
     
     func build() -> URLRequest {
@@ -54,10 +74,14 @@ class UrlRequestBuilder {
         self.baseUrl :
         self.baseUrl.appendingPathComponent(path)
         
-        var urlRequest = URLRequest(url: url)
-        urlRequest.allHTTPHeaderFields = self.httpHeader
-        
-        return urlRequest
+        if self.urlQueryItems.isEmpty {
+            var urlRequest = URLRequest(url: url)
+            urlRequest.allHTTPHeaderFields = self.httpHeader
+            
+            return urlRequest
+        }
+        return getURLRequestWithQueryItems(url: url)
+            
     }
     
     enum HttpMethod: String {
@@ -169,5 +193,35 @@ class TestingRequestBuilderTest: XCTestCase {
             .build()
         
         XCTAssertEqual(request.allHTTPHeaderFields, header)
+    }
+    
+    func test_urlRequestBuilder_has_no_query_items_returns_plain_URLReqeust() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path)
+            .setQueryItems(urlQueryItems: [/* empty */])
+            .build()
+        
+        XCTAssertEqual(request.url?.path, path)
+    }
+    
+    func test_urlRequestBuilder_has_query_items_setQeuryItems_returns_URLRequest_URL_queryString() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path)
+            .setQueryItems(urlQueryItems: [queryItem])
+            .build()
+        
+        let expectedUrl = "https://example.com/path?q=query"
+            
+        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+    }
+    
+    func test_urlRequestBuilder_has_query_items_setPath_with_URLQueryItems_return_expected_URL() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path, [queryItem])
+            .build()
+        
+        let expectedUrl = "https://example.com/path?q=query"
+            
+        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
 }
