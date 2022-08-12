@@ -7,107 +7,49 @@
 
 import XCTest
 
-struct UrlRequestBuilder {
-    var url: URL? = nil
-    var path: String? = nil
+class UrlRequestBuilder {
+    var baseUrl: URL
+    var path: String = ""
+    
     var httpHeader: [String: String] = [:]
     var httpMethod: HttpMethod = .get
-    var urlQueryItems: [URLQueryItem] = []
     var httpBody: Data? = nil
     
-    func setUrl(url: URL?) -> Self {
-        UrlRequestBuilder(url: url,
-                          path: self.path,
-                          httpHeader: self.httpHeader,
-                          httpMethod: self.httpMethod,
-                          urlQueryItems: self.urlQueryItems,
-                          httpBody: self.httpBody)
+    var urlQueryItems: [URLQueryItem] = []
+    
+    // To make it safer Compile time error occured without `baseUrl`
+    init(baseUrl: URL) {
+        self.baseUrl = baseUrl
     }
     
-    func setPath(path: String?) -> Self {
-        UrlRequestBuilder(url: self.url,
-                          path: path,
-                          httpHeader: self.httpHeader,
-                          httpMethod: self.httpMethod,
-                          urlQueryItems: self.urlQueryItems,
-                          httpBody: self.httpBody)
+    func setPath(path: String) -> Self {
+        self.path = path
+        return self
     }
     
-    func setHttpHeader(header: [String: String]) -> Self {
-        UrlRequestBuilder(url: self.url,
-                          path: self.path,
-                          httpHeader: header,
-                          httpMethod: self.httpMethod,
-                          urlQueryItems: self.urlQueryItems,
-                          httpBody: self.httpBody)
+    func setPath(path: String, _ pathVariable: String) -> Self {
+        self.path = path + "/" + pathVariable
+        return self
     }
     
-    func setHttpMethod(method: HttpMethod = .get) -> Self {
-        UrlRequestBuilder(url: self.url,
-                          path: path,
-                          httpHeader: self.httpHeader,
-                          httpMethod: method,
-                          urlQueryItems: self.urlQueryItems,
-                          httpBody: self.httpBody)
+    func addPath(_ path: String) -> Self {
+        self.path.append(path)
+        return self
     }
     
-    func setUrlQueryItems(urlQueryItems: [URLQueryItem]) -> Self {
-        UrlRequestBuilder(url: self.url,
-                          path: self.path,
-                          httpHeader: self.httpHeader,
-                          httpMethod: self.httpMethod,
-                          urlQueryItems: urlQueryItems,
-                          httpBody: self.httpBody)
+    func addPath(_ path: String, _ pathVariable: String) -> Self {
+        self.path.append(path + "/" + pathVariable)
+        return self
     }
     
-    func setHttpBody(httpBody: Data?) -> Self {
-        UrlRequestBuilder(url: self.url,
-                          path: self.path,
-                          httpHeader: self.httpHeader,
-                          httpMethod: self.httpMethod,
-                          urlQueryItems: self.urlQueryItems,
-                          httpBody: httpBody)
-    }
-    
-    func getEncodedUrl() throws -> URL {
-        guard let url = url else {
-            throw BuilderError.invalidUrl
-        }
-
-        var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)
-        urlComponent?.queryItems = self.urlQueryItems
-        
-        if let urlComponent = urlComponent?.url {
-            if httpMethod == .get {
-                return urlComponent
-            } else {
-                throw BuilderError.invalidHttpMethod
-            }
-        }
-        
-        return url
-    }
-    
-    func build() -> URLRequest? {
-        guard let url = try? getEncodedUrl() else {
-            return nil
-        }
+    func build() -> URLRequest {
+        let url = self.path.isEmpty ?
+        self.baseUrl :
+        self.baseUrl.appendingPathComponent(path)
         
         var urlRequest = URLRequest(url: url)
         
-        self.httpHeader.forEach {
-            urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
-        }
-        
-        urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
-        urlRequest.httpBody = self.httpBody
-        
         return urlRequest
-    }
-    
-    enum BuilderError: Error {
-        case invalidUrl
-        case invalidHttpMethod
     }
     
     enum HttpMethod: String {
@@ -116,143 +58,79 @@ struct UrlRequestBuilder {
         case delete
         case put
     }
+    
+    enum BuilderError: Error {
+        case invalidUrl
+        case invalidHttpMethod
+    }
 }
 
 class TestingRequestBuilderTest: XCTestCase {
-    private let testUrl = URL(string: "https://example.com")
-    private let testPath = "/testPath"
-    private let testHeader = ["Content-type": "application/json"]
-    private let testUrlQueryItems = [URLQueryItem(name: "name", value: "value1")]
-    private let testHttpBody = Data()
+    private let url = URL(string: "https://example.com")!
     
-    override func setUp() { }
-    
-    func test_urlRequestBuilderSetUrlIsNilReturnsTrue() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: nil)
+    func test_urlRequestBuilder_initialize_with_proper_url() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .build()
         
-        XCTAssertNil(requestBuilder.url)
+        XCTAssertEqual(request.url, url)
     }
     
-    func test_urlRequestBuilderSetUrlIsNotNil() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: testUrl)
+    func test_urlRequestBuilder_setPath_path_is_empty() {
+        let request = UrlRequestBuilder(baseUrl: url)
+            .build()
         
-        XCTAssertNotNil(requestBuilder.url)
+        XCTAssertEqual(request.url?.path.isEmpty, true)
     }
     
-    func test_urlRequestBuilderMemberPathIsNil() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: testUrl)
+    func test_urlRequestBuilder_setPath_path_is_not_empty() {
+        let path = "/path"
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path)
+            .build()
         
-        XCTAssertNil(requestBuilder.path)
+        XCTAssertEqual(request.url?.path.isEmpty, false)
+        XCTAssertEqual(request.url?.path, path)
     }
     
-    func test_urlRequestBuilderSetPathIsNilReturnsTrue() {
-        let requestBuilder = UrlRequestBuilder()
-            .setPath(path: testPath)
+    func test_urlRequestBuilder_setPath_with_path_variable() {
+        let path = "/path"
+        let pathVariable = "1234"
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path, pathVariable)
+            .build()
         
-        XCTAssertNotNil(requestBuilder.path)
+        XCTAssertEqual(request.url?.path, path + "/\(pathVariable)")
     }
     
-    func test_urlRequestBuilderSetUrlSetPathNotNil() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: testUrl)
-            .setPath(path: testPath)
+    func test_urlRequestBuilder_setPath_path_is_not_nil() {
+        let path = "/path"
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path)
+            .build()
         
-        XCTAssertNotNil(requestBuilder.url)
-        XCTAssertNotNil(requestBuilder.path)
+        XCTAssertEqual(request.url?.path, path)
     }
     
-    func test_urlRequestBuilderHttpMethodIsGet() {
-        let requestBuilder = UrlRequestBuilder()
+    func test_urlRequestBuilder_addPath_is_appended_path() {
+        let path = "/path"
+        let somePath = "/some"
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path)
+            .addPath(somePath)
+            .build()
         
-        XCTAssertEqual(UrlRequestBuilder.HttpMethod.get, requestBuilder.httpMethod)
+        XCTAssertEqual(request.url?.path, path + somePath)
     }
     
-    func test_urlRequestBuilderSetHttpMethodIsNotGet() {
-        let requestBuilder = UrlRequestBuilder()
-            .setHttpMethod(method: .post)
+    func test_urlRequestBuilder_addPath_with_path_variable() {
+        let path = "/path"
+        let somePath = "/some"
+        let variable = "1234"
+        let request = UrlRequestBuilder(baseUrl: url)
+            .setPath(path: path)
+            .addPath(somePath, variable)
+            .build()
         
-        XCTAssertNotEqual(
-            UrlRequestBuilder.HttpMethod.get,
-            requestBuilder.httpMethod)
-    }
-    
-    func test_urlRequestBuilderGetEncodedUrlThrowsError() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: testUrl)
-            .setHttpMethod(method: .delete)
-            .setUrlQueryItems(urlQueryItems: testUrlQueryItems)
-        
-       XCTAssertThrowsError(try requestBuilder.getEncodedUrl())
-    }
-    
-    func test_urlRequestBuilderSetUrlIsNilAndGetEncodedUrlThrowsError() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: nil)
-            .setHttpMethod(method: .get)
-            .setUrlQueryItems(urlQueryItems: testUrlQueryItems)
-        
-       XCTAssertThrowsError(try requestBuilder.getEncodedUrl())
-    }
-    
-    func test_urlRequestBuilderGetEncodedUrlNotThrowsError() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrl(url: nil)
-            .setHttpMethod(method: .delete)
-            .setUrlQueryItems(urlQueryItems: testUrlQueryItems)
-        
-        XCTAssertThrowsError(try requestBuilder.getEncodedUrl())
-    }
-
-    func test_urlRequestBuilderSetHttpHeaderIsEmptyReturnsTrue() {
-        let requestBuilder = UrlRequestBuilder()
-        
-        XCTAssertTrue(requestBuilder.httpHeader.isEmpty)
-    }
-    
-    func test_urlRequestBuilderSetHttpHeaderIsEmptyReturnsFalse() {
-        let requestBuilder = UrlRequestBuilder()
-            .setHttpHeader(header: testHeader)
-        
-        XCTAssertFalse(requestBuilder.httpHeader.isEmpty)
-    }
-    
-    func test_urlRequestBuilderSetHttpMethodIsPost() {
-        let requestBuilder = UrlRequestBuilder()
-            .setHttpMethod(method: .post)
-        
-        XCTAssertEqual(
-            UrlRequestBuilder.HttpMethod.post,
-            requestBuilder.httpMethod)
-    }
-    
-    func test_urlRequestBuilderQueryItemsIsEmptyReturnsTrue() {
-        let requestBuilder = UrlRequestBuilder()
-        
-        XCTAssertNotNil(requestBuilder.urlQueryItems)
-        XCTAssertTrue(requestBuilder.urlQueryItems.isEmpty)
-    }
-    
-    func test_urlRequestBuilderQueryItemsIsEmptyReturnsFalse() {
-        let requestBuilder = UrlRequestBuilder()
-            .setUrlQueryItems(urlQueryItems: testUrlQueryItems)
-        
-        XCTAssertNotNil(requestBuilder.urlQueryItems)
-        XCTAssertFalse(requestBuilder.urlQueryItems.isEmpty)
-    }
-    
-    func test_urlRequestBuilderHttpBodyIsNil() {
-        let requestBuilder = UrlRequestBuilder()
-        
-        XCTAssertNil(requestBuilder.httpBody)
-    }
-    
-    func test_urlRequestBuilderHttpBodyIsNotNil() {
-        let requestBuilder = UrlRequestBuilder()
-            .setHttpBody(httpBody: testHttpBody)
-        
-        XCTAssertNotNil(requestBuilder.httpBody)
+        XCTAssertEqual(request.url?.path, path + somePath + "/" + variable)
     }
 }
