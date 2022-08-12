@@ -76,6 +76,10 @@ class UrlRequestBuilder {
 class TestingRequestBuilderTest: XCTestCase {
     private let url = URL(string: "https://example.com")!
     private let header: [String: String] = ["Content-Type": "applicaiton/json"]
+    private let path = "/path"
+    private let pathVariable = "1234"
+    
+    private let queryItem = URLQueryItem(name: "q", value: "query")
     
     func test_urlRequestBuilder_initialize_with_proper_url() {
         let request = UrlRequestBuilder(baseUrl: url)
@@ -92,7 +96,6 @@ class TestingRequestBuilderTest: XCTestCase {
     }
     
     func test_urlRequestBuilder_setPath_path_is_not_empty() {
-        let path = "/path"
         let request = UrlRequestBuilder(baseUrl: url)
             .setPath(path: path)
             .build()
@@ -102,8 +105,6 @@ class TestingRequestBuilderTest: XCTestCase {
     }
     
     func test_urlRequestBuilder_setPath_with_path_variable() {
-        let path = "/path"
-        let pathVariable = "1234"
         let request = UrlRequestBuilder(baseUrl: url)
             .setPath(path: path, pathVariable)
             .build()
@@ -112,7 +113,6 @@ class TestingRequestBuilderTest: XCTestCase {
     }
     
     func test_urlRequestBuilder_setPath_path_is_not_nil() {
-        let path = "/path"
         let request = UrlRequestBuilder(baseUrl: url)
             .setPath(path: path)
             .build()
@@ -121,7 +121,6 @@ class TestingRequestBuilderTest: XCTestCase {
     }
     
     func test_urlRequestBuilder_addPath_is_appended_path() {
-        let path = "/path"
         let somePath = "/some"
         let request = UrlRequestBuilder(baseUrl: url)
             .setPath(path: path)
@@ -132,15 +131,13 @@ class TestingRequestBuilderTest: XCTestCase {
     }
     
     func test_urlRequestBuilder_addPath_with_path_variable() {
-        let path = "/path"
         let somePath = "/some"
-        let variable = "1234"
         let request = UrlRequestBuilder(baseUrl: url)
             .setPath(path: path)
-            .addPath(somePath, variable)
+            .addPath(somePath, pathVariable)
             .build()
         
-        XCTAssertEqual(request.url?.path, path + somePath + "/" + variable)
+        XCTAssertEqual(request.url?.path, path + somePath + "/" + pathVariable)
     }
     
     func test_urlRequestBuilder_has_empty_httpHeader_without_setHttpHeader() {
