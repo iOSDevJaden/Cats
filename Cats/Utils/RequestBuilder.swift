@@ -34,14 +34,13 @@ final class RequestBuilder {
     }
     
     public func setPath(path: String, _ pathVariable: String) -> Self {
-        self.path = path + "/" + pathVariable
+        self.path += path + "/" + pathVariable
         return self
     }
     
     public func setPath(path: String, _ urlQueryItems: [URLQueryItem]) -> Self {
-        self.path = path
+        self.path += path
         self.urlQueryItems = urlQueryItems
-        // setQueryItems(urlQueryItems: queryItems)
         return self
     }
     
