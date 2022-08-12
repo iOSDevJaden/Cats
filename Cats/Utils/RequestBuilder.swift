@@ -69,7 +69,9 @@ final class RequestBuilder {
     
     // Http Headers
     public func setHeaders(headers: [String: String]) -> Self {
-        self.httpHeader = headers
+        headers.forEach {
+            self.httpHeader.updateValue($0.value, forKey: $0.key)
+        }
         return self
     }
     
@@ -93,7 +95,11 @@ final class RequestBuilder {
         
         if self.urlQueryItems.isEmpty {
             var urlRequest = URLRequest(url: url)
-            urlRequest.allHTTPHeaderFields = self.httpHeader
+//            urlRequest.allHTTPHeaderFields = self.httpHeader
+            self.httpHeader.forEach {
+                urlRequest.addValue($0.value,
+                                    forHTTPHeaderField: $0.key)
+            }
             urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
             urlRequest.httpBody = self.httpBody
             return urlRequest
