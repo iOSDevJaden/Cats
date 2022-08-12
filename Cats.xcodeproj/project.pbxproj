@@ -70,6 +70,7 @@
 		A1C2CB222882E846008CFFD2 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2CB212882E846008CFFD2 /* UploadViewModel.swift */; };
 		A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5328A17D4C0087C28C /* CatsTests.swift */; };
 		A1E5BF5B28A17D6C0087C28C /* TestingRequestBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */; };
+		A1E6F42728A6E3FD00C06B81 /* BaseApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6F42628A6E3FC00C06B81 /* BaseApiProtocol.swift */; };
 		A1F3375328786D3C0023961C /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3375228786D3C0023961C /* Resources.swift */; };
 		A1F3CBDD2878F67B00710A35 /* CategoryRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3CBDC2878F67B00710A35 /* CategoryRes.swift */; };
 		A1F57F092883B2D100D01E30 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F57F082883B2D100D01E30 /* CacheManager.swift */; };
@@ -157,6 +158,7 @@
 		A1E5BF5128A17D4C0087C28C /* CatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E5BF5328A17D4C0087C28C /* CatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsTests.swift; sourceTree = "<group>"; };
 		A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingRequestBuilderTest.swift; sourceTree = "<group>"; };
+		A1E6F42628A6E3FC00C06B81 /* BaseApiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApiProtocol.swift; sourceTree = "<group>"; };
 		A1F3375228786D3C0023961C /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		A1F3CBDC2878F67B00710A35 /* CategoryRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRes.swift; sourceTree = "<group>"; };
 		A1F57F082883B2D100D01E30 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				A1819695287A785D00C6E7B8 /* FavouriteApi.swift */,
 				A197895D2879FF8400EDB501 /* ImagesApi.swift */,
 				A1819699287A892200C6E7B8 /* VoteApi.swift */,
+				A1E6F42628A6E3FC00C06B81 /* BaseApiProtocol.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -752,6 +755,7 @@
 				A1ACAC702889E9E000B6A788 /* ImageAnalysisRes.swift in Sources */,
 				A18C175D2897FC6D00BC3909 /* UploadImageRes.swift in Sources */,
 				A1F80FC92895CDEE009C21C8 /* ImageModel.swift in Sources */,
+				A1E6F42728A6E3FD00C06B81 /* BaseApiProtocol.swift in Sources */,
 				A126C9D92879576C00CF3CD7 /* BreedApi.swift in Sources */,
 				A1F3CBDD2878F67B00710A35 /* CategoryRes.swift in Sources */,
 				A1C2CB222882E846008CFFD2 /* UploadViewModel.swift in Sources */,
