@@ -7,86 +7,112 @@
 
 import Foundation
 
-class RequestBuilder {
-    private let baseUrl = URL.baseUrl
-    private lazy var path: String = ""
-    private lazy var method: HttpMethod = .get
-    private lazy var headers: [String: String] = [:]
-    private lazy var urlQuery: [URLQueryItem]? = nil
-    private lazy var parameters: Data? = nil
+final class RequestBuilder {
+    private var baseUrl: URL
+    private var path: String = ""
     
-    func setMethod(method: HttpMethod) -> Self {
-        self.method = method
+    private var httpHeader: [String: String] = [:]
+    private var httpMethod: HttpMethod = .get
+    private var httpBody: Data? = nil
+    
+    private var urlQueryItems: [URLQueryItem] = []
+    
+    // To make it safer Compile time error occured without `baseUrl`
+    public init(baseUrl: URL) {
+        self.baseUrl = baseUrl
+    }
+    
+    // Path
+    public func setBasePath(path: String) -> Self {
+        self.path = path + self.path
         return self
     }
     
-    func setPath(path: String) -> Self {
-        self.path = String.apiVersion + path
+    public func setPath(path: String) -> Self {
+        self.path = path
         return self
     }
     
-    func setHeaders(headers: [String: String]) -> Self {
-        self.headers = headers
+    public func setPath(path: String, _ pathVariable: String) -> Self {
+        self.path = path + "/" + pathVariable
         return self
     }
     
-    func setParameters(parameters: Data?) -> Self {
-        self.parameters = parameters
+    public func setPath(path: String, _ urlQueryItems: [URLQueryItem]) -> Self {
+        self.path = path
+        self.urlQueryItems = urlQueryItems
+        // setQueryItems(urlQueryItems: queryItems)
         return self
     }
     
-    func setParameters(urlQuery: [URLQueryItem]) -> Self {
-        self.urlQuery = urlQuery
+    public func addPath(_ path: String) -> Self {
+        self.path.append(path)
         return self
     }
     
-    func build() -> URLRequest {
-        guard var component = URLComponents(
-            url: baseUrl.appendingPathComponent(path),
-            resolvingAgainstBaseURL: true) else {
-            // TODO: - Find Another way to remove fatal Error
-            fatalError("")
-        }
-        
-        if let urlQuery = self.urlQuery {
-            component.queryItems = urlQuery
-        }
-        
-        guard let url =  component.url else {
-            // TODO: - Find Another way to remove fatal Error
-            fatalError("")
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
-        
-        if let httpBody = self.parameters {
-            request.httpBody = httpBody
-        }
-        
-        // Adding Request headers
+    public func addPath(_ path: String, _ pathVariable: String) -> Self {
+        self.path.append(path + "/" + pathVariable)
+        return self
+    }
+    
+    // Query Items
+    public func setQueryItems(urlQueryItems: [URLQueryItem]) -> Self {
+        self.urlQueryItems = urlQueryItems
+        return self
+    }
+    
+    // Http Method
+    public func setHttpMethod(_ httpMehtod: HttpMethod) -> Self {
+        self.httpMethod = httpMehtod
+        return self
+    }
+    
+    // Http Headers
+    public func setHeaders(headers: [String: String]) -> Self {
         headers.forEach {
-            request.addValue(
-                $0.value,
-                forHTTPHeaderField: $0.key
-            )
+            self.httpHeader.updateValue($0.value, forKey: $0.key)
         }
+        return self
+    }
+    
+    // Http Body
+    public func setHttpBody(httpBody: Data?) -> Self {
+        self.httpBody = httpBody
+        return self
+    }
+    
+    private func getURLRequestWithQueryItems(url: URL) -> URLRequest {
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        urlComponents?.queryItems = self.urlQueryItems
         
-        // All the cat api needs the following header.
-        // x-api-key: my-key
-        request.addValue(
-            String.apiKey,
-            forHTTPHeaderField: Const.xApiKey
-        )
+        return URLRequest(url: urlComponents?.url ?? url)
+    }
+    
+    public func build() -> URLRequest {
+        let url = self.path.isEmpty ?
+        self.baseUrl :
+        self.baseUrl.appendingPathComponent(path)
         
-        print(url.debugDescription)
+        if self.urlQueryItems.isEmpty {
+            var urlRequest = URLRequest(url: url)
+//            urlRequest.allHTTPHeaderFields = self.httpHeader
+            self.httpHeader.forEach {
+                urlRequest.addValue($0.value,
+                                    forHTTPHeaderField: $0.key)
+            }
+            urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
+            urlRequest.httpBody = self.httpBody
+            return urlRequest
+        }
+        return getURLRequestWithQueryItems(url: url)
         
-        return request
+    }
+    
+    enum HttpMethod: String {
+        case get
+        case post
+        case delete
+        case put
     }
 }
 
-extension RequestBuilder {
-    enum Const {
-        static let xApiKey = "x-api-key"
-    }
-}
