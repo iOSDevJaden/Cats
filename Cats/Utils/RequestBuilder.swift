@@ -92,19 +92,17 @@ final class RequestBuilder {
         self.baseUrl :
         self.baseUrl.appendingPathComponent(path)
         
-        if self.urlQueryItems.isEmpty {
-            var urlRequest = URLRequest(url: url)
-//            urlRequest.allHTTPHeaderFields = self.httpHeader
-            self.httpHeader.forEach {
-                urlRequest.addValue($0.value,
-                                    forHTTPHeaderField: $0.key)
-            }
-            urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
-            urlRequest.httpBody = self.httpBody
-            return urlRequest
-        }
-        return getURLRequestWithQueryItems(url: url)
+        var urlRequest = self.urlQueryItems.isEmpty ?
+        URLRequest(url: url) :
+        getURLRequestWithQueryItems(url: url)
         
+        self.httpHeader.forEach {
+            urlRequest.addValue($0.value,
+                                forHTTPHeaderField: $0.key)
+        }
+        urlRequest.httpMethod = self.httpMethod.rawValue.uppercased()
+        urlRequest.httpBody = self.httpBody
+        return urlRequest
     }
     
     enum HttpMethod: String {
