@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RequestBuilder {
+final class RequestBuilder {
     private var baseUrl: URL
     private var path: String = ""
     
@@ -23,6 +23,11 @@ class RequestBuilder {
     }
     
     // Path
+    public func setBasePath(path: String) -> Self {
+        self.path = path + self.path
+        return self
+    }
+    
     public func setPath(path: String) -> Self {
         self.path = path
         return self

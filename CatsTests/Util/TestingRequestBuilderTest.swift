@@ -31,6 +31,28 @@ class TestingRequestBuilderTest: XCTestCase {
         XCTAssertEqual(request.url?.path.isEmpty, true)
     }
     
+    func test_urlRequestBuilder_setBasePath_is_empty() {
+        let request = RequestBuilder(baseUrl: url)
+            .setBasePath(path: "")
+            .build()
+        
+        let expected = "https://example.com"
+        
+        XCTAssertEqual(request.url?.path.isEmpty, true)
+        XCTAssertEqual(request.url?.absoluteString, expected)
+    }
+    
+    func test_urlRequestBuilder_setBasePath_is_not_empty() {
+        let request = RequestBuilder(baseUrl: url)
+            .setBasePath(path: "/base")
+            .build()
+        
+        let expected = "https://example.com/base"
+        
+        XCTAssertEqual(request.url?.path.isEmpty, false)
+        XCTAssertEqual(request.url?.absoluteString, expected)
+    }
+    
     func test_urlRequestBuilder_setPath_path_is_not_empty() {
         let request = RequestBuilder(baseUrl: url)
             .setPath(path: path)
@@ -105,6 +127,35 @@ class TestingRequestBuilderTest: XCTestCase {
             .build()
         
         XCTAssertEqual(request.allHTTPHeaderFields, header)
+    }
+    
+    func test_urlRequestBuilder_has_multiple_http_headers() {
+        let anotherHeader: [String: String] = [
+            "Content-Length": "123"
+        ]
+        
+        let request = RequestBuilder(baseUrl: url)
+            .setHeaders(headers: header)
+            .setHeaders(headers: anotherHeader)
+            .build()
+        
+        var expected = header
+        anotherHeader.forEach {
+            expected.updateValue($0.value, forKey: $0.key)
+        }
+        
+        XCTAssertEqual(request.allHTTPHeaderFields, expected)
+    }
+    
+    func test_urlRequestBuilder_has_duplicated_http_headers() {
+        let request = RequestBuilder(baseUrl: url)
+            .setHeaders(headers: header)
+            .setHeaders(headers: header)
+            .setHeaders(headers: header)
+            .build()
+        
+        XCTAssertEqual(request.allHTTPHeaderFields?.isEmpty, false)
+        XCTAssertEqual(request.allHTTPHeaderFields?.count, header.count)
     }
     
     func test_urlRequestBuilder_has_no_query_items_returns_plain_URLReqeust() {
