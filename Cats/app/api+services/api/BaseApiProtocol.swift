@@ -12,12 +12,17 @@ protocol BaseApiProtocol {
 }
 
 extension BaseApiProtocol {
+    private var commonPath: String { String.apiKey }
+    
+    private var commonHeader: [String: String] {
+        let commonHttpHeaderKey = "x-api-key"
+        let commonHttpHeaderValue = String.apiKey
+        return [commonHttpHeaderKey: commonHttpHeaderValue]
+    }
+    
     func getCommonRequestBuilder() -> RequestBuilder {
-        let commonPath = String.apiVersion
-        let commonHttpHeader = ["x-api-key": String.apiKey]
-        
         return RequestBuilder(baseUrl: .baseUrl)
-            .setPath(path: commonPath) // `/v1`
-            .setHeaders(headers: commonHttpHeader)
+            .setPath(path: commonPath)
+            .setHeaders(headers: commonHeader)
     }
 }
