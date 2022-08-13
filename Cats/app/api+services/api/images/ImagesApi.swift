@@ -8,18 +8,19 @@
 import Foundation
 import UIKit
 
-struct ImagesApi {
+struct ImagesApi: BaseApiProtocol {
     /**
      * Search & Itterate through all public images.
      */
     func getSingleImage() -> URLRequest {
-        return RequestBuilder()
-            .setPath(path: "/images/search")
-            .setMethod(method: .get)
+        return getCommonRequestBuilder()
+            .addPath("/images")
+            .addPath("/search")
+            .setHttpMethod(.get)
             .build()
     }
     
-    func getAllPublicImages(limit: Int, page: Int = 0) -> URLRequest {
+    func getMultipleImages(limit: Int, page: Int = 0) -> URLRequest {
         let parameter = ImagesReq(
             size: .small,
             mimeTypes: [.jpg, .png],
@@ -32,10 +33,11 @@ struct ImagesApi {
             breedsIncluded: false
         )
         
-        return RequestBuilder()
-            .setPath(path: "/images/search")
-            .setMethod(method: .get)
-            .setParameters(urlQuery: parameter.getUrlQueries())
+        return getCommonRequestBuilder()
+            .addPath("/images")
+            .addPath("/search")
+            .setHttpMethod(.get)
+            .setQueryItems(urlQueryItems: parameter.getUrlQueries())
             .build()
     }
     
@@ -45,9 +47,9 @@ struct ImagesApi {
      * and any Vote or Favourite matching your account & sub_id will be attached.
      */
     func getImage(by id: String) -> URLRequest {
-        return RequestBuilder()
-            .setPath(path: "/images/\(id))")
-            .setMethod(method: .get)
+        return getCommonRequestBuilder()
+            .setPath(path: "/images", id)
+            .setHttpMethod(.get)
             .build()
     }
     
@@ -60,11 +62,12 @@ struct ImagesApi {
         
         let req = UploadImageReq(imageData: image)
         
-        return RequestBuilder()
-            .setParameters(parameters: req.getHttpBodyData(boundary: boundary))
-            .setPath(path: "/images/upload")
-            .setMethod(method: .post)
+        return getCommonRequestBuilder()
+            .addPath("/images")
+            .addPath("/upload")
             .setHeaders(headers: headers)
+            .setHttpBody(httpBody: req.getHttpBodyData(boundary: boundary))
+            .setHttpMethod(.post)
             .build()
     }
 }
