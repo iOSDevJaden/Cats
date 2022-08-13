@@ -20,7 +20,7 @@ class ImagesService: BaseService {
     func getImages(limit: Int, page: Int) -> AnyPublisher<[ImageModel], Error> {
         return Deferred {
             Future { promise in
-                URLSession.shared.dataTaskPublisher(for: ImagesApi().getAllPublicImages(limit: limit, page: page))
+                URLSession.shared.dataTaskPublisher(for: ImagesApi().getMultipleImages(limit: limit, page: page))
                     .receive(on: DispatchQueue.global(qos: .background))
                     .subscribe(on: DispatchQueue.main)
                     .map(\.data)
