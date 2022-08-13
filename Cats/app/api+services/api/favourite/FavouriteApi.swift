@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct FavouriteApi {
+struct FavouriteApi: BaseApiProtocol {
     /**
      * Get the Favourites belonging to your account, with the
      * option to filter by ‘sub_id’ used when creating them.
      */
     func getMyFavourites() -> URLRequest {
-        return RequestBuilder()
-            .setPath(path: "/favourites")
-            .setMethod(method: .get)
+        return getCommonRequestBuilder()
+            .addPath("/favourites")
+            .setHttpMethod(.get )
             .build()
     }
     
@@ -23,9 +23,9 @@ struct FavouriteApi {
      * Get one specific Favourite belonging to your Account
      */
     func getMyFavourites(favourite id: String) -> URLRequest {
-        return RequestBuilder()
-            .setPath(path: "/favourites/\(id)")
-            .setMethod(method: .get)
+        return getCommonRequestBuilder()
+            .addPath("/favourites", id)
+            .setHttpMethod(.get)
             .build()
     }
     
@@ -33,9 +33,9 @@ struct FavouriteApi {
      * Get one specific Favourite belonging to your Account
      */
     func deleteFavourite(favourite id: String) -> URLRequest {
-        return RequestBuilder()
-            .setPath(path: "/favourites/\(id)")
-            .setMethod(method: .delete)
+        return getCommonRequestBuilder()
+            .setPath(path: "/favourites", id)
+            .setHttpMethod(.delete)
             .build()
     }
     
@@ -47,13 +47,14 @@ struct FavouriteApi {
         let header = [
             "Content-Type": "application/json",
         ]
+        
         let req = SaveFavouriteImageRequest(imageId: id)
         
-        return RequestBuilder()
+        return getCommonRequestBuilder()
             .setPath(path: "/favourites")
             .setHeaders(headers: header)
-            .setParameters(parameters: req.getJson())
-            .setMethod(method: .post)
+            .setHttpBody(httpBody: req.getJson())
+            .setHttpMethod(.post)
             .build()
     }
 }
