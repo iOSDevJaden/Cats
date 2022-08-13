@@ -212,7 +212,7 @@
 		A126C9D6287953DC00CF3CD7 /* api */ = {
 			isa = PBXGroup;
 			children = (
-				A126C9D82879576C00CF3CD7 /* BreedApi.swift */,
+				A1C9331228A72E77002B2A67 /* breed */,
 				A1819695287A785D00C6E7B8 /* FavouriteApi.swift */,
 				A197895D2879FF8400EDB501 /* ImagesApi.swift */,
 				A1E6F42628A6E3FC00C06B81 /* BaseApiProtocol.swift */,
@@ -532,6 +532,14 @@
 				A1C2CB212882E846008CFFD2 /* UploadViewModel.swift */,
 			);
 			path = upload;
+			sourceTree = "<group>";
+		};
+		A1C9331228A72E77002B2A67 /* breed */ = {
+			isa = PBXGroup;
+			children = (
+				A126C9D82879576C00CF3CD7 /* BreedApi.swift */,
+			);
+			path = breed;
 			sourceTree = "<group>";
 		};
 		A1E5BF5228A17D4C0087C28C /* CatsTests */ = {
