@@ -7,21 +7,22 @@
 
 import Foundation
 
-struct BreedApi {
+struct BreedApi: BaseApiProtocol {
     func getBreedList() -> URLRequest {
-        return RequestBuilder()
-            .setPath(path: "/breeds")
-            .setMethod(method: .get)
+        return getCommonRequestBuilder()
+            .addPath("/breeds")
+            .setHttpMethod(.get)
             .build()
     }
     
     func getBreedList(id: String) -> URLRequest {
         let parameter = BreedReq(q: id)
         
-        return RequestBuilder()
-            .setPath(path: "/breeds/search")
-            .setParameters(urlQuery: parameter.getUrlQuery())
-            .setMethod(method: .get)
+        return getCommonRequestBuilder()
+            .addPath("/breeds")
+            .addPath("/search")
+            .setQueryItems(urlQueryItems: parameter.getUrlQuery())
+            .setHttpMethod(.get)
             .build()
     }
 }
