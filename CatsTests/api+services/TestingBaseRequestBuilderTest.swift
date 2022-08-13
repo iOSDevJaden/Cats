@@ -87,27 +87,6 @@ class TestingBaseRequestBuilderTest: XCTestCase {
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
 
-    func test_commonRequestBuiler_returns_URLReqeust_for_breed_api() {
-        let requestBuilder = baseApi.getCommonRequestBuilder()
-            .addPath("/breeds")
-            .addPath("/search", "id")
-            .setQueryItems(urlQueryItems: [URLQueryItem(name: "name", value: "value")])
-            .setHttpMethod(.get)
-            .build()
-
-        let expectedUrl = "https://example.com/api/version/breeds/search/id?name=value"
-        XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
-        
-    
-        let expectedHttpMethod = "GET"
-        XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
-        
-        let expectedHttpHeader = [
-            "x-api-key": "1234",
-        ]
-        XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
-        XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
-    }
 }
 
 // Helper funciton(s)
