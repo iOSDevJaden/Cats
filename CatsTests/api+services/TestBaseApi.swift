@@ -22,4 +22,3 @@ struct TestBaseApi: BaseApiProtocol {
             .setHeaders(headers: defaultHeader)
     }
 }
-

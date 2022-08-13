@@ -67,6 +67,7 @@
 		A1BF171028968E4B0077AB1E /* FavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BF170F28968E4B0077AB1E /* FavouriteModel.swift */; };
 		A1C2CB202882E83F008CFFD2 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2CB1F2882E83F008CFFD2 /* UploadView.swift */; };
 		A1C2CB222882E846008CFFD2 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2CB212882E846008CFFD2 /* UploadViewModel.swift */; };
+		A1C9331128A72960002B2A67 /* TestBreedApiTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9331028A72960002B2A67 /* TestBreedApiTesting.swift */; };
 		A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5328A17D4C0087C28C /* CatsTests.swift */; };
 		A1E5BF5B28A17D6C0087C28C /* TestingRequestBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */; };
 		A1E6F42728A6E3FD00C06B81 /* BaseApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6F42628A6E3FC00C06B81 /* BaseApiProtocol.swift */; };
@@ -155,6 +156,7 @@
 		A1BF170F28968E4B0077AB1E /* FavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteModel.swift; sourceTree = "<group>"; };
 		A1C2CB1F2882E83F008CFFD2 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		A1C2CB212882E846008CFFD2 /* UploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
+		A1C9331028A72960002B2A67 /* TestBreedApiTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBreedApiTesting.swift; sourceTree = "<group>"; };
 		A1E5BF5128A17D4C0087C28C /* CatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E5BF5328A17D4C0087C28C /* CatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsTests.swift; sourceTree = "<group>"; };
 		A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingRequestBuilderTest.swift; sourceTree = "<group>"; };
@@ -545,7 +547,7 @@
 		A1E6F42A28A70D4000C06B81 /* baseApi */ = {
 			isa = PBXGroup;
 			children = (
-				A1E6F42B28A70D5900C06B81 /* TestBaseApi.swift */,
+				A1C9331028A72960002B2A67 /* TestBreedApiTesting.swift */,
 			);
 			path = baseApi;
 			sourceTree = "<group>";
@@ -599,6 +601,7 @@
 		A1F70DC528A17FEA00AB0DE9 /* api+services */ = {
 			isa = PBXGroup;
 			children = (
+				A1E6F42B28A70D5900C06B81 /* TestBaseApi.swift */,
 				A1E6F42A28A70D4000C06B81 /* baseApi */,
 				A1E6F42828A6FC9600C06B81 /* TestingBaseRequestBuilderTest.swift */,
 			);
@@ -786,6 +789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E5BF5B28A17D6C0087C28C /* TestingRequestBuilderTest.swift in Sources */,
+				A1C9331128A72960002B2A67 /* TestBreedApiTesting.swift in Sources */,
 				A1E6F42C28A70D5900C06B81 /* TestBaseApi.swift in Sources */,
 				A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */,
 				A1E6F42928A6FC9600C06B81 /* TestingBaseRequestBuilderTest.swift in Sources */,
