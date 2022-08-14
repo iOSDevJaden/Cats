@@ -12,6 +12,10 @@ protocol BaseApiProtocol {
 }
 
 extension BaseApiProtocol {
+    var subId: String {
+        return .userId
+    }
+    
     private var commonPath: String { String.apiVersion }
     
     private var commonHeader: [String: String] {

@@ -13,7 +13,7 @@ struct UploadImageReq: Codable {
     
     private var httpBody = Data()
     
-    init(imageData: Data, subId: String = UserInfoCache.shared.id) {
+    init(imageData: Data, subId: String) {
         self.imageData = imageData
         self.subId = subId
     }

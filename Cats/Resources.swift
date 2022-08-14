@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     static var urlString: String {
@@ -27,5 +28,12 @@ extension String {
             fatalError("Service API Version could not find in plist.")
         }
         return "/\(apiVersion)"
+    }
+    
+    static var userId: String {
+        guard let deviceId = UIDevice.current.identifierForVendor?.uuidString else {
+            fatalError("Device ID for vendor Error")
+        }
+        return deviceId
     }
 }

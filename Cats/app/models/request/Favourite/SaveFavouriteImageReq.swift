@@ -1,5 +1,5 @@
 //
-//  SaveFavouriteImageRequest.swift
+//  SaveFavouriteImageReq.swift
 //  Cats
 //
 //  Created by 김태호 on 2022/07/31.
@@ -7,14 +7,11 @@
 
 import Foundation
 
-struct SaveFavouriteImageRequest: Codable {
+struct SaveFavouriteImageReq: Codable {
     let imageId: String
     let subId: String
     
-    init(
-        imageId: String,
-        subId: String = UserInfoCache.shared.id
-    ) {
+    init(imageId: String, subId: String) {
         self.imageId = imageId
         self.subId = subId
     }

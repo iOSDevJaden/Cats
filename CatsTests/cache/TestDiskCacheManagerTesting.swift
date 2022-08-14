@@ -12,34 +12,6 @@ class TestDiskCacheManagerTesting: XCTestCase {
     let diskFileManager = DiskCache.shared
     let fileDirectory = FileManager.default.temporaryDirectory
     
-    func test_disk_file_manager_tmp_url_dir_is_writable_return_true() {
-        let filePath = fileDirectory
-        
-        let isWritable = diskFileManager.isWritable(filePath)
-        XCTAssertTrue(isWritable)
-    }
-    
-    func test_disk_file_manager_tmp_str_dir_is_writable_return_true() {
-        let filePath = fileDirectory
-        
-        let isWritable = diskFileManager.isWritable(filePath)
-        XCTAssertTrue(isWritable)
-    }
-    
-    func test_disk_file_manager_tmp_url_dir_is_readable_return_true() {
-        let filePath = fileDirectory
-        
-        let isReadable = diskFileManager.isReadable(filePath)
-        XCTAssertTrue(isReadable)
-    }
-    
-    func test_disk_file_manager_tmp_str_dir_is_readable_return_true() {
-        let filePath = fileDirectory.path
-        
-        let isReadable = diskFileManager.isReadable(filePath)
-        XCTAssertTrue(isReadable)
-    }
-    
     func test_disk_file_manager_tmp_str_dir_wirte_read_data() {
         let dataContent = "Hello world".data(using: .utf8)
         let filePath = fileDirectory.appendingPathComponent("test")

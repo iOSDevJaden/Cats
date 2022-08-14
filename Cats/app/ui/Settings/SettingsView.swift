@@ -51,9 +51,7 @@ struct SettingsView: View {
             
             Section(
                 content: {
-                    Stepper("Number of Picture \(vm.numberOfPicture)",
-                            value: $vm.numberOfPicture,
-                            in: 15 ... 30)
+                    // TODO: Make stepper
                 },
                 header: {
                     Text("Number of Cat Pictures per Page")
