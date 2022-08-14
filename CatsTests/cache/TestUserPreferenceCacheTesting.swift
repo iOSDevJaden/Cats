@@ -14,6 +14,19 @@ class UserPreferences {
     
     private init() { }
     
+    func getUserProfileImage() -> Data {
+        let key = UserDefaultKeys.userDefaultProfileImageKey
+        guard let profileImageData = userDefaults.data(forKey: key) else {
+            return Consts.userDefaultProfileImage
+        }
+        return profileImageData
+    }
+    
+    func setUserProfileImage(imageData: Data?) {
+        let key = UserDefaultKeys.userDefaultProfileImageKey
+        userDefaults.set(imageData, forKey: key)
+    }
+    
     func getUserProfileId() -> String {
         let key = UserDefaultKeys.userDefaultProfileIdKey
         guard let userProfileId = userDefaults.string(forKey: key) else {
@@ -30,7 +43,7 @@ class UserPreferences {
     // if no data saved ever, returns 0
     func getCurrentSearchImagePage() -> Int {
         let key = UserDefaultKeys.userDefaultCurrentSearchImagePage
-        return userDefaults.integer(forKey: key)
+        return userDefaults.integer(forKey: key) 
     }
     
     // MARK: - Making increased page value inside the function removed since it reflects business logic.
@@ -57,13 +70,14 @@ class UserPreferences {
     
     func resetUserSettings() {
         setUserProfileId(profileId: Consts.userDefaultId)
+        setUserProfileImage(imageData: Consts.userDefaultProfileImage)
         setCurrentSearchImagePage(Consts.userDefaultCurrentSearchImagePage)
         setCurrentNumberOfImagePerPage(Consts.userDefaultNumberOfImagePerPage)
     }
     
     enum Consts {
         static let userDefaultId = "User Default Id"
-        static let userDefaultProfileImage = "cat-paw"
+        static let userDefaultProfileImage = "cat-paw".data(using: .utf8)!
         static let userDefaultNumberOfImagePerPage = 15
         static let userDefaultCurrentSearchImagePage = 0
     }
@@ -82,6 +96,22 @@ class TestUserPreferenceCacheTesting: XCTestCase {
 
     override func setUp() {
         userPreferences.resetUserSettings()
+    }
+    
+    func test_getUserProfileImage_returns_image_data() {
+        let expected = "cat-paw".data(using: .utf8)!
+        
+        let userProfileImageData = userPreferences.getUserProfileImage()
+        XCTAssertEqual(userProfileImageData, expected)
+    }
+    
+    func test_setUserProfileImage_returns_expected_value() {
+        let expected = "new-cat-paw-image".data(using: .utf8)
+        
+        userPreferences.setUserProfileImage(imageData: "new-cat-paw-image".data(using: .utf8))
+        
+        let userProfileImageData = userPreferences.getUserProfileImage()
+        XCTAssertEqual(userProfileImageData, expected)
     }
     
     func test_getUserProfileId_returns_expected_value() {
