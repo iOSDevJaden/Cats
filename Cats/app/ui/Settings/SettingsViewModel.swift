@@ -8,34 +8,26 @@
 import Foundation
 
 class SettingsViewModel: ObservableObject {
-    private let userInfoCahce = UserInfoCache.shared
-    
-    @Published var numberOfPicture = 15
+    private let userPreference = UserPreferences.shared
     
     func getUserId() -> String {
-        return userInfoCahce.id
+        return userPreference.getUserProfileId()
     }
     
     // Current Page
     func getCurrentPage() -> Int {
-        return userInfoCahce.getCurrentPage()
+        return userPreference.getCurrentSearchImagePage()
     }
     
     func setCurrentPage(_ page: Int) {
-        userInfoCahce.setCurrentPage(page: page)
-    }
-    
-    // Maximum Page
-    // Will be deprecated.
-    func getMaximumPage() -> Float {
-        return Float(userInfoCahce.getMaximumPage())
+        userPreference.setCurrentSearchImagePage(page)
     }
     
     func getNumberOfImage() -> Int {
-        return userInfoCahce.getNumberOfImage()
+        return userPreference.getCurrentNumberOfImagePerPage()
     }
     
-    func setNumberOfImage(_ page: Int) {
-        userInfoCahce.setNumberOfImage(page)
+    func setNumberOfImage(_ numberOfImage: Int) {
+        userPreference.setCurrentNumberOfImagePerPage(numberOfImage)
     }
 }
