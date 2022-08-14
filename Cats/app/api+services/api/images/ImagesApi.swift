@@ -60,7 +60,7 @@ struct ImagesApi: BaseApiProtocol {
             "Content-Type": "multipart/form-data; boundary=\(boundary)",
         ]
         
-        let req = UploadImageReq(imageData: image)
+        let req = UploadImageReq(imageData: image, subId: subId)
         
         return getCommonRequestBuilder()
             .addPath("/images")

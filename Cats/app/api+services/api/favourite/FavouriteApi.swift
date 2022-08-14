@@ -48,7 +48,7 @@ struct FavouriteApi: BaseApiProtocol {
             "Content-Type": "application/json",
         ]
         
-        let req = SaveFavouriteImageRequest(imageId: id)
+        let req = SaveFavouriteImageReq(imageId: id, subId: subId)
         
         return getCommonRequestBuilder()
             .setPath(path: "/favourites")
