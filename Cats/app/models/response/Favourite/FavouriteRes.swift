@@ -33,7 +33,7 @@ struct FavouriteRes: Codable, Identifiable {
     static let staticFavouriteRes = FavouriteRes(
         id: 100052852,
         imageId: "2gh",
-        subId: UserInfoCache.shared.id,
+        subId: "user default id",
         createdAt: "2022-07-30T21:54:58.000Z",
         image: .staticImageModel)
 #endif
