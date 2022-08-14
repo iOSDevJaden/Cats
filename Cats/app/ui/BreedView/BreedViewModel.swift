@@ -10,51 +10,62 @@ import Foundation
 
 class BreedViewModel: BaseViewModel, ObservableObject {
     private lazy var breedService = BreedService()
-    
-    private var diskCache = DiskCache.shared
+    private let diskCache = DiskCache.shared
     
     @Published var breeds: [BreedModel] = []
     
-    func getBreeds() {
-        if checkCacheExists() {
-            self.breeds = readData(from: Const.breedsKey)
+    func getBreedsData() {
+        if cacheFileExists() {
+            setBreedsModels()
         } else {
-            getAllBreeds()
+            fetchBreedsData()
         }
     }
     
-    private func checkCacheExists() -> Bool {
-        return diskCache.isNotEmptyPath(at: Const.breedsKey) &&
-        diskCache.getDataFromFile(name: Const.breedsKey) != nil
-    }
-    
-    private func getAllBreeds() {
+    private func fetchBreedsData() {
         breedService.getBreeds()
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .replaceError(with: [])
             .sink { [weak self] breeds in
                 self?.breeds = breeds
+                self?.saveBreedModelsDataCache(breeds)
             }
             .store(in: &cancellable)
     }
     
-    private func readData(from path: String) -> [BreedModel] {
-        guard let data = diskCache.getDataFromFile(name: path),
-              let breedRes = try? JSONDecoder().decode([BreedModel].self, from: data)
-        else {
-            return []
-        }
-        return breedRes
+    private func cacheFileExists() -> Bool {
+        return diskCache.fileExists(Const.filePathUrl)
     }
     
-    private func writeData(data: Data) {
-        diskCache.setData(data: data, name: Const.breedsKey)
+    private func getCacheFileData() -> Data? {
+        return diskCache.readData(Const.filePathUrl)
+    }
+    
+    private func setBreedsModels() {
+        guard
+            let breedsData = getCacheFileData(),
+            let breedModels = try? JSONDecoder().decode([BreedModel].self, from: breedsData)
+        else { return }
+        self.breeds = breedModels
+    }
+    
+    @discardableResult
+    private func saveBreedModelsDataCache(_ breeds: [BreedModel]) -> Bool {
+        guard
+            let breedsData = try? JSONEncoder().encode(breeds)
+        else {
+            return false
+        }
+        return diskCache.writeData(at: Const.filePathUrl, content: breedsData)
     }
 }
 
 extension BreedViewModel {
-    enum Const {
-        static let breedsKey = "BreedsModels"
+    private enum Const {
+        static var filePathUrl: URL {
+            let breedsKey = "breeds-models"
+            return FileManager.default.temporaryDirectory.appendingPathComponent(breedsKey)
+        }
     }
 }
