@@ -69,6 +69,7 @@
 		A1C2CB222882E846008CFFD2 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2CB212882E846008CFFD2 /* UploadViewModel.swift */; };
 		A1C9331128A72960002B2A67 /* TestBreedApiTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9331028A72960002B2A67 /* TestBreedApiTesting.swift */; };
 		A1C9331528A72F3B002B2A67 /* TestImageApiTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9331428A72F3B002B2A67 /* TestImageApiTesting.swift */; };
+		A1CDFD9228A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CDFD9128A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift */; };
 		A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5328A17D4C0087C28C /* CatsTests.swift */; };
 		A1E5BF5B28A17D6C0087C28C /* TestingRequestBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */; };
 		A1E6F42728A6E3FD00C06B81 /* BaseApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6F42628A6E3FC00C06B81 /* BaseApiProtocol.swift */; };
@@ -161,6 +162,7 @@
 		A1C2CB212882E846008CFFD2 /* UploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
 		A1C9331028A72960002B2A67 /* TestBreedApiTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBreedApiTesting.swift; sourceTree = "<group>"; };
 		A1C9331428A72F3B002B2A67 /* TestImageApiTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestImageApiTesting.swift; sourceTree = "<group>"; };
+		A1CDFD9128A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserPreferenceCacheTesting.swift; sourceTree = "<group>"; };
 		A1E5BF5128A17D4C0087C28C /* CatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E5BF5328A17D4C0087C28C /* CatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsTests.swift; sourceTree = "<group>"; };
 		A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingRequestBuilderTest.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 			children = (
 				A1EDFF1828A7755900A76C45 /* TestCacheManagerTesting.swift */,
 				A15A138A28A78085001309E4 /* TestDiskCacheManagerTesting.swift */,
+				A1CDFD9128A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift */,
 			);
 			path = cache;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 				A1EDFF0F28A76C9C00A76C45 /* TestFavouriteApiTesting.swift in Sources */,
 				A1EDFF1928A7755900A76C45 /* TestCacheManagerTesting.swift in Sources */,
 				A1E6F42928A6FC9600C06B81 /* TestingBaseRequestBuilderTest.swift in Sources */,
+				A1CDFD9228A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift in Sources */,
 				A1C9331528A72F3B002B2A67 /* TestImageApiTesting.swift in Sources */,
 				A15A138B28A78085001309E4 /* TestDiskCacheManagerTesting.swift in Sources */,
 			);
