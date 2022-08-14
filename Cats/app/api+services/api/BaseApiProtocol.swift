@@ -12,7 +12,7 @@ protocol BaseApiProtocol {
 }
 
 extension BaseApiProtocol {
-    private var commonPath: String { String.apiKey }
+    private var commonPath: String { String.apiVersion }
     
     private var commonHeader: [String: String] {
         let commonHttpHeaderKey = "x-api-key"
