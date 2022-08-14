@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import Cats
 
 class UserPreferences {
     static let shared = UserPreferences()
@@ -14,6 +13,19 @@ class UserPreferences {
     private let userDefaults = UserDefaults.standard
     
     private init() { }
+    
+    func getUserProfileId() -> String {
+        let key = UserDefaultKeys.userDefaultProfileIdKey
+        guard let userProfileId = userDefaults.string(forKey: key) else {
+            return Consts.userDefaultId
+        }
+        return userProfileId
+    }
+    
+    func setUserProfileId(profileId: String) {
+        let key = UserDefaultKeys.userDefaultProfileIdKey
+        userDefaults.set(profileId, forKey: key)
+    }
     
     // if no data saved ever, returns 0
     func getCurrentSearchImagePage() -> Int {
@@ -34,13 +46,20 @@ class UserPreferences {
     
     func resetUserSettings() {
         setCurrentSearchImagePage(Consts.userDefaultCurrentSearchImagePage)
+        setUserProfileId(profileId: Consts.userDefaultId)
     }
     
     enum Consts {
+        static let userDefaultId = "User Default Id"
+        static let userDefaultProfileImage = "cat-paw"
+        static let userDefaultNumberOfImagePerPage = 15
         static let userDefaultCurrentSearchImagePage = 0
     }
     
     enum UserDefaultKeys {
+        static let userDefaultProfileIdKey = "User Default ID Key"
+        static let userDefaultProfileImageKey = "User Default Profile Image Key"
+        static let userDefaultNumberOfImagePerPage = "User Default Number Of Image Per Page Key"
         static let userDefaultCurrentSearchImagePage = "User Default Current Search Image Page Key"
     }
 }
@@ -51,6 +70,22 @@ class TestUserPreferenceCacheTesting: XCTestCase {
 
     override func setUp() {
         userPreferences.resetUserSettings()
+    }
+    
+    func test_getUserProfileId_returns_expected_value() {
+        let expected = "User Default Id"
+        
+        let userProfileId = userPreferences.getUserProfileId()
+        XCTAssertEqual(userProfileId, expected)
+    }
+    
+    func test_setUserProfileId_returns_expected_value() {
+        let expected = "New User Default Id"
+        
+        userPreferences.setUserProfileId(profileId: "New User Default Id")
+        
+        let userProfileId = userPreferences.getUserProfileId()
+        XCTAssertEqual(userProfileId, expected)
     }
     
     func test_getCurrentSearchImagePage_returns_expected_value() {
