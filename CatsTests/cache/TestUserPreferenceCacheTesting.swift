@@ -44,9 +44,20 @@ class UserPreferences {
         userDefaults.set(page, forKey: key)
     }
     
+    func getCurrentNumberOfImagePerPage() -> Int {
+        let key = UserDefaultKeys.userDefaultNumberOfImagePerPage
+        return userDefaults.integer(forKey: key)
+    }
+    
+    func setCurrentNumberOfImagePerPage(_ numberOfImage: Int) {
+        let key = UserDefaultKeys.userDefaultNumberOfImagePerPage
+        userDefaults.set(numberOfImage, forKey: key)
+    }
+    
     func resetUserSettings() {
-        setCurrentSearchImagePage(Consts.userDefaultCurrentSearchImagePage)
         setUserProfileId(profileId: Consts.userDefaultId)
+        setCurrentSearchImagePage(Consts.userDefaultCurrentSearchImagePage)
+        setCurrentNumberOfImagePerPage(Consts.userDefaultNumberOfImagePerPage)
     }
     
     enum Consts {
@@ -114,5 +125,21 @@ class TestUserPreferenceCacheTesting: XCTestCase {
         
         let userCurrentPage = userPreferences.getCurrentSearchImagePage()
         XCTAssertEqual(userCurrentPage, expected)
+    }
+    
+    func test_getCurrentNumberOfImagePerPage_returns_default_value() {
+        let expected = 15
+        
+        let numberOfImage = userPreferences.getCurrentNumberOfImagePerPage()
+        XCTAssertEqual(numberOfImage, expected)
+    }
+    
+    func test_setCurrentNumberOfImagePerPage_returns_default_value() {
+        let expected = 50
+        
+        userPreferences.setCurrentNumberOfImagePerPage(50)
+        
+        let numberOfImage = userPreferences.getCurrentNumberOfImagePerPage()
+        XCTAssertEqual(numberOfImage, expected)
     }
 }
