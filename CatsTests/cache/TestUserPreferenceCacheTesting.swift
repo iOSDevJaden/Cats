@@ -33,11 +33,12 @@ class UserPreferences {
         return userDefaults.integer(forKey: key)
     }
     
-    func setCurrentSearchImagePage() {
+    // MARK: - Making increased page value inside the function removed since it reflects business logic.
+    /* func setCurrentSearchImagePage() {
         let key = UserDefaultKeys.userDefaultCurrentSearchImagePage
         let increasedPage = getCurrentSearchImagePage() + 1
         userDefaults.set(increasedPage, forKey: key)
-    }
+    } */
     
     func setCurrentSearchImagePage(_ page: Int) {
         let key = UserDefaultKeys.userDefaultCurrentSearchImagePage
@@ -111,7 +112,7 @@ class TestUserPreferenceCacheTesting: XCTestCase {
         var expected = 0
         for _ in (0 ..< Int.random(in: 0...50)) {
             expected += 1
-            userPreferences.setCurrentSearchImagePage()
+            userPreferences.setCurrentSearchImagePage(expected)
         }
         
         let userCurrentPage = userPreferences.getCurrentSearchImagePage()
