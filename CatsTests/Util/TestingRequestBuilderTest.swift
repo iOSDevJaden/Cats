@@ -9,8 +9,8 @@ import XCTest
 @testable import Cats
 
 class TestingRequestBuilderTest: XCTestCase {
-    private let url = URL(string: "https://example.com")!
-    private let header: [String: String] = ["Content-Type": "applicaiton/json"]
+    private let url = Const.baseUrl!
+    private let header: [String: String] = [Const.contentType: Const.applicationJson]
     private let path = "/path"
     private let pathVariable = "1234"
     private let httpBody = "{\"key\":\"value\"}".data(using: .utf8)
