@@ -21,13 +21,13 @@ class TestFavouriteApiTesting: XCTestCase {
             .setHttpMethod(.get)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/favourites"
+        let expectedUrl = "https://api.thecatapi.com/v1/favourites"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
@@ -39,14 +39,14 @@ class TestFavouriteApiTesting: XCTestCase {
             .addPath("/favourites", "my-favourite-image")
             .setHttpMethod(.get)
             .build()
-        
-        let expectedUrl = "https://example.com/api/version/favourites/my-favourite-image"
+    
+        let expectedUrl = "https://api.thecatapi.com/v1/favourites/my-favourite-image"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
@@ -59,13 +59,13 @@ class TestFavouriteApiTesting: XCTestCase {
             .setHttpMethod(.delete)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/favourites/my-favourite-image"
+        let expectedUrl = "https://api.thecatapi.com/v1/favourites/my-favourite-image"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "DELETE"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
@@ -81,7 +81,7 @@ class TestFavouriteApiTesting: XCTestCase {
             .setHttpBody(httpBody: myFavouriteData)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/favourites/my-favourite-image"
+        let expectedUrl = "https://api.thecatapi.com/v1/favourites/my-favourite-image"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "POST"
@@ -91,7 +91,7 @@ class TestFavouriteApiTesting: XCTestCase {
         XCTAssertNotNil(requestBuilder.httpBody)
         XCTAssertEqual(requestBuilder.httpBody, expectedData)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }

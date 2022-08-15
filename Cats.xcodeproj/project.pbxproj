@@ -20,6 +20,7 @@
 		A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE7287F131C008AF229 /* TabBarItems.swift */; };
 		A15A138B28A78085001309E4 /* TestDiskCacheManagerTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A138A28A78085001309E4 /* TestDiskCacheManagerTesting.swift */; };
 		A16C70C028AA380900273BDA /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C70BF28AA380900273BDA /* Const.swift */; };
+		A16C70C828AA4A7700273BDA /* TestBreedServiceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C70C728AA4A7700273BDA /* TestBreedServiceTesting.swift */; };
 		A17162F228883D01004CC2AF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17162F128883D01004CC2AF /* HomeView.swift */; };
 		A17162F728884718004CC2AF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17162F628884718004CC2AF /* HomeViewModel.swift */; };
 		A17162FA28885D28004CC2AF /* BreedRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17162F928885D28004CC2AF /* BreedRes.swift */; };
@@ -113,6 +114,7 @@
 		A1584AE7287F131C008AF229 /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
 		A15A138A28A78085001309E4 /* TestDiskCacheManagerTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDiskCacheManagerTesting.swift; sourceTree = "<group>"; };
 		A16C70BF28AA380900273BDA /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		A16C70C728AA4A7700273BDA /* TestBreedServiceTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBreedServiceTesting.swift; sourceTree = "<group>"; };
 		A17162F128883D01004CC2AF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A17162F628884718004CC2AF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A17162F928885D28004CC2AF /* BreedRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedRes.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 		A16C70C628AA495E00273BDA /* service */ = {
 			isa = PBXGroup;
 			children = (
+				A1C032D628AA4E2B002FD02E /* breed */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -539,6 +542,14 @@
 				A1B8AEF22878560B000D16DE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A1C032D628AA4E2B002FD02E /* breed */ = {
+			isa = PBXGroup;
+			children = (
+				A16C70C728AA4A7700273BDA /* TestBreedServiceTesting.swift */,
+			);
+			path = breed;
 			sourceTree = "<group>";
 		};
 		A1C2CB1D2882E82A008CFFD2 /* upload */ = {
@@ -867,6 +878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E5BF5B28A17D6C0087C28C /* TestingRequestBuilderTest.swift in Sources */,
+				A16C70C828AA4A7700273BDA /* TestBreedServiceTesting.swift in Sources */,
 				A1C9331128A72960002B2A67 /* TestBreedApiTesting.swift in Sources */,
 				A1E6F42C28A70D5900C06B81 /* TestBaseApi.swift in Sources */,
 				A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */,

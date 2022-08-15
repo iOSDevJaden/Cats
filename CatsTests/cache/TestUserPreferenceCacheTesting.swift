@@ -34,6 +34,7 @@ class TestUserPreferenceCacheTesting: XCTestCase {
     
     func test_getUserProfileId_returns_expected_value() {
         let expected = "User Default Id"
+        userPreferences.setUserProfileId(profileId: expected)
         
         let userProfileId = userPreferences.getUserProfileId()
         XCTAssertEqual(userProfileId, expected)

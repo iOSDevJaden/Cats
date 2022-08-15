@@ -14,7 +14,6 @@ struct TestBaseApi: BaseApiProtocol {
     
     private let defaultHeader = [
         Const.xApiKey: Const.apiKey,
-        Const.contentType: Const.applicationJson
     ]
     
     func getCommonRequestBuilder() -> RequestBuilder {

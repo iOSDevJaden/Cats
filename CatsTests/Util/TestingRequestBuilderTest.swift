@@ -36,7 +36,7 @@ class TestingRequestBuilderTest: XCTestCase {
             .setBasePath(path: "")
             .build()
         
-        let expected = "https://example.com"
+        let expected = "https://api.thecatapi.com"
         
         XCTAssertEqual(request.url?.path.isEmpty, true)
         XCTAssertEqual(request.url?.absoluteString, expected)
@@ -47,7 +47,7 @@ class TestingRequestBuilderTest: XCTestCase {
             .setBasePath(path: "/base")
             .build()
         
-        let expected = "https://example.com/base"
+        let expected = "https://api.thecatapi.com/base"
         
         XCTAssertEqual(request.url?.path.isEmpty, false)
         XCTAssertEqual(request.url?.absoluteString, expected)
@@ -173,7 +173,7 @@ class TestingRequestBuilderTest: XCTestCase {
             .setQueryItems(urlQueryItems: [queryItem])
             .build()
         
-        let expectedUrl = "https://example.com/path?q=query"
+        let expectedUrl = "https://api.thecatapi.com/path?q=query"
         
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
@@ -183,7 +183,7 @@ class TestingRequestBuilderTest: XCTestCase {
             .setPath(path: path, [queryItem])
             .build()
         
-        let expectedUrl = "https://example.com/path?q=query"
+        let expectedUrl = "https://api.thecatapi.com/path?q=query"
         
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }

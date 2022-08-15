@@ -11,14 +11,14 @@ import XCTest
 class TestingBaseRequestBuilderTest: XCTestCase {
     private let baseApi: BaseApiProtocol = TestBaseApi()
 
-    private let baseUrl = URL(string: "https://example.com")!
-    private let basePath = "/api/version"
+    private let baseUrl = Const.baseUrl!
+    private let basePath = Const.apiVersion
     
     func test_BaseApi_default_values_url_exists_returns_true() {
         let requestBuilder = getGetCommonURLRequest()
-        
+    
         XCTAssertNotNil(requestBuilder.url?.absoluteString)
-        XCTAssertEqual(requestBuilder.url?.absoluteString, "https://example.com/api/version")
+        XCTAssertEqual(requestBuilder.url?.absoluteString, "https://api.thecatapi.com/v1")
     }
     
     func test_BaseApi_default_values_httpMethod_exists_returns_true() {
@@ -30,7 +30,7 @@ class TestingBaseRequestBuilderTest: XCTestCase {
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(
             requestBuilder.allHTTPHeaderFields,
-            ["x-api-key": "1234"]
+            ["x-api-key": "my-api-key"]
         )
     }
     
@@ -40,7 +40,7 @@ class TestingBaseRequestBuilderTest: XCTestCase {
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(
             requestBuilder.allHTTPHeaderFields,
-            ["x-api-key": "1234"]
+            ["x-api-key": "my-api-key"]
         )
     }
     
@@ -51,7 +51,7 @@ class TestingBaseRequestBuilderTest: XCTestCase {
             .setHttpMethod(.post)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/my-path/1234"
+        let expectedUrl = "https://api.thecatapi.com/v1/my-path/1234"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "POST"
@@ -59,7 +59,7 @@ class TestingBaseRequestBuilderTest: XCTestCase {
         
         let expectedHttpHeader = [
             "Contnet-Type": "application/json",
-            "x-api-key": "1234",
+            "x-api-key": "my-api-key",
         ]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
@@ -72,8 +72,8 @@ class TestingBaseRequestBuilderTest: XCTestCase {
             .setQueryItems(urlQueryItems: [URLQueryItem(name: "q", value: "1234")])
             .setHttpMethod(.get)
             .build()
-        
-        let expectedUrl = "https://example.com/api/version/my-path?q=1234"
+    
+        let expectedUrl = "https://api.thecatapi.com/v1/my-path?q=1234"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
@@ -81,7 +81,7 @@ class TestingBaseRequestBuilderTest: XCTestCase {
         
         let expectedHttpHeader = [
             "Contnet-Type": "application/json",
-            "x-api-key": "1234",
+            "x-api-key": "my-api-key",
         ]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
