@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BreedModel: Codable, Identifiable {
+struct BreedModel: Codable, Equatable, Identifiable {
     let id: String
     let breedName: String
     let wikipediaUrl: String

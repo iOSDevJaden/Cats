@@ -24,13 +24,14 @@ class TestImageApiTesting: XCTestCase {
             .setHttpMethod(.get)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/images/search?limit=5"
+    
+        let expectedUrl = "https://api.thecatapi.com/v1/images/search?limit=5"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
@@ -44,13 +45,13 @@ class TestImageApiTesting: XCTestCase {
             .setHttpMethod(.get)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/images/search?mime_types=jpg,png"
+        let expectedUrl = "https://api.thecatapi.com/v1/images/search?mime_types=jpg,png"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
@@ -65,13 +66,13 @@ class TestImageApiTesting: XCTestCase {
             .setHttpMethod(.get)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/images/search?limit=5"
+        let expectedUrl = "https://api.thecatapi.com/v1/images/search?limit=5"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
@@ -89,14 +90,15 @@ class TestImageApiTesting: XCTestCase {
             .setHttpBody(httpBody: multipartformData)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/images/upload"
+    
+        let expectedUrl = "https://api.thecatapi.com/v1/images/upload"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "POST"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
         let expectedHttpHeader = [
-            "x-api-key": "1234",
+            "x-api-key": "my-api-key",
             "Content-Type": "multipart/form-data; boundary=---myBoundary"
         ]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
@@ -111,14 +113,14 @@ class TestImageApiTesting: XCTestCase {
             .setHttpMethod(.get)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/images/imageId"
+        let expectedUrl = "https://api.thecatapi.com/v1/images/imageId"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
         let expectedHttpHeader = [
-            "x-api-key": "1234",
+            "x-api-key": "my-api-key",
         ]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
@@ -132,14 +134,14 @@ class TestImageApiTesting: XCTestCase {
             .setHttpMethod(.delete)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/images/imageId"
+        let expectedUrl = "https://api.thecatapi.com/v1/images/imageId"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "DELETE"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
         let expectedHttpHeader = [
-            "x-api-key": "1234",
+            "x-api-key": "my-api-key",
         ]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)

@@ -20,13 +20,13 @@ class TestBreedApiTesting: XCTestCase {
             .setHttpMethod(.get)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/breeds"
+        let expectedUrl = "https://api.thecatapi.com/v1/breeds"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }
@@ -40,13 +40,13 @@ class TestBreedApiTesting: XCTestCase {
             .setHttpMethod(.get)
             .build()
         
-        let expectedUrl = "https://example.com/api/version/breeds/search?q=query"
+        let expectedUrl = "https://api.thecatapi.com/v1/breeds/search?q=query"
         XCTAssertEqual(requestBuilder.url?.absoluteString, expectedUrl)
         
         let expectedHttpMethod = "GET"
         XCTAssertEqual(requestBuilder.httpMethod, expectedHttpMethod)
         
-        let expectedHttpHeader = ["x-api-key": "1234"]
+        let expectedHttpHeader = ["x-api-key": "my-api-key"]
         XCTAssertNotNil(requestBuilder.allHTTPHeaderFields)
         XCTAssertEqual(requestBuilder.allHTTPHeaderFields, expectedHttpHeader)
     }

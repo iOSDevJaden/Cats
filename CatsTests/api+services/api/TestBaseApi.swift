@@ -9,10 +9,11 @@ import Foundation
 @testable import Cats
 
 struct TestBaseApi: BaseApiProtocol {
-    private let baseUrl = URL(string: "https://example.com")!
-    private let basePath = "/api/version"
+    private let baseUrl = Const.baseUrl!
+    private let basePath = Const.apiVersion
+    
     private let defaultHeader = [
-        "x-api-key": "1234"
+        Const.xApiKey: Const.apiKey,
     ]
     
     func getCommonRequestBuilder() -> RequestBuilder {
