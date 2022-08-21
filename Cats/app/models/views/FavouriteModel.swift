@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FavouriteModel {
+struct FavouriteModel: Equatable {
     let favouriteId: String
     let imageModel: ImageModel
 }
