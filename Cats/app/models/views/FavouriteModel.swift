@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct FavouriteModel {
+struct FavouriteModel: Equatable {
     let favouriteId: String
     let imageModel: ImageModel
+    
+#if DEBUG
+    static let staticFavouriteModel = FavouriteModel(favouriteId: "favouriteId", imageModel: .staticImageModel)
+#endif
 }

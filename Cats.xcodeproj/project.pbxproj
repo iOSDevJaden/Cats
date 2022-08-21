@@ -37,6 +37,9 @@
 		A1819698287A7B3800C6E7B8 /* FavouriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1819697287A7B3800C6E7B8 /* FavouriteService.swift */; };
 		A1836344288B4D440070B862 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1836343288B4D440070B862 /* DiskCache.swift */; };
 		A18C175D2897FC6D00BC3909 /* UploadImageRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C175C2897FC6D00BC3909 /* UploadImageRes.swift */; };
+		A190263628B1E00A00A77424 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263528B1E00A00A77424 /* CommonError.swift */; };
+		A190263928B1E08300A77424 /* TestFavouriteServiceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263828B1E08300A77424 /* TestFavouriteServiceTesting.swift */; };
+		A190263B28B1E0AB00A77424 /* MockFavouriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263A28B1E0AB00A77424 /* MockFavouriteService.swift */; };
 		A1973FCC28A15C3500B90093 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1973FCB28A15C3500B90093 /* BaseService.swift */; };
 		A19789502879FA1600EDB501 /* BreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197894F2879FA1600EDB501 /* BreedView.swift */; };
 		A19789522879FA4700EDB501 /* BreedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19789512879FA4700EDB501 /* BreedViewModel.swift */; };
@@ -132,6 +135,9 @@
 		A1819697287A7B3800C6E7B8 /* FavouriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteService.swift; sourceTree = "<group>"; };
 		A1836343288B4D440070B862 /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		A18C175C2897FC6D00BC3909 /* UploadImageRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageRes.swift; sourceTree = "<group>"; };
+		A190263528B1E00A00A77424 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		A190263828B1E08300A77424 /* TestFavouriteServiceTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFavouriteServiceTesting.swift; sourceTree = "<group>"; };
+		A190263A28B1E0AB00A77424 /* MockFavouriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFavouriteService.swift; sourceTree = "<group>"; };
 		A1973FCB28A15C3500B90093 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		A197894F2879FA1600EDB501 /* BreedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedView.swift; sourceTree = "<group>"; };
 		A19789512879FA4700EDB501 /* BreedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedViewModel.swift; sourceTree = "<group>"; };
@@ -312,6 +318,7 @@
 		A16C70C628AA495E00273BDA /* service */ = {
 			isa = PBXGroup;
 			children = (
+				A190263728B1E06600A77424 /* favourite */,
 				A1C032D628AA4E2B002FD02E /* breed */,
 			);
 			path = service;
@@ -356,6 +363,15 @@
 			path = request;
 			sourceTree = "<group>";
 		};
+		A190263728B1E06600A77424 /* favourite */ = {
+			isa = PBXGroup;
+			children = (
+				A190263828B1E08300A77424 /* TestFavouriteServiceTesting.swift */,
+				A190263A28B1E0AB00A77424 /* MockFavouriteService.swift */,
+			);
+			path = favourite;
+			sourceTree = "<group>";
+		};
 		A1973FCA28A15C2700B90093 /* base */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +412,7 @@
 		A19EE58A28819F6B00C161AC /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				A190263528B1E00A00A77424 /* CommonError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -839,6 +856,7 @@
 				A1F80FC42895C686009C21C8 /* SaveFavouriteRes.swift in Sources */,
 				A17162FA28885D28004CC2AF /* BreedRes.swift in Sources */,
 				A19789572879FE7E00EDB501 /* SearchViewModel.swift in Sources */,
+				A190263628B1E00A00A77424 /* CommonError.swift in Sources */,
 				A1584ADF287EF150008AF229 /* SearchBar.swift in Sources */,
 				A17162F228883D01004CC2AF /* HomeView.swift in Sources */,
 				A1ACAC562889D7D100B6A788 /* DeleteVoteRes.swift in Sources */,
@@ -882,8 +900,10 @@
 			files = (
 				A1E5BF5B28A17D6C0087C28C /* TestingRequestBuilderTest.swift in Sources */,
 				A16C70C828AA4A7700273BDA /* TestBreedServiceTesting.swift in Sources */,
+				A190263928B1E08300A77424 /* TestFavouriteServiceTesting.swift in Sources */,
 				A1C9331128A72960002B2A67 /* TestBreedApiTesting.swift in Sources */,
 				A1E6F42C28A70D5900C06B81 /* TestBaseApi.swift in Sources */,
+				A190263B28B1E0AB00A77424 /* MockFavouriteService.swift in Sources */,
 				A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */,
 				A1EDFF0F28A76C9C00A76C45 /* TestFavouriteApiTesting.swift in Sources */,
 				A1EDFF1928A7755900A76C45 /* TestCacheManagerTesting.swift in Sources */,
