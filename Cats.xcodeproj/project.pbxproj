@@ -40,6 +40,8 @@
 		A190263628B1E00A00A77424 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263528B1E00A00A77424 /* CommonError.swift */; };
 		A190263928B1E08300A77424 /* TestFavouriteServiceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263828B1E08300A77424 /* TestFavouriteServiceTesting.swift */; };
 		A190263B28B1E0AB00A77424 /* MockFavouriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263A28B1E0AB00A77424 /* MockFavouriteService.swift */; };
+		A190263E28B1F08C00A77424 /* MockImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263D28B1F08C00A77424 /* MockImageService.swift */; };
+		A190264028B1F12600A77424 /* TestImagesServiceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190263F28B1F12600A77424 /* TestImagesServiceTesting.swift */; };
 		A1973FCC28A15C3500B90093 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1973FCB28A15C3500B90093 /* BaseService.swift */; };
 		A19789502879FA1600EDB501 /* BreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197894F2879FA1600EDB501 /* BreedView.swift */; };
 		A19789522879FA4700EDB501 /* BreedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19789512879FA4700EDB501 /* BreedViewModel.swift */; };
@@ -138,6 +140,8 @@
 		A190263528B1E00A00A77424 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		A190263828B1E08300A77424 /* TestFavouriteServiceTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFavouriteServiceTesting.swift; sourceTree = "<group>"; };
 		A190263A28B1E0AB00A77424 /* MockFavouriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFavouriteService.swift; sourceTree = "<group>"; };
+		A190263D28B1F08C00A77424 /* MockImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageService.swift; sourceTree = "<group>"; };
+		A190263F28B1F12600A77424 /* TestImagesServiceTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestImagesServiceTesting.swift; sourceTree = "<group>"; };
 		A1973FCB28A15C3500B90093 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		A197894F2879FA1600EDB501 /* BreedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedView.swift; sourceTree = "<group>"; };
 		A19789512879FA4700EDB501 /* BreedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedViewModel.swift; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 		A16C70C628AA495E00273BDA /* service */ = {
 			isa = PBXGroup;
 			children = (
+				A190263C28B1F07A00A77424 /* images */,
 				A190263728B1E06600A77424 /* favourite */,
 				A1C032D628AA4E2B002FD02E /* breed */,
 			);
@@ -370,6 +375,15 @@
 				A190263A28B1E0AB00A77424 /* MockFavouriteService.swift */,
 			);
 			path = favourite;
+			sourceTree = "<group>";
+		};
+		A190263C28B1F07A00A77424 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				A190263D28B1F08C00A77424 /* MockImageService.swift */,
+				A190263F28B1F12600A77424 /* TestImagesServiceTesting.swift */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		A1973FCA28A15C2700B90093 /* base */ = {
@@ -911,8 +925,10 @@
 				A1CDFD9228A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift in Sources */,
 				A1C9331528A72F3B002B2A67 /* TestImageApiTesting.swift in Sources */,
 				A154449C28AA56D900D452EC /* MockBreedService.swift in Sources */,
+				A190264028B1F12600A77424 /* TestImagesServiceTesting.swift in Sources */,
 				A15A138B28A78085001309E4 /* TestDiskCacheManagerTesting.swift in Sources */,
 				A16C70C028AA380900273BDA /* Const.swift in Sources */,
+				A190263E28B1F08C00A77424 /* MockImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
