@@ -30,7 +30,11 @@ struct BreedView: View {
             }
             .navigationBarHidden(true)
         }
-        .onAppear(perform: vm.getBreedsData)
+        .onAppear(perform: loadBreeds)
+    }
+    
+    private func loadBreeds() {
+        vm.loadBreedModelsIfExists()
     }
     
     private func getNavigationLinkList(_ alphabet: String) -> some View {
