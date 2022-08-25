@@ -70,6 +70,7 @@
 		A1B8AEF02878560B000D16DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B8AEEF2878560B000D16DE /* Assets.xcassets */; };
 		A1B8AEF32878560B000D16DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B8AEF22878560B000D16DE /* Preview Assets.xcassets */; };
 		A1B8AF1628785648000D16DE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B8AF1528785648000D16DE /* MainView.swift */; };
+		A1BA670728B644B200ECFEE4 /* TestBreedViewModelTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BA670628B644B200ECFEE4 /* TestBreedViewModelTesting.swift */; };
 		A1BF170E28967B8F0077AB1E /* MultipleTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BF170D28967B8F0077AB1E /* MultipleTypes.swift */; };
 		A1BF171028968E4B0077AB1E /* FavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BF170F28968E4B0077AB1E /* FavouriteModel.swift */; };
 		A1C2CB202882E83F008CFFD2 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2CB1F2882E83F008CFFD2 /* UploadView.swift */; };
@@ -171,6 +172,7 @@
 		A1B8AEEF2878560B000D16DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1B8AEF22878560B000D16DE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1B8AF1528785648000D16DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A1BA670628B644B200ECFEE4 /* TestBreedViewModelTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBreedViewModelTesting.swift; sourceTree = "<group>"; };
 		A1BF170D28967B8F0077AB1E /* MultipleTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleTypes.swift; sourceTree = "<group>"; };
 		A1BF170F28968E4B0077AB1E /* FavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteModel.swift; sourceTree = "<group>"; };
 		A1C2CB1F2882E83F008CFFD2 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
@@ -577,6 +579,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		A1BA670528B6447300ECFEE4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A1BA670628B644B200ECFEE4 /* TestBreedViewModelTesting.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		A1C032D628AA4E2B002FD02E /* breed */ = {
 			isa = PBXGroup;
 			children = (
@@ -614,6 +624,7 @@
 		A1E5BF5228A17D4C0087C28C /* CatsTests */ = {
 			isa = PBXGroup;
 			children = (
+				A1BA670528B6447300ECFEE4 /* ViewModels */,
 				A1EDFF1728A774BB00A76C45 /* cache */,
 				A1F70DC528A17FEA00AB0DE9 /* api+services */,
 				A1F70DC428A17FE300AB0DE9 /* Util */,
@@ -920,6 +931,7 @@
 				A190263B28B1E0AB00A77424 /* MockFavouriteService.swift in Sources */,
 				A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */,
 				A1EDFF0F28A76C9C00A76C45 /* TestFavouriteApiTesting.swift in Sources */,
+				A1BA670728B644B200ECFEE4 /* TestBreedViewModelTesting.swift in Sources */,
 				A1EDFF1928A7755900A76C45 /* TestCacheManagerTesting.swift in Sources */,
 				A1E6F42928A6FC9600C06B81 /* TestingBaseRequestBuilderTest.swift in Sources */,
 				A1CDFD9228A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift in Sources */,
