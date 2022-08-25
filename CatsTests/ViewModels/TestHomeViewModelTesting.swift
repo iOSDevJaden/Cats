@@ -16,6 +16,13 @@ class TestHomeViewModelTesting: XCTestCase {
     private var userPreferences: UserPreferences!
     private var cacheManager: CacheManager!
     
+    private lazy var fakeFavouriteModels: [FavouriteModel] = [
+        FavouriteModel(favouriteId: "favourite #1", imageModel: .staticImageModel),
+        FavouriteModel(favouriteId: "favourite #2", imageModel: .staticImageModel),
+        FavouriteModel(favouriteId: "favourite #3", imageModel: .staticImageModel),
+        FavouriteModel(favouriteId: "favourite #4", imageModel: .staticImageModel),
+    ]
+    
     override func setUp() {
         super.setUp()
         mockFavouriteService = MockFavouriteService()
@@ -90,5 +97,69 @@ class TestHomeViewModelTesting: XCTestCase {
         
         wait(for: [expectation], timeout: 3)
         XCTAssertEqual(viewModel.favouriteImages, [])
+    }
+    
+    func test_homeViewModel_deleteImage_with_contained_favouriteId() {
+        viewModel.favouriteImages = fakeFavouriteModels
+        let initialNumberOfFavouriteImages = viewModel.favouriteImages.count
+        
+        viewModel.deleteImage(favouriteId: "favourite #1")
+        
+        XCTAssertEqual(viewModel.favouriteImages.count, initialNumberOfFavouriteImages - 1)
+    }
+    
+    func test_homeViewModel_deleteImage_with_not_contained_favouriteId() {
+        viewModel.favouriteImages = fakeFavouriteModels
+        let initialNumberOfFavouriteImages = viewModel.favouriteImages.count
+
+        viewModel.deleteImage(favouriteId: "not contained favourite id")
+        
+        XCTAssertEqual(viewModel.favouriteImages.count, initialNumberOfFavouriteImages)
+    }
+    
+    func test_homeViewModel_deleteFavourtieImage_returns_success_true_deleteImage() {
+        viewModel.favouriteImages = fakeFavouriteModels
+        
+        mockFavouriteService.resultBool = Result
+            .success(true)
+            .publisher
+            .eraseToAnyPublisher()
+        
+        viewModel.deleteFavouriteImage(image: "favourite #1")
+        
+        let expectation = XCTestExpectation(description: "Test set to fail, not delete favourite models.")
+        viewModel.$favouriteImages.dropFirst().sink { result in
+            expectation.fulfill()
+        }
+        .store(in: &viewModel.cancellable)
+        
+        wait(for: [expectation], timeout: 3.0)
+        XCTAssertNotEqual(viewModel.favouriteImages, fakeFavouriteModels)
+    }
+    
+    func test_homeViewModel_deleteFavourtieImage_returns_success_false_not_deleteImage() {
+        viewModel.favouriteImages = fakeFavouriteModels
+        
+        mockFavouriteService.resultBool = Result
+            .success(false)
+            .publisher
+            .eraseToAnyPublisher()
+        
+        viewModel.deleteFavouriteImage(image: "favourite #1")
+        
+        XCTAssertEqual(viewModel.favouriteImages, fakeFavouriteModels)
+    }
+    
+    func test_homeViewModel_deleteFavourtieImage_returns_error_replace_with_false_not_deleteImage() {
+        viewModel.favouriteImages = fakeFavouriteModels
+        
+        mockFavouriteService.resultBool = Result
+            .failure(CommonError.response)
+            .publisher
+            .eraseToAnyPublisher()
+        
+        viewModel.deleteFavouriteImage(image: "favourite #1")
+        
+        XCTAssertEqual(viewModel.favouriteImages, fakeFavouriteModels)
     }
 }
