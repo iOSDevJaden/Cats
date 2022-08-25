@@ -9,18 +9,28 @@ import Combine
 import Foundation
 
 class HomeViewModel: BaseViewModel, ObservableObject {
-    private let favouriteService = FavouriteService()
+    private let favouriteService: FavouriteServiceProtocol
+    private let userPreferences: UserPreferences
+    private let cacheManager: CacheManager
     
     @Published var favouriteImages = [FavouriteModel]()
+    
+    init(
+        favouriteService: FavouriteServiceProtocol = FavouriteService(),
+        userPreferences: UserPreferences = UserPreferences.shared,
+        cacheManager: CacheManager = CacheManager.shared
+    ) {
+        self.favouriteService = favouriteService
+        self.userPreferences = userPreferences
+        self.cacheManager = cacheManager
+    }
     
     func getFavouriteImages() {
         favouriteService.getMyFavourites()
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
+            .replaceError(with: [])
             .sink(
-                receiveCompletion: {
-                    print("Receive Completion \($0)")
-                },
                 receiveValue: { [weak self] favouriteImages in
                     self?.favouriteImages = favouriteImages
                 })
@@ -31,10 +41,8 @@ class HomeViewModel: BaseViewModel, ObservableObject {
         favouriteService.deleteMyFavourite(favourite: id)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
+            .replaceError(with: false)
             .sink(
-                receiveCompletion: {
-                    print("Receive Completion \($0)")
-                },
                 receiveValue: { [weak self] in
                     if $0 == true {
                         self?.deleteImage(favouriteId: id)

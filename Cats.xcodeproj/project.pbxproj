@@ -79,6 +79,7 @@
 		A1C9331528A72F3B002B2A67 /* TestImageApiTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9331428A72F3B002B2A67 /* TestImageApiTesting.swift */; };
 		A1CDFD9228A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CDFD9128A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift */; };
 		A1CDFD9428A9389B00FF50A9 /* UserPreferenceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CDFD9328A9389B00FF50A9 /* UserPreferenceCache.swift */; };
+		A1E1F00628B79079003435D3 /* TestHomeViewModelTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1F00528B79079003435D3 /* TestHomeViewModelTesting.swift */; };
 		A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5328A17D4C0087C28C /* CatsTests.swift */; };
 		A1E5BF5B28A17D6C0087C28C /* TestingRequestBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */; };
 		A1E6F42728A6E3FD00C06B81 /* BaseApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6F42628A6E3FC00C06B81 /* BaseApiProtocol.swift */; };
@@ -181,6 +182,7 @@
 		A1C9331428A72F3B002B2A67 /* TestImageApiTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestImageApiTesting.swift; sourceTree = "<group>"; };
 		A1CDFD9128A91EEF00FF50A9 /* TestUserPreferenceCacheTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserPreferenceCacheTesting.swift; sourceTree = "<group>"; };
 		A1CDFD9328A9389B00FF50A9 /* UserPreferenceCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceCache.swift; sourceTree = "<group>"; };
+		A1E1F00528B79079003435D3 /* TestHomeViewModelTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHomeViewModelTesting.swift; sourceTree = "<group>"; };
 		A1E5BF5128A17D4C0087C28C /* CatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E5BF5328A17D4C0087C28C /* CatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsTests.swift; sourceTree = "<group>"; };
 		A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingRequestBuilderTest.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				A1BA670628B644B200ECFEE4 /* TestBreedViewModelTesting.swift */,
+				A1E1F00528B79079003435D3 /* TestHomeViewModelTesting.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				A1E6F42C28A70D5900C06B81 /* TestBaseApi.swift in Sources */,
 				A190263B28B1E0AB00A77424 /* MockFavouriteService.swift in Sources */,
 				A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */,
+				A1E1F00628B79079003435D3 /* TestHomeViewModelTesting.swift in Sources */,
 				A1EDFF0F28A76C9C00A76C45 /* TestFavouriteApiTesting.swift in Sources */,
 				A1BA670728B644B200ECFEE4 /* TestBreedViewModelTesting.swift in Sources */,
 				A1EDFF1928A7755900A76C45 /* TestCacheManagerTesting.swift in Sources */,
