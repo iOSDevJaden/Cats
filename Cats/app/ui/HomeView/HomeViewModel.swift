@@ -9,9 +9,21 @@ import Combine
 import Foundation
 
 class HomeViewModel: BaseViewModel, ObservableObject {
-    private let favouriteService = FavouriteService()
+    private let favouriteService: FavouriteServiceProtocol
+    private let userPreferences: UserPreferences
+    private let cacheManager: CacheManager
     
     @Published var favouriteImages = [FavouriteModel]()
+    
+    init(
+        favouriteService: FavouriteServiceProtocol = FavouriteService(),
+        userPreferences: UserPreferences = UserPreferences.shared,
+        cacheManager: CacheManager = CacheManager.shared
+    ) {
+        self.favouriteService = favouriteService
+        self.userPreferences = userPreferences
+        self.cacheManager = cacheManager
+    }
     
     func getFavouriteImages() {
         favouriteService.getMyFavourites()
