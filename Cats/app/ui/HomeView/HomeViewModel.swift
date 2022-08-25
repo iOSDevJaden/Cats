@@ -29,10 +29,8 @@ class HomeViewModel: BaseViewModel, ObservableObject {
         favouriteService.getMyFavourites()
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
+            .replaceError(with: [])
             .sink(
-                receiveCompletion: {
-                    print("Receive Completion \($0)")
-                },
                 receiveValue: { [weak self] favouriteImages in
                     self?.favouriteImages = favouriteImages
                 })
