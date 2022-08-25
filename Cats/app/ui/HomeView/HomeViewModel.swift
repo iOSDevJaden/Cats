@@ -41,10 +41,8 @@ class HomeViewModel: BaseViewModel, ObservableObject {
         favouriteService.deleteMyFavourite(favourite: id)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
+            .replaceError(with: false)
             .sink(
-                receiveCompletion: {
-                    print("Receive Completion \($0)")
-                },
                 receiveValue: { [weak self] in
                     if $0 == true {
                         self?.deleteImage(favouriteId: id)
