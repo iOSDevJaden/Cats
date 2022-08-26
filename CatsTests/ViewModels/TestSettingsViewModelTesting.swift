@@ -75,4 +75,12 @@ class TestSettingsViewModelTesting: XCTestCase {
         )
     }
     
+    func test_settings_viewModel_update_number_of_image_per_page() {
+        viewModel.loadNumberOfImagePerPage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
+        
+        viewModel.setNumberOfImage(50, key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
+
+        viewModel.loadNumberOfImagePerPage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
+        XCTAssertEqual(viewModel.numberOfImage, 50)
+    }
 }
