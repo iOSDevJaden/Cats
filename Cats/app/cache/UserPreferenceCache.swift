@@ -77,7 +77,7 @@ class UserPreferences {
     
     enum Consts {
         static let userDefaultId = String.userId
-        static let userDefaultProfileImage = "cat-paw".data(using: .utf8)!
+        static let userDefaultProfileImage = Data.placeHolderImageData
         static let userDefaultNumberOfImagePerPage = 15
         static let userDefaultCurrentSearchImagePage = 0
     }
