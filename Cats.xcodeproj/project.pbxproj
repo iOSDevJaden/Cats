@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A108AD15288BAC4E00682532 /* ServiceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A108AD14288BAC4E00682532 /* ServiceConst.swift */; };
 		A10EEDB828B942C100E8B1CB /* TestSettingsViewModelTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10EEDB728B942C100E8B1CB /* TestSettingsViewModelTesting.swift */; };
+		A10EEDBA28B957A700E8B1CB /* KeysForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10EEDB928B957A700E8B1CB /* KeysForTest.swift */; };
 		A11E0CEE288EB80D00635594 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E0CED288EB80D00635594 /* SettingsView.swift */; };
 		A11E0CF0288EB81400635594 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E0CEF288EB81400635594 /* SettingsViewModel.swift */; };
 		A126C9D92879576C00CF3CD7 /* BreedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126C9D82879576C00CF3CD7 /* BreedApi.swift */; };
@@ -109,6 +110,7 @@
 /* Begin PBXFileReference section */
 		A108AD14288BAC4E00682532 /* ServiceConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceConst.swift; sourceTree = "<group>"; };
 		A10EEDB728B942C100E8B1CB /* TestSettingsViewModelTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettingsViewModelTesting.swift; sourceTree = "<group>"; };
+		A10EEDB928B957A700E8B1CB /* KeysForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysForTest.swift; sourceTree = "<group>"; };
 		A11E0CED288EB80D00635594 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A11E0CEF288EB81400635594 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		A126C9D82879576C00CF3CD7 /* BreedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedApi.swift; sourceTree = "<group>"; };
@@ -735,6 +737,7 @@
 			children = (
 				A1E5BF5A28A17D6C0087C28C /* TestingRequestBuilderTest.swift */,
 				A16C70BF28AA380900273BDA /* Const.swift */,
+				A10EEDB928B957A700E8B1CB /* KeysForTest.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -935,6 +938,7 @@
 				A1C9331128A72960002B2A67 /* TestBreedApiTesting.swift in Sources */,
 				A1E6F42C28A70D5900C06B81 /* TestBaseApi.swift in Sources */,
 				A190263B28B1E0AB00A77424 /* MockFavouriteService.swift in Sources */,
+				A10EEDBA28B957A700E8B1CB /* KeysForTest.swift in Sources */,
 				A1E5BF5428A17D4C0087C28C /* CatsTests.swift in Sources */,
 				A1E1F00628B79079003435D3 /* TestHomeViewModelTesting.swift in Sources */,
 				A10EEDB828B942C100E8B1CB /* TestSettingsViewModelTesting.swift in Sources */,
