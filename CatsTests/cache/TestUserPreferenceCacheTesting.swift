@@ -15,15 +15,16 @@ class TestUserPreferenceCacheTesting: XCTestCase {
      * Therefore, the test cases affect on the code that actually works.
      */
     private let userPreferences = UserPreferences.shared
-    
+   
     override func setUp() {
-        userPreferences.resetUserSettings()
+        resetUserPreferences()
+        super.setUp()
     }
     
-    override func tearDown() {
+    private func resetUserPreferences() {
         userPreferences.resetUserProfileId(key: KeysForTest.userDefaultProfileIdKeyForTest)
         userPreferences.resetUserProfileImage(key: KeysForTest.userDefaultProfileImageKeyForTest)
-        userPreferences.resetCurrentNumberOfImagePerPage(key: KeysForTest.userDefaultCurrentSearchImagePageForTest)
+        userPreferences.resetCurrentNumberOfImagePerPage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
     }
     
     func test_getUserProfileImage_returns_image_data() {
