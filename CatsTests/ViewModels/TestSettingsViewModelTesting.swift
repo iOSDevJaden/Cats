@@ -83,4 +83,14 @@ class TestSettingsViewModelTesting: XCTestCase {
         viewModel.loadNumberOfImagePerPage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
         XCTAssertEqual(viewModel.numberOfImage, 50)
     }
+    
+    func test_settings_viewModel_update_user_profile_image() {
+        let profileImageData = UIImage(named: "AppIcon")?.jpegData(compressionQuality: 0.5)!
+        viewModel.loadUserProfileImage(key: KeysForTest.userDefaultProfileImageKeyForTest)
+        
+        viewModel.setUserProfileImage(profileImageData, key: KeysForTest.userDefaultProfileImageKeyForTest)
+        
+        viewModel.loadUserProfileImage(key: KeysForTest.userDefaultProfileImageKeyForTest)
+        XCTAssertEqual(viewModel.profileImageData, profileImageData)
+    }
 }
