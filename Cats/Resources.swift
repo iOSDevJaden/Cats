@@ -8,6 +8,15 @@
 import Foundation
 import UIKit
 
+extension Data {
+    static var placeHolderImageData: Data {
+        guard let imageData = UIImage(named: "cat-paw")?.jpegData(compressionQuality: 0.5) else {
+            fatalError("Check if Image is in the bundle.")
+        }
+        return imageData
+    }
+}
+
 extension String {
     static var urlString: String {
         guard let urlString = Bundle.main.object(forInfoDictionaryKey: "ServerUrl") as? String else {
