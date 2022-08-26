@@ -15,7 +15,7 @@ protocol ImageServiceProtocol {
     func uploadImage(image: Data) -> AnyPublisher<Bool, Error>
 }
 
-class ImagesService: BaseService {
+class ImagesService: BaseService, ImageServiceProtocol {
     
     func getImages(limit: Int, page: Int) -> AnyPublisher<[ImageModel], Error> {
         return Deferred {
