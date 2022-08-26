@@ -17,7 +17,7 @@ class TestUserPreferenceCacheTesting: XCTestCase {
     }
     
     func test_getUserProfileImage_returns_image_data() {
-        let expected = "cat-paw".data(using: .utf8)!
+        let expected = UIImage(named: "cat-paw")?.jpegData(compressionQuality: 0.5)
         
         let userProfileImageData = userPreferences.getUserProfileImage()
         XCTAssertEqual(userProfileImageData, expected)
