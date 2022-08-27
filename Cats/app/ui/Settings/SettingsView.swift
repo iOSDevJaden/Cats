@@ -57,6 +57,29 @@ struct SettingsView: View {
                     Text("Number of Cat Pictures per Page")
                 })
         }
+        .onAppear(perform: loadUserPreferences)
+    }
+    
+    private func onIncreamentNumberOfImage() {
+        vm.setNumberOfImage(vm.numberOfImage + 1)
+        vm.loadNumberOfImagePerPage()
+    }
+    
+    private func onDecrementNumberOfImage() {
+        vm.setNumberOfImage(vm.numberOfImage - 1)
+        vm.loadNumberOfImagePerPage()
+    }
+    
+    private func resetUserPreferences() {
+        vm.resetUserProfileImage()
+        vm.resetNumberOfImage()
+    }
+    
+    private func loadUserPreferences() {
+        vm.loadUserId()
+        vm.loadCurrentPage()
+        vm.loadNumberOfImagePerPage()
+        vm.loadUserProfileImage()
     }
 }
 
