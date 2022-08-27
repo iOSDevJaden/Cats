@@ -25,6 +25,7 @@ class TestUserPreferenceCacheTesting: XCTestCase {
         userPreferences.resetUserProfileId(key: KeysForTest.userDefaultProfileIdKeyForTest)
         userPreferences.resetUserProfileImage(key: KeysForTest.userDefaultProfileImageKeyForTest)
         userPreferences.resetCurrentNumberOfImagePerPage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
+        userPreferences.resetCurrentSearchImagePage(key: KeysForTest.userDefaultCurrentSearchImagePageForTest)
     }
     
     func test_getUserProfileImage_returns_image_data() {
@@ -143,5 +144,21 @@ class TestUserPreferenceCacheTesting: XCTestCase {
             key: KeysForTest.userDefaultCurrentSearchImagePageForTest
         )
         XCTAssertEqual(numberOfImage, expected)
+    }
+    
+    func test_resetCurrentNumberOfPerPage_returns_default_value() {
+        userPreferences.setCurrentNumberOfImagePerPage(25, key: KeysForTest.userDefaultCurrentSearchImagePageForTest)
+        
+        userPreferences.resetCurrentNumberOfImagePerPage(key: KeysForTest.userDefaultCurrentSearchImagePageForTest)
+        
+        XCTAssertEqual(15, userPreferences.getCurrentNumberOfImagePerPage(key: KeysForTest.userDefaultCurrentSearchImagePageForTest))
+    }
+    
+    func test_resetCurrentSearchImagePage_returns_default_value() {
+        userPreferences.setCurrentSearchImagePage(50, key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
+        
+        userPreferences.resetCurrentNumberOfImagePerPage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
+        
+        XCTAssertEqual(0, userPreferences.getCurrentSearchImagePage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest))
     }
 }
