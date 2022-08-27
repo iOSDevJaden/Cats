@@ -123,6 +123,15 @@ class SettingsViewModel: BaseViewModel, ObservableObject {
         userPreference.setUserProfileImage(imageData: imageData)
     }
     
+    func resetUserProfileImage(key: String? = nil)  {
+        if let key = key {
+            userPreference.resetUserProfileImage(key: key)
+            loadUserProfileImage(key: key)
+        }
+        userPreference.resetUserProfileImage()
+        loadUserProfileImage()
+    }
+    
     fileprivate enum Consts {
         static let maximumNumberOfImagePerPage = 30
         static let minimumNumberOfImagePerPage = 15
