@@ -9,8 +9,8 @@ import XCTest
 @testable import Cats
 
 class TestSearchImageViewModelTesting: XCTestCase {
-    private var mockFavouriteService: FavouriteServiceProtocol!
-    private var mockImageService: ImageServiceProtocol!
+    private var mockFavouriteService: MockFavouriteService!
+    private var mockImageService: MockImageService!
     private var userPreferences: UserPreferences!
     
     private var viewModel: SearchViewModel!
