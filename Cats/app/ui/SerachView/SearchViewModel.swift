@@ -49,16 +49,13 @@ class SearchViewModel: BaseViewModel, ObservableObject {
     }
     
     func getImages() {
-        imagesService.getImages(limit: Const.defaultImageLimit, page: page)
+        imagesService.getImages(limit: numberOfImagePerPage, page: page)
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
-            .sink(
-                receiveCompletion: {
-                    print("Completion \($0)")
-                },
-                receiveValue: { [weak self] images in
-                    self?.images.append(contentsOf: images)
-                })
+            .replaceError(with: [])
+            .sink { [weak self] images in
+                self?.images.append(contentsOf: images)
+            }
             .store(in: &cancellable)
     }
     
@@ -66,18 +63,10 @@ class SearchViewModel: BaseViewModel, ObservableObject {
         favouriteService.saveFavouriteImage(id: id)
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
-            .sink(
-                receiveCompletion: {
-                    print("Completion \($0)")
-                },
-                receiveValue: {
-                    print("Save image as an favourite \($0 ? "success" : "failed.")")
-                })
+            .replaceError(with: false)
+            .sink {
+                print("Save image as an favourite \($0 ? "success" : "failed.")")
+            }
             .store(in: &cancellable)
-    }
-    
-    enum Const {
-        static let defaultImageLimit = 20
-        static let lastImagePageKey = "LastImagePageKey"
     }
 }
