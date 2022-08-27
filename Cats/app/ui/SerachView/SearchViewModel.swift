@@ -26,6 +26,7 @@ class SearchViewModel: BaseViewModel, ObservableObject {
     @Published var images: [ImageModel] = []
     @Published var page = 0
     @Published var numberOfImagePerPage = 0
+    @Published var favouritedImage: Bool? = nil
     
     func loadCurrentPage(key: String? = nil) {
         if let key = key {
@@ -64,8 +65,8 @@ class SearchViewModel: BaseViewModel, ObservableObject {
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .replaceError(with: false)
-            .sink {
-                print("Save image as an favourite \($0 ? "success" : "failed.")")
+            .sink { [weak self] in
+                self?.favouritedImage = $0
             }
             .store(in: &cancellable)
     }
