@@ -73,6 +73,15 @@ class UserPreferences {
         userDefaults.set(page, forKey: key)
     }
     
+    func resetCurrentSearchImagePage(
+        key: String = UserDefaultKeys.userDefaultCurrentSearchImagePage
+    ) {
+        userDefaults.set(
+            Consts.userDefaultCurrentSearchImagePage,
+            forKey: key
+        )
+    }
+    
     func getCurrentNumberOfImagePerPage(
         key: String = UserDefaultKeys.userDefaultNumberOfImagePerPage
     ) -> Int {
