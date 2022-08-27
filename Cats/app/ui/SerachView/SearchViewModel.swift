@@ -24,8 +24,28 @@ class SearchViewModel: BaseViewModel, ObservableObject {
     }
     
     @Published var images: [ImageModel] = []
-    @Published var page: Int = 0 {
-        didSet { saveImagePage() }
+    @Published var page = 0
+    @Published var numberOfImagePerPage = 0
+    
+    func loadCurrentPage(key: String? = nil) {
+        if let key = key {
+            self.page = userPreferences.getCurrentSearchImagePage(key: key)
+        }
+        self.page = userPreferences.getCurrentSearchImagePage()
+    }
+    
+    func loadNumberOfImagePerPage(key: String? = nil) {
+        if let key = key {
+            self.numberOfImagePerPage = userPreferences.getCurrentNumberOfImagePerPage(key: key)
+        }
+        self.numberOfImagePerPage = userPreferences.getCurrentNumberOfImagePerPage()
+    }
+    
+    func updateCurrentPage(key: String? = nil) {
+        if let key = key {
+            userPreferences.setCurrentSearchImagePage(self.page + 1, key: key)
+        }
+        userPreferences.setCurrentSearchImagePage(self.page + 1)
     }
     
     func getImages() {
