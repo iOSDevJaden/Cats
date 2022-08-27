@@ -85,6 +85,60 @@ class TestSearchImageViewModelTesting: XCTestCase {
         XCTAssertEqual(viewModel.images.isEmpty, true)
     }
     
+    func test_search_viewModel_favourite_images_success_returns_true() {
+        mockFavouriteService.resultBool = Result
+            .success(true)
+            .publisher
+            .eraseToAnyPublisher()
+        
+        let expected = XCTestExpectation(description: "Test set to success and return true.")
+        viewModel.favouriteImage(imageId: "favourite #1")
+        
+        viewModel.$favouritedImage.dropFirst().sink { result in
+            expected.fulfill()
+        }
+        .store(in: &viewModel.cancellable)
+        
+        wait(for: [expected], timeout: 3.0)
+        XCTAssertEqual(viewModel.favouritedImage, true)
+    }
+    
+    func test_search_viewModel_favourite_images_success_returns_false() {
+        mockFavouriteService.resultBool = Result
+            .success(false)
+            .publisher
+            .eraseToAnyPublisher()
+        
+        let expected = XCTestExpectation(description: "Test set to success and return false.")
+        viewModel.favouriteImage(imageId: "favourite #1")
+        
+        viewModel.$favouritedImage.dropFirst().sink { result in
+            expected.fulfill()
+        }
+        .store(in: &viewModel.cancellable)
+        
+        wait(for: [expected], timeout: 3.0)
+        XCTAssertEqual(viewModel.favouritedImage, false)
+    }
+    
+    func test_search_viewModel_favourite_images_failed_return_error_replace_with_false() {
+        mockFavouriteService.resultBool = Result
+            .failure(CommonError.response)
+            .publisher
+            .eraseToAnyPublisher()
+        
+        let expected = XCTestExpectation(description: "Test set to fail and return false.")
+        viewModel.favouriteImage(imageId: "favourite #1")
+        
+        viewModel.$favouritedImage.dropFirst().sink { result in
+            expected.fulfill()
+        }
+        .store(in: &viewModel.cancellable)
+        
+        wait(for: [expected], timeout: 3.0)
+        XCTAssertEqual(viewModel.favouritedImage, false)
+    }
+    
     private func getFakeImages(_ count: Int = 15) -> [ImageModel] {
         Array(repeating: ImageModel.staticImageModel, count: count)
     }
