@@ -9,8 +9,19 @@ import Combine
 import Foundation
 
 class SearchViewModel: BaseViewModel, ObservableObject {
-    private lazy var imagesService = ImagesService()
-    private lazy var favouriteService = FavouriteService()
+    private let favouriteService: FavouriteServiceProtocol
+    private let imagesService: ImageServiceProtocol
+    private let userPreferences: UserPreferences
+    
+    init(
+        favouriteService: FavouriteServiceProtocol = FavouriteService(),
+        imagesService: ImageServiceProtocol = ImagesService(),
+        userPreferences: UserPreferences = UserPreferences.shared
+    ) {
+        self.favouriteService = favouriteService
+        self.imagesService = imagesService
+        self.userPreferences = userPreferences
+    }
     
     @Published var images: [ImageModel] = []
     @Published var page: Int = 0 {
@@ -45,22 +56,6 @@ class SearchViewModel: BaseViewModel, ObservableObject {
             .store(in: &cancellable)
     }
     
-    func getMoreImages() {
-        self.page += 1
-        getImages()
-    }
-    
-    private func setImagePage() {
-        guard let lastPage = UserDefaults.standard.value(forKey: Const.lastImagePageKey) as? Int else { return }
-        self.page = lastPage
-    }
-    
-    private func saveImagePage() {
-        UserDefaults.standard.set(page, forKey: Const.lastImagePageKey)
-    }
-}
-
-extension SearchViewModel {
     enum Const {
         static let defaultImageLimit = 20
         static let lastImagePageKey = "LastImagePageKey"
