@@ -28,7 +28,7 @@ struct SearchView: View {
                 getImageGridList()
             }
         }
-        .onAppear(perform: vm.getImages)
+        .onAppear(perform: performOnAppear)
     }
     
     private func getImageGridList() -> some View {
@@ -51,9 +51,26 @@ struct SearchView: View {
                 }
             }
             Button(
-                action: vm.getMoreImages,
-                label: getMoreImagesBtnLabel)
+                action: onClickGetMoreImagesButton,
+                label: getMoreImagesBtnLabel
+            )
         }
+    }
+    
+    private func onClickGetMoreImagesButton() {
+        vm.updateCurrentPage()
+        vm.loadCurrentPage()
+        vm.getImages()
+    }
+    
+    private func performOnAppear() {
+        loadUserPreferences()
+        vm.getImages()
+    }
+    
+    private func loadUserPreferences() {
+        vm.loadCurrentPage()
+        vm.loadNumberOfImagePerPage()
     }
     
     private func getImageFullScreen() -> some View {
