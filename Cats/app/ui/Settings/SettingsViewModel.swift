@@ -77,9 +77,33 @@ class SettingsViewModel: BaseViewModel, ObservableObject {
         key: String? = nil
     ) {
         if let key = key {
-            userPreference.setCurrentNumberOfImagePerPage(numberOfImage, key: key)
+            userPreference.setCurrentNumberOfImagePerPage(
+                setRangeForNumberOfImaegPerPage(numberOfImage),
+                key: key
+            )
         }
-        userPreference.setCurrentNumberOfImagePerPage(numberOfImage)
+        userPreference.setCurrentNumberOfImagePerPage(
+            setRangeForNumberOfImaegPerPage(numberOfImage)
+        )
+    }
+    
+    private func setRangeForNumberOfImaegPerPage(_ numberOfPage: Int) -> Int {
+        if numberOfPage > Consts.maximumNumberOfImagePerPage {
+            return Consts.maximumNumberOfImagePerPage
+        }
+        else if numberOfPage < Consts.minimumNumberOfImagePerPage {
+            return Consts.minimumNumberOfImagePerPage
+        }
+        else { return numberOfPage }
+    }
+    
+    func resetNumberOfImage(key: String? = nil) {
+        if let key = key {
+            userPreference.resetCurrentNumberOfImagePerPage(key: key)
+            loadNumberOfImagePerPage(key: key)
+        }
+        userPreference.resetCurrentNumberOfImagePerPage()
+        loadNumberOfImagePerPage()
     }
     
     func getUserProfileImage(key: String? = nil) -> Data {
@@ -97,5 +121,10 @@ class SettingsViewModel: BaseViewModel, ObservableObject {
             userPreference.setUserProfileImage(imageData: imageData, key: key)
         }
         userPreference.setUserProfileImage(imageData: imageData)
+    }
+    
+    fileprivate enum Consts {
+        static let maximumNumberOfImagePerPage = 30
+        static let minimumNumberOfImagePerPage = 15
     }
 }
