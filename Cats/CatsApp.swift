@@ -9,9 +9,22 @@ import SwiftUI
 
 @main
 struct CatsApp: App {
+    @State private var launchScreenPlayed = true
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            if launchScreenPlayed {
+                LaunchScreen()
+                    .onAppear(perform: playLaunchScreen)
+            } else {
+                MainView()
+            }
+        }
+    }
+    
+    private func playLaunchScreen() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            launchScreenPlayed.toggle()
         }
     }
 }
