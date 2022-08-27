@@ -40,23 +40,54 @@ struct SettingsView: View {
                                 .font(.headline)
                                 .foregroundColor(.accentColor)
                                 .padding(.vertical, 5)
-                            Text(vm.getUserId()).font(.callout)
                             
+                            Text(vm.userId)
+                                .font(.callout)
                         }.padding(.leading)
                     }
                 },
                 header: {
                     Text("User Information")
                 })
-            
             Section(
                 content: {
-                    // TODO: Make stepper
+                    Stepper(
+                        "\(vm.numberOfImage)",
+                        onIncrement: onIncreamentNumberOfImage,
+                        onDecrement: onDecrementNumberOfImage)
                 },
                 header: {
                     Text("Number of Cat Pictures per Page")
                 })
+            Button(
+                action: resetUserPreferences,
+                label: {
+                    Text("Reset")
+                })
         }
+        .onAppear(perform: loadUserPreferences)
+    }
+    
+    private func onIncreamentNumberOfImage() {
+        vm.setNumberOfImage(vm.numberOfImage + 1)
+        vm.loadNumberOfImagePerPage()
+    }
+    
+    private func onDecrementNumberOfImage() {
+        vm.setNumberOfImage(vm.numberOfImage - 1)
+        vm.loadNumberOfImagePerPage()
+    }
+    
+    private func resetUserPreferences() {
+        vm.resetUserProfileImage()
+        vm.resetNumberOfImage()
+    }
+    
+    private func loadUserPreferences() {
+        vm.loadUserId()
+        vm.loadCurrentPage()
+        vm.loadNumberOfImagePerPage()
+        vm.loadUserProfileImage()
     }
 }
 
