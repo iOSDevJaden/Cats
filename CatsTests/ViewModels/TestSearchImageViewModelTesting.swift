@@ -48,4 +48,44 @@ class TestSearchImageViewModelTesting: XCTestCase {
         XCTAssertEqual(initialPage + 1, viewModel.page)
     }
     
+    func test_search_viewModel_get_images_success_returns_15_images_and_append_to_member_variable() {
+        let numberOfImage = userPreferences.getCurrentNumberOfImagePerPage(key: KeysForTest.userDefaultNumberOfImagePerPageForTest)
+        mockImageService.resultImageModels = Result
+            .success(getFakeImages(numberOfImage))
+            .publisher
+            .eraseToAnyPublisher()
+        
+        let expected = XCTestExpectation(description: "Test set to success and return 15 image models.")
+        viewModel.getImages()
+        
+        viewModel.$images.dropFirst().sink { result in
+            expected.fulfill()
+        }
+        .store(in: &viewModel.cancellable)
+        
+        wait(for: [expected], timeout: 3.0)
+        XCTAssertEqual(viewModel.images.count, numberOfImage)
+    }
+    
+    func test_search_viewModel_get_images_failed_returns_empty_array_of_image_model() {
+        mockImageService.resultImageModels = Result
+            .failure(CommonError.response)
+            .publisher
+            .eraseToAnyPublisher()
+        
+        let expected = XCTestExpectation(description: "Test set to fail and return 0 image model.")
+        viewModel.getImages()
+        
+        viewModel.$images.dropFirst().sink { result in
+            expected.fulfill()
+        }
+        .store(in: &viewModel.cancellable)
+        
+        wait(for: [expected], timeout: 3.0)
+        XCTAssertEqual(viewModel.images.isEmpty, true)
+    }
+    
+    private func getFakeImages(_ count: Int = 15) -> [ImageModel] {
+        Array(repeating: ImageModel.staticImageModel, count: count)
+    }
 }
