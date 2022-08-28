@@ -24,10 +24,9 @@ struct SearchView: View {
         VStack {
             switch (mode) {
             case .grid:
-                getImageFullScreen()
-                    .animation(.linear)
-            case .fullScreen:
                 getImageGridList()
+            case .fullScreen:
+                getImageFullScreen()
             }
         }
     }
@@ -45,7 +44,7 @@ struct SearchView: View {
                                 .onTapGesture {
                                     self.image = AsyncImgView(imageUrl)
                                     self.imageId = image.imageId
-                                    toggleWithAnimation()
+                                    toggleSearchMode()
                                 }
                         }
                     }
@@ -78,16 +77,17 @@ struct SearchView: View {
             }
         }
         .ignoresSafeArea()
-        .onTapGesture(perform: dismissFullScreen)
+        .onTapGesture(perform: {
+            image = nil
+            imageId = nil
+            toggleSearchMode()
+        })
     }
     
-    private func dismissFullScreen() {
-        self.image = nil
-        self.imageId = nil
-        toggleWithAnimation()
-    }
-    
-    private func toggleWithAnimation() {
+    private func toggleSearchMode() {
+        withAnimation {
+            mode = mode == .grid ? .fullScreen : .grid
+        }
     }
     
     private func getMoreImagesBtnLabel() -> some View {
