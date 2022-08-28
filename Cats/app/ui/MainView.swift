@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject private var homeVM: HomeViewModel
+    @EnvironmentObject private var searchVM: SearchViewModel
+    @EnvironmentObject private var breedVM: BreedViewModel
+    
     @State private var currentTab: TabBarItems = .home
     @State private var showUploadView = false
     
@@ -31,6 +35,9 @@ struct MainView: View {
                 }
             Spacer().frame(height: 20)
         }
+        .environmentObject(homeVM)
+        .environmentObject(searchVM)
+        .environmentObject(breedVM)
         .ignoresSafeArea()
     }
     

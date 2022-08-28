@@ -15,7 +15,7 @@ import SwiftUI
  */
 
 struct HomeView: View {
-    @ObservedObject private var vm = HomeViewModel()
+    @EnvironmentObject private var vm: HomeViewModel
     
     var body: some View {
         Form {
@@ -39,7 +39,6 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear(perform: vm.getFavouriteImages)
     }
     
     private func getButtonLabel(favouriteId: String) -> some View {

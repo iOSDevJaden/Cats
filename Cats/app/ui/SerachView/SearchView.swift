@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SearchView: View {
-    @ObservedObject private var vm = SearchViewModel()
+    @EnvironmentObject private var vm: SearchViewModel
+    
     @State private var showFullImage = false
     @State private var image: AsyncImgView? = nil
     @State private var imageId: String? = nil

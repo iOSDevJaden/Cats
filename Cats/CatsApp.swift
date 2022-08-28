@@ -9,9 +9,48 @@ import SwiftUI
 
 @main
 struct CatsApp: App {
+    @StateObject private var homeVM = HomeViewModel()
+    @StateObject private var searchVM = SearchViewModel()
+    @StateObject private var breedVM = BreedViewModel()
+    
+    @State private var launchScreenPlayed = true
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            if launchScreenPlayed {
+                LaunchScreen()
+                    .onAppear(perform: playLaunchScreen)
+            } else {
+                MainView()
+                    .environmentObject(homeVM)
+                    .environmentObject(searchVM)
+                    .environmentObject(breedVM)
+            }
+        }
+    }
+    
+    private func setupHomeViewModel() {
+    }
+    
+    private func setupSearchViewModel() {
+        searchVM.loadCurrentPage()
+        searchVM.loadNumberOfImagePerPage()
+        searchVM.getImages()
+    }
+    
+    private func setupBreedViewModel() {
+        breedVM.loadBreedModelsIfExists()
+    }
+    
+    private func playLaunchScreen() {
+        homeVM.getFavouriteImages()
+        
+        setupSearchViewModel()
+        
+        setupBreedViewModel()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            launchScreenPlayed.toggle()
         }
     }
 }
