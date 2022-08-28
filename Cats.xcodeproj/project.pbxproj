@@ -312,6 +312,7 @@
 		A1584ADD287EF140008AF229 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				A14BDE0928BA451D00EA7B69 /* LaunchScreen */,
 				A1A92BAC2885B3310091EBEA /* CatWikiView.swift */,
 				A1B70F8428834007002B4F26 /* ImagePicker.swift */,
 				A1A89C192880B11000FE3DBC /* Labels.swift */,
@@ -325,7 +326,6 @@
 		A1584AE0287EF832008AF229 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				A14BDE0928BA451D00EA7B69 /* LaunchScreen */,
 				A17F4D2F2886F1CD009A68BF /* AsyncImgView */,
 				A1584AE2287EF84B008AF229 /* BreedView */,
 			);
