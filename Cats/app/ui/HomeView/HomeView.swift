@@ -15,7 +15,7 @@ import SwiftUI
  */
 
 struct HomeView: View {
-    @ObservedObject private var vm = HomeViewModel()
+    @EnvironmentObject private var vm: HomeViewModel
     
     var body: some View {
         Form {
