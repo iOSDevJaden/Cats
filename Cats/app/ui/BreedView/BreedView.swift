@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BreedView: View {
-    @ObservedObject private var vm = BreedViewModel()
+    @EnvironmentObject private var vm: BreedViewModel
     @State private var searchText = ""
     
     var body: some View {
@@ -30,11 +30,6 @@ struct BreedView: View {
             }
             .navigationBarHidden(true)
         }
-        .onAppear(perform: loadBreeds)
-    }
-    
-    private func loadBreeds() {
-        vm.loadBreedModelsIfExists()
     }
     
     private func getNavigationLinkList(_ alphabet: String) -> some View {

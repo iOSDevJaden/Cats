@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject private var breedVM: BreedViewModel
+    
     @State private var currentTab: TabBarItems = .home
     @State private var showUploadView = false
     
@@ -31,6 +33,7 @@ struct MainView: View {
                 }
             Spacer().frame(height: 20)
         }
+        .environmentObject(breedVM)
         .ignoresSafeArea()
     }
     

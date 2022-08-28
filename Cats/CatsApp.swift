@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct CatsApp: App {
+    @StateObject private var breedVM = BreedViewModel()
+    
     @State private var launchScreenPlayed = true
     
     var body: some Scene {
@@ -18,11 +20,18 @@ struct CatsApp: App {
                     .onAppear(perform: playLaunchScreen)
             } else {
                 MainView()
+                    .environmentObject(breedVM)
             }
         }
     }
     
+    private func setupBreedViewModel() {
+        breedVM.loadBreedModelsIfExists()
+    }
+    
     private func playLaunchScreen() {
+        setupBreedViewModel()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             launchScreenPlayed.toggle()
         }
