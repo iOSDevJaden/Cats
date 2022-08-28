@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct CatsApp: App {
+    @StateObject private var homeVM = HomeViewModel()
     @StateObject private var breedVM = BreedViewModel()
     
     @State private var launchScreenPlayed = true
@@ -20,9 +21,14 @@ struct CatsApp: App {
                     .onAppear(perform: playLaunchScreen)
             } else {
                 MainView()
+                    .environmentObject(homeVM)
                     .environmentObject(breedVM)
             }
         }
+    }
+    
+    private func setupHomeViewModel() {
+        homeVM.getFavouriteImages()
     }
     
     private func setupBreedViewModel() {
@@ -30,6 +36,8 @@ struct CatsApp: App {
     }
     
     private func playLaunchScreen() {
+        setupHomeViewModel()
+        
         setupBreedViewModel()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

@@ -39,7 +39,6 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear(perform: vm.getFavouriteImages)
     }
     
     private func getButtonLabel(favouriteId: String) -> some View {

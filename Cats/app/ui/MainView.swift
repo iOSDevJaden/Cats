@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject private var homeVM: HomeViewModel
     @EnvironmentObject private var breedVM: BreedViewModel
     
     @State private var currentTab: TabBarItems = .home
@@ -33,6 +34,7 @@ struct MainView: View {
                 }
             Spacer().frame(height: 20)
         }
+        .environmentObject(homeVM)
         .environmentObject(breedVM)
         .ignoresSafeArea()
     }
