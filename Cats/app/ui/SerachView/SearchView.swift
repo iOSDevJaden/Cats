@@ -10,11 +10,11 @@ import SwiftUI
 struct SearchView: View {
     @EnvironmentObject private var vm: SearchViewModel
     
-    @State private var showFullImage = false
+    @State private var mode = ImageScreenMode.grid
     @State private var image: AsyncImgView? = nil
     @State private var imageId: String? = nil
     
-    let colums: [GridItem] = [
+    private let colums: [GridItem] = [
         GridItem(.flexible(), spacing: 2),
         GridItem(.flexible(), spacing: 2),
         GridItem(.flexible(), spacing: 2),
@@ -22,14 +22,14 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            if showFullImage {
+            switch (mode) {
+            case .grid:
                 getImageFullScreen()
                     .animation(.linear)
-            } else {
+            case .fullScreen:
                 getImageGridList()
             }
         }
-        .onAppear(perform: performOnAppear)
     }
     
     private func getImageGridList() -> some View {
@@ -64,16 +64,6 @@ struct SearchView: View {
         vm.getImages()
     }
     
-    private func performOnAppear() {
-        loadUserPreferences()
-        vm.getImages()
-    }
-    
-    private func loadUserPreferences() {
-        vm.loadCurrentPage()
-        vm.loadNumberOfImagePerPage()
-    }
-    
     private func getImageFullScreen() -> some View {
         ZStack {
             VStack {
@@ -98,17 +88,15 @@ struct SearchView: View {
     }
     
     private func toggleWithAnimation() {
-        withAnimation { showFullImage.toggle() }
     }
     
     private func getMoreImagesBtnLabel() -> some View {
-        Text("Get More Images")
-            .font(.title3.bold())
-            .padding()
-            .background(
-                Color.black.opacity(0.3)
-                    .cornerRadius(10)
-            )
+        Labels(text: "Get More Images")
+            .padding(.horizontal)
+    }
+    
+    enum ImageScreenMode {
+        case grid, fullScreen
     }
     
     private func getFavouriteBtnLabel() -> some View {
