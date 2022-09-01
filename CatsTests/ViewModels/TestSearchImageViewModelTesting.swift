@@ -15,6 +15,8 @@ class TestSearchImageViewModelTesting: XCTestCase {
     
     private var viewModel: SearchViewModel!
     
+    private lazy var imageUrl = "https://24.media.tumblr.com/tumblr_m294stk8SQ1qzex9io1_250.jpg"
+    
     override func setUp() {
         self.mockFavouriteService = MockFavouriteService()
         self.mockImageService = MockImageService()
@@ -85,58 +87,24 @@ class TestSearchImageViewModelTesting: XCTestCase {
         XCTAssertEqual(viewModel.images.isEmpty, true)
     }
     
-    func test_search_viewModel_favourite_images_success_returns_true() {
+    func test_search_viewModel_favourite_images_success_returns_true_remove_image_from_image_list() {
+        viewModel.images = getFakeImages()
+        viewModel.candidateImageUrl = self.imageUrl
         mockFavouriteService.resultBool = Result
             .success(true)
             .publisher
             .eraseToAnyPublisher()
+
+        let expected = XCTestExpectation(description: "Test set to success and return true and remove a image from the list.")
+        viewModel.favouriteImage(imageUrl: self.imageUrl)
         
-        let expected = XCTestExpectation(description: "Test set to success and return true.")
-        viewModel.favouriteImage(imageId: "favourite #1")
-        
-        viewModel.$favouritedImage.dropFirst().sink { result in
+        viewModel.$images.dropFirst().sink { _ in
             expected.fulfill()
-        }
-        .store(in: &viewModel.cancellable)
+        }.store(in: &viewModel.cancellable)
         
         wait(for: [expected], timeout: 3.0)
-        XCTAssertEqual(viewModel.favouritedImage, true)
-    }
-    
-    func test_search_viewModel_favourite_images_success_returns_false() {
-        mockFavouriteService.resultBool = Result
-            .success(false)
-            .publisher
-            .eraseToAnyPublisher()
-        
-        let expected = XCTestExpectation(description: "Test set to success and return false.")
-        viewModel.favouriteImage(imageId: "favourite #1")
-        
-        viewModel.$favouritedImage.dropFirst().sink { result in
-            expected.fulfill()
-        }
-        .store(in: &viewModel.cancellable)
-        
-        wait(for: [expected], timeout: 3.0)
-        XCTAssertEqual(viewModel.favouritedImage, false)
-    }
-    
-    func test_search_viewModel_favourite_images_failed_return_error_replace_with_false() {
-        mockFavouriteService.resultBool = Result
-            .failure(CommonError.response)
-            .publisher
-            .eraseToAnyPublisher()
-        
-        let expected = XCTestExpectation(description: "Test set to fail and return false.")
-        viewModel.favouriteImage(imageId: "favourite #1")
-        
-        viewModel.$favouritedImage.dropFirst().sink { result in
-            expected.fulfill()
-        }
-        .store(in: &viewModel.cancellable)
-        
-        wait(for: [expected], timeout: 3.0)
-        XCTAssertEqual(viewModel.favouritedImage, false)
+        XCTAssertEqual(viewModel.images.count, 14)
+        XCTAssertEqual(viewModel.candidateImageUrl, nil)
     }
     
     private func getFakeImages(_ count: Int = 15) -> [ImageModel] {
