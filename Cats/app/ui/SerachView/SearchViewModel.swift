@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class SearchViewModel: BaseViewModel, ObservableObject {
+final class SearchViewModel: BaseViewModel, ObservableObject {
     private let favouriteService: FavouriteServiceProtocol
     private let imagesService: ImageServiceProtocol
     private let userPreferences: UserPreferences
@@ -23,10 +23,11 @@ class SearchViewModel: BaseViewModel, ObservableObject {
         self.userPreferences = userPreferences
     }
     
-    @Published var images: [ImageModel] = []
+    @Published var images = [ImageModel]()
     @Published var page = 0
     @Published var numberOfImagePerPage = 0
-    @Published var favouritedImage: Bool? = nil
+    
+    @Published var candidateImageUrl: String?
     
     func loadCurrentPage(key: String? = nil) {
         if let key = key {
@@ -60,14 +61,29 @@ class SearchViewModel: BaseViewModel, ObservableObject {
             .store(in: &cancellable)
     }
     
-    func favouriteImage(imageId id: String) {
+    func favouriteImage(imageUrl url: String) {
+        guard let id = getFavouriteImageId() else {
+            return
+        }
         favouriteService.saveFavouriteImage(id: id)
             .receive(on: DispatchQueue.main)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .replaceError(with: false)
             .sink { [weak self] in
-                self?.favouritedImage = $0
+                if $0 { self?.removeFavouriteImage(id) }
+                self?.candidateImageUrl = nil
             }
             .store(in: &cancellable)
+    }
+    
+    private func getFavouriteImageId() -> String? {
+        images.first(where: { $0.imageUrl == self.candidateImageUrl })?.imageId
+    }
+    
+    private func removeFavouriteImage(_ imageId: String) {
+        guard let imageIndex = images.firstIndex(where: { $0.imageId == imageId }) else {
+            return
+        }
+        images.remove(at: imageIndex)
     }
 }
