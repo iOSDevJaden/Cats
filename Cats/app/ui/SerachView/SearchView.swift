@@ -10,9 +10,7 @@ import SwiftUI
 struct SearchView: View {
     @EnvironmentObject private var vm: SearchViewModel
     
-    @State private var mode = ImageScreenMode.grid
-    @State private var image: AsyncImgView? = nil
-    @State private var imageId: String? = nil
+    @State private var mode = SearchViewMode.grid
     
     private let colums: [GridItem] = [
         GridItem(.flexible(), spacing: 2),
@@ -22,97 +20,83 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            switch (mode) {
-            case .grid:
-                getImageGridList()
-            case .fullScreen:
-                getImageFullScreen()
+            switch mode {
+            case .grid:       getGridImageView()
+            case .fullScreen: getCandidateImage()
             }
         }
     }
     
-    private func getImageGridList() -> some View {
-        ScrollView {
-            LazyVGrid(columns: colums, spacing: 0) {
-                ForEach(vm.images, id: \.imageId) { image in
-                    VStack(spacing: 0) {
-                        if let imageUrl = image.imageUrl {
-                            AsyncImgView(imageUrl)
-                                .frame(height: 120, alignment: .top)
-                                .background(Color.black)
-                                .border(Color.white, width: 1)
-                                .onTapGesture {
-                                    self.image = AsyncImgView(imageUrl)
-                                    self.imageId = image.imageId
-                                    toggleSearchMode()
-                                }
-                        }
+    private func getGridImageView() -> some View {
+        VStack {
+            ScrollView {
+                LazyVGrid(columns: colums) {
+                    ForEach(vm.images, id: \.imageId) { image in
+                        AsyncImgView(image.imageUrl)
+                            .onTapGesture {
+                                vm.candidateImageUrl = image.imageUrl
+                                toggleSearchMode()
+                            }
                     }
                 }
             }
             Button(
-                action: onClickGetMoreImagesButton,
-                label: getMoreImagesBtnLabel
-            )
+                action: onTapGetMoreImageButton,
+                label: getMoreImagesButtonLabel)
         }
     }
     
-    private func onClickGetMoreImagesButton() {
+    func onTapGetMoreImageButton() {
         vm.updateCurrentPage()
         vm.loadCurrentPage()
         vm.getImages()
     }
     
-    private func getImageFullScreen() -> some View {
-        ZStack {
-            VStack {
-                if let image = image {
-                    image
-                }
-                if let imageId = imageId {
-                    Button(
-                        action: { vm.favouriteImage(imageId: imageId) },
-                        label: getFavouriteBtnLabel)
-                }
+    private func getCandidateImage() -> some View {
+        VStack {
+            if let candidateImageUrl = vm.candidateImageUrl {
+                AsyncImgView(candidateImageUrl)
+                    .onTapGesture(perform: toggleSearchMode)
+                Button(
+                    action: {
+                        vm.favouriteImage(imageUrl: candidateImageUrl)
+                        toggleSearchMode()
+                    },
+                    label: {
+                        Labels(text: "Like")
+                            .padding()
+                    })
+            } else {
+                EmptyView()
             }
         }
-        .ignoresSafeArea()
-        .onTapGesture(perform: {
-            image = nil
-            imageId = nil
-            toggleSearchMode()
-        })
     }
     
-    private func toggleSearchMode() {
-        withAnimation {
-            mode = mode == .grid ? .fullScreen : .grid
-        }
-    }
-    
-    private func getMoreImagesBtnLabel() -> some View {
+    private func getMoreImagesButtonLabel() -> some View {
         Labels(text: "Get More Images")
             .padding(.horizontal)
     }
     
-    enum ImageScreenMode {
-        case grid, fullScreen
+    private func toggleSearchMode() {
+        withAnimation {
+            self.mode = mode == .grid ? .fullScreen : .grid
+        }
     }
     
-    private func getFavouriteBtnLabel() -> some View {
-        Image(systemName: "heart.fill")
-            .resizable()
-            .frame(width: 30, height: 30)
-            .padding()
-            .background(
-                Color.black.opacity(0.3)
-                    .cornerRadius(10)
-            )
+    enum SearchViewMode {
+        case grid, fullScreen
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
+    static private let vm = SearchViewModel()
     static var previews: some View {
         SearchView()
+            .environmentObject(vm)
+            .onAppear(perform: {
+                vm.loadCurrentPage()
+                vm.loadNumberOfImagePerPage()
+                vm.getImages()
+            })
     }
 }
