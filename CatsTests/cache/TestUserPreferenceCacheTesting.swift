@@ -17,7 +17,6 @@ class TestUserPreferenceCacheTesting: XCTestCase {
     private let userPreferences = UserPreferences.shared
    
     override func setUp() {
-        resetUserPreferences()
         super.setUp()
     }
     
