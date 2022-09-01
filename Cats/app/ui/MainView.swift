@@ -29,7 +29,8 @@ struct MainView: View {
                     default: EmptyView()
                     }
                 })
-            getTabItems().padding()
+            getTabItems()
+                .padding()
                 .sheet(isPresented: $showUploadView) {
                     UploadView()
                 }
@@ -59,6 +60,9 @@ struct MainView: View {
     private func setCurrentTab(to item: TabBarItems) {
         switch item {
         case .upload: self.showUploadView.toggle()
+        case .home  :
+            self.currentTab = item
+            homeVM.getFavouriteImages()
         default:      self.currentTab = item
         }
     }

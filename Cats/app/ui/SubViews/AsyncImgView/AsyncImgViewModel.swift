@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 class AsyncImgViewModel: BaseViewModel, ObservableObject {
-    @Published var imageData = Data()
+    @Published var imageData: Data? = nil
     
     private lazy var urlString: String = ""
     

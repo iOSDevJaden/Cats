@@ -30,6 +30,7 @@ struct CatsApp: App {
     }
     
     private func setupHomeViewModel() {
+        homeVM.getFavouriteImages()
     }
     
     private func setupSearchViewModel() {
@@ -43,7 +44,7 @@ struct CatsApp: App {
     }
     
     private func playLaunchScreen() {
-        homeVM.getFavouriteImages()
+        setupHomeViewModel()
         
         setupSearchViewModel()
         
