@@ -8,8 +8,8 @@
 import Foundation
 
 struct ImageModel: Equatable, Codable {
-    let imageUrl: String?
-    let imageId: String?
+    let imageUrl: String
+    let imageId: String
     
     enum CodingKeys: String, CodingKey {
         case imageUrl = "url"

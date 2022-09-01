@@ -12,7 +12,7 @@ struct FavouriteRes: Codable, Identifiable {
     let imageId: String?
     let subId: String?
     let createdAt: String?
-    let image: ImageModel?
+    let image: ImageModel
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -23,11 +23,7 @@ struct FavouriteRes: Codable, Identifiable {
     }
     
     func mapToFavouriteModel() -> FavouriteModel {
-        return FavouriteModel(
-            favouriteId: "\(self.id)",
-            imageModel: ImageModel(
-                imageUrl: image?.imageUrl,
-                imageId: image?.imageId))
+        return FavouriteModel(favouriteId: "\(id)", imageModel: image)
     }
 #if DEBUG
     static let staticFavouriteRes = FavouriteRes(
