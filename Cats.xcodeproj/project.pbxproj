@@ -22,6 +22,7 @@
 		A1584AE4287EF85B008AF229 /* BreedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE3287EF85B008AF229 /* BreedDetailView.swift */; };
 		A1584AE6287F058A008AF229 /* BaseViewFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE5287F058A008AF229 /* BaseViewFrame.swift */; };
 		A1584AE8287F131C008AF229 /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1584AE7287F131C008AF229 /* TabBarItems.swift */; };
+		A15934E628C378FA003496DB /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15934E528C378FA003496DB /* NotificationManager.swift */; };
 		A15A138B28A78085001309E4 /* TestDiskCacheManagerTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A138A28A78085001309E4 /* TestDiskCacheManagerTesting.swift */; };
 		A15E5F0128B9D4B200104FCB /* TestSearchImageViewModelTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15E5F0028B9D4B200104FCB /* TestSearchImageViewModelTesting.swift */; };
 		A16C70C028AA380900273BDA /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C70BF28AA380900273BDA /* Const.swift */; };
@@ -129,6 +130,7 @@
 		A1584AE3287EF85B008AF229 /* BreedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedDetailView.swift; sourceTree = "<group>"; };
 		A1584AE5287F058A008AF229 /* BaseViewFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewFrame.swift; sourceTree = "<group>"; };
 		A1584AE7287F131C008AF229 /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
+		A15934E528C378FA003496DB /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A15A138A28A78085001309E4 /* TestDiskCacheManagerTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDiskCacheManagerTesting.swift; sourceTree = "<group>"; };
 		A15E5F0028B9D4B200104FCB /* TestSearchImageViewModelTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSearchImageViewModelTesting.swift; sourceTree = "<group>"; };
 		A16C70BF28AA380900273BDA /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				A17C461A287B2440005B6E07 /* RequestBuilder.swift */,
 				A1A086C8287C30B90021C4D3 /* URL+extension.swift */,
 				A1A086CA287C30D70021C4D3 /* HttpMethod.swift */,
+				A15934E528C378FA003496DB /* NotificationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				A1C2CB202882E83F008CFFD2 /* UploadView.swift in Sources */,
 				A1A086C9287C30B90021C4D3 /* URL+extension.swift in Sources */,
 				A1ACAC752889EBD600B6A788 /* BreedsReq.swift in Sources */,
+				A15934E628C378FA003496DB /* NotificationManager.swift in Sources */,
 				A197895E2879FF8400EDB501 /* ImagesApi.swift in Sources */,
 				A1ACAC582889DFE100B6A788 /* DeleteFavouriteRes.swift in Sources */,
 				A17162FC28885D57004CC2AF /* VoteRes.swift in Sources */,
