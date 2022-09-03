@@ -90,17 +90,13 @@ final class SearchViewModel: BaseViewModel, ObservableObject {
     }
     
     func sendNotification(_ didFavourited: Bool) {
-        let notificationContent = UNMutableNotificationContent()
-
-        notificationContent.title = "Cats"
-        notificationContent.body = didFavourited ?
-        "The cat successfully liked!\nMeet other cats too!" : "Could not have the cat saved. \nTry Again!"
-
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
-        let request = UNNotificationRequest(identifier: "testNotification",
-                                            content: notificationContent,
-                                            trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request)
+        NotificationManager.instance
+            .setNotificationContent(didFavourited ? Const.favouriteSuccessMessage : Const.favouriteFailureMessage)
+            .addNotificationPush()
+    }
+    
+    enum Const {
+        static let favouriteSuccessMessage = "The cat successfully liked!\nMeet other cats too!"
+        static let favouriteFailureMessage = "Could not have the cat saved. \nTry Again!"
     }
 }
