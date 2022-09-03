@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import NotificationCenter
 
 final class SearchViewModel: BaseViewModel, ObservableObject {
     private let favouriteService: FavouriteServiceProtocol
@@ -71,6 +72,7 @@ final class SearchViewModel: BaseViewModel, ObservableObject {
             .replaceError(with: false)
             .sink { [weak self] in
                 if $0 { self?.removeFavouriteImage(id) }
+                self?.sendNotification($0)
                 self?.candidateImageUrl = nil
             }
             .store(in: &cancellable)
@@ -85,5 +87,20 @@ final class SearchViewModel: BaseViewModel, ObservableObject {
             return
         }
         images.remove(at: imageIndex)
+    }
+    
+    func sendNotification(_ didFavourited: Bool) {
+        let notificationContent = UNMutableNotificationContent()
+
+        notificationContent.title = "Cats"
+        notificationContent.body = didFavourited ?
+        "The cat successfully liked!\nMeet other cats too!" : "Could not have the cat saved. \nTry Again!"
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
+        let request = UNNotificationRequest(identifier: "testNotification",
+                                            content: notificationContent,
+                                            trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
     }
 }
