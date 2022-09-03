@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import NotificationCenter
 
 @main
 struct CatsApp: App {
+    @UIApplicationDelegateAdaptor
+    private var appDelegate: AppDelegateAdapter
+    
     @StateObject private var homeVM = HomeViewModel()
     @StateObject private var searchVM = SearchViewModel()
     @StateObject private var breedVM = BreedViewModel()
@@ -53,5 +57,27 @@ struct CatsApp: App {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             launchScreenPlayed.toggle()
         }
+    }
+}
+
+final class AppDelegateAdapter: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        NotificationManager.instance.notificationDelegate = self
+        NotificationManager.instance.requestNotificationCenterPermissions()
+        return true
+    }
+}
+
+extension AppDelegateAdapter: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.badge, .sound])
     }
 }
