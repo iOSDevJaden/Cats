@@ -61,24 +61,11 @@ struct CatsApp: App {
 }
 
 final class AppDelegateAdapter: NSObject, UIApplicationDelegate {
-    private var notificationCenter: UNUserNotificationCenter {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.delegate = self
-        return notificationCenter
-    }
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        requestNotificationCenterPermissions()
+        NotificationManager.instance.notificationDelegate = self
+        NotificationManager.instance.requestNotificationCenterPermissions()
         return true
     }
-    
-    private func requestNotificationCenterPermissions() {
-        notificationCenter.requestAuthorization(
-            options:[.badge, .sound, .alert],
-            completionHandler: handleNotificationPermissions(granted:error:))
-    }
-    
-    private func handleNotificationPermissions(granted: Bool, error: Error?) { }
 }
 
 extension AppDelegateAdapter: UNUserNotificationCenterDelegate {
